@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('area', function (Blueprint $table) {
+        Schema::create('areas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('alias');
@@ -32,17 +32,17 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('area_user', function (Blueprint $table) {
+        Schema::create('area_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_users')->unsigned()->default(0);
-            $table->foreign('id_users')->references('id')->on('users');
-            $table->integer('id_area')->unsigned()->default(0);
-            $table->foreign('id_area')->references('id')->on('area');
+            $table->integer('user_id')->unsigned()->default(0);
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('area_id')->unsigned()->default(0);
+            $table->foreign('area_id')->references('id')->on('areas');
             $table->boolean('active')->default(0);
             $table->timestamps();
         });
 
-        Schema::create('menu', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('icon');
@@ -50,10 +50,10 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('sub_menu', function (Blueprint $table) {
+        Schema::create('sub_menus', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_menu')->unsigned()->default(0);
-            $table->foreign('id_menu')->references('id')->on('menu');
+            $table->integer('menu_id')->unsigned()->default(0);
+            $table->foreign('menu_id')->references('id')->on('menus');
             $table->string('name');
             $table->string('url');
             $table->string('icon');
@@ -61,12 +61,12 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('menu_user', function (Blueprint $table) {
+        Schema::create('menu_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_user')->unsigned()->default(0);
-            $table->foreign('id_user')->references('id')->on('users');
-            $table->integer('id_sub_menu')->unsigned()->default(0);
-            $table->foreign('id_sub_menu')->references('id')->on('sub_menu');
+            $table->integer('user_id')->unsigned()->default(0);
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('menu_id')->unsigned()->default(0);
+            $table->foreign('menu_id')->references('id')->on('menus');
             $table->string('icon');
             $table->boolean('active')->default(0);
             $table->timestamps();
@@ -81,10 +81,10 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('menu_user');
-        Schema::dropIfExists('sub_menu');
-        Schema::dropIfExists('menu');
-        Schema::dropIfExists('area_user');
-        Schema::dropIfExists('area');
+        Schema::dropIfExists('menu_users');
+        Schema::dropIfExists('sub_menus');
+        Schema::dropIfExists('menus');
+        Schema::dropIfExists('area_users');
+        Schema::dropIfExists('areas');
     }
 }

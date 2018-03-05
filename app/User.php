@@ -26,4 +26,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function AreaUser()
+    {
+      return $this->hasMany('App\AreaUser');
+    }
+
+    public function MenuUser()
+    {
+      return $this->hasMany('App\MenuUser');
+    }
+
 }

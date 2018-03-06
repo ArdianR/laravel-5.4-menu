@@ -67,10 +67,70 @@ class CreateUsersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('menu_id')->unsigned()->default(0);
             $table->foreign('menu_id')->references('id')->on('menus');
-            $table->string('icon');
             $table->boolean('active')->default(0);
             $table->timestamps();
         });
+
+        DB::table('users')->insert(array(
+            'name' => 'fianr5750',
+            'email' => 'fianr5750@gmail.com',
+            'active' => '1',
+            'password' => bcrypt('721355'),
+            'created_at' => DB::raw('now()'),
+            'updated_at' => DB::raw('now()')
+        ));
+
+        DB::table('areas')->insert(array(
+            'name' => 'all',
+            'alias' => 'all',
+            'active' => '1',
+            'created_at' => DB::raw('now()'),
+            'updated_at' => DB::raw('now()')
+        ));
+
+        DB::table('areas')->insert(array(
+            'name' => 'jakarta pusat',
+            'alias' => 'jktp',
+            'active' => '1',
+            'created_at' => DB::raw('now()'),
+            'updated_at' => DB::raw('now()')
+        ));
+
+        DB::table('area_users')->insert(array(
+            'user_id' => '1',
+            'area_id' => '1',
+            'active' => '1',
+            'created_at' => DB::raw('now()'),
+            'updated_at' => DB::raw('now()')
+        ));
+
+        DB::table('menus')->insert(array(
+            'name' => 'Dashboard',
+            'icon' => '-',
+            'active' => '1',
+            'created_at' => DB::raw('now()'),
+            'updated_at' => DB::raw('now()')
+        ));
+
+        DB::table('sub_menus')->insert(array(
+            'menu_id' => '1',
+            'name' => 'dashboard 1',
+            'url' => '#',
+            'icon' => '-',
+            'active' => '1',
+            'created_at' => DB::raw('now()'),
+            'updated_at' => DB::raw('now()')
+        ));
+
+        DB::table('menu_users')->insert(array(
+            'user_id' => '1',
+            'menu_id' => '1',
+            'active' => '1',
+            'created_at' => DB::raw('now()'),
+            'updated_at' => DB::raw('now()')
+        ));
+
+
     }
 
     /**

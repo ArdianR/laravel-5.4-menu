@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\AreaUser;
 use App\MenuUser;
@@ -30,8 +31,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $all = User::where('id',Auth::id())->with('AreaUser','MenuUser')->get()->toArray();
-        dd($all);exit;
-        return view('home');
+        // $alls = User::with('areas')->where('id',Auth::id())->get()->toArray();
+        $alls = User::with( array( 'MenuUser' ) )->first();
+
+        dd($alls);exit;
+        return view('home',compact('alls'));
     }
 }

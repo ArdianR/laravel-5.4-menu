@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
+    'failed' => 'your account does not exist.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'notactivated' => 'This account has not been activated yet.',
+    'notactivated' => 'your account is inactive.',
 
 ];

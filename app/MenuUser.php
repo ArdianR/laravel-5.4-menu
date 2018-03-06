@@ -7,13 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class MenuUser extends Model
 {
 
-	public function User()
+    protected $table = 'menu_users';
+    public $timestamps = true;
+
+	public function Menu()
 	{
-	  return $this->belongTo('App\User');
+	  return $this->hasMany('App\Menu');
 	}
 
-	public function SubMenu()
-	{
-	  return $this->hasMany('App\SubMenu');
-	}
+    public function User()
+    {
+        return $this->belongTo('App\User');
+    }
 }

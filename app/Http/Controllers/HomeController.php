@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\AreaUser;
-use App\MenuUser;
 use App\User;
-use App\Area;
-use App\Menu;
-use App\SubMenu;
 use Auth;
+use App\DetailUser;
+use App\Area;
+use App\Group;
 
 class HomeController extends Controller
 {
@@ -31,10 +29,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $alls = User::with('areas')->where('id',Auth::id())->get()->toArray();
-        $alls = User::with( array( 'MenuUser' ) )->first();
-
-        dd($alls);exit;
+        //$alls = User::where('id',Auth::id())->with('')->get();
+        // $groups = DetailUser::All();
+        // dd($groups);exit;
         return view('home',compact('alls'));
     }
 }

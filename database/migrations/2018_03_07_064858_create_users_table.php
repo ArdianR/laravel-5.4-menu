@@ -17,6 +17,13 @@ class CreateUsersTable extends Migration {
             $table->rememberToken();
 			$table->timestamps();
 		});
+		DB::table('users')->insert(array(
+            'name' => 'fianr5750',
+            'email' => 'fianr5750@gmail.com',
+            'password' => bcrypt('721355'),
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token');
@@ -29,23 +36,82 @@ class CreateUsersTable extends Migration {
             $table->boolean('active')->default(0);
             $table->timestamps();
         });
+        DB::table('area')->insert(array(
+            'name' => 'semua area',
+            'alias' => 'all',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
+        DB::table('area')->insert(array(
+            'name' => 'jakarta pusat',
+            'alias' => 'jktp',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
+        DB::table('area')->insert(array(
+            'name' => 'makassar',
+            'alias' => 'mks',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
 		Schema::create('group', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
 			$table->boolean('active')->default(0);
 			$table->timestamps();
 		});
+        DB::table('group')->insert(array(
+            'name' => 'hq',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
 		Schema::create('status', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
 			$table->boolean('active')->default(0);
 			$table->timestamps();
 		});
+        DB::table('status')->insert(array(
+            'name' => 'uploaded',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
+        DB::table('status')->insert(array(
+            'name' => 'rejected',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
+        DB::table('status')->insert(array(
+            'name' => 'approved',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
 		Schema::create('product', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
+			$table->boolean('active')->default(0);
 			$table->timestamps();
 		});
+        DB::table('product')->insert(array(
+            'name' => 'Tidak Ada POP',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
+        DB::table('product')->insert(array(
+            'name' => 'POP Standar_Showcase_Standar',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
+        DB::table('product')->insert(array(
+            'name' => 'POP Standar_Showcase_Corner/Lightbox Corner',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
+        DB::table('product')->insert(array(
+            'name' => 'POP Standar_Showcase_Dealer(3 Level)',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
 		Schema::create('store', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('dealer_id');
@@ -59,6 +125,24 @@ class CreateUsersTable extends Migration {
 			$table->boolean('active')->default(0);
 			$table->timestamps();
 		});
+        DB::table('store')->insert(array(
+            'dealer_id' => 'JXS36636',
+            'name' => 'SULSEL-MKS01-OS-S-O-MTC-OPPO STORE-BLAZT',
+            'address' => 'KAREBOSI LINK BLOK M39-M40, L52',
+            'area_id' => '1',
+            'grade' => 'C',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
+        DB::table('store')->insert(array(
+            'dealer_id' => 'JXS23648',
+            'name' => 'BDO-SMI-PRIBADI UTAMA KOMUNIKA CV_CIANJUR',
+            'address' => 'JL. SITI JENAB NO 44 CIANJUR',
+            'area_id' => '2',
+            'grade' => 'A',
+            'active' => '1',
+            'created_at' => DB::raw('now()')
+        ));
 		Schema::create('detail_user', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
@@ -75,6 +159,12 @@ class CreateUsersTable extends Migration {
 						->onUpdate('no action');
 			$table->timestamps();
 		});
+        DB::table('detail_user')->insert(array(
+            'user_id' => '1',
+            'area_id' => '2',
+            'group_id' => '1',
+            'created_at' => DB::raw('now()')
+        ));
 		Schema::create('pop', function(Blueprint $table) {
 			$table->increments('id');
 			$table->boolean('periode')->default(0);
@@ -178,6 +268,7 @@ class CreateUsersTable extends Migration {
 			$table->integer('qty');
 			$table->timestamps();
 		});
+
 	}
 
 	public function down()

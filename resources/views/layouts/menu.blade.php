@@ -118,11 +118,11 @@
                                     <span class="selected"></span>
                                 </a>
                             </li>
-                            @foreach($alls as $all)
+                            
                             <li class="nav-item">
-                                <a href="{{ $all->menuuser }}" class="nav-link nav-toggle">
+                                <a href="" class="nav-link nav-toggle">
                                     <i class="icon-settings"></i>
-                                    <span class="title">{{ $all->menuuser }}</span>
+                                    <span class="title"></span>
                                     <span class="arrow"></span>
                                 </a>
                                 <ul class="sub-menu">
@@ -133,7 +133,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            @endforeach
+                            
                         </ul>
                         <!-- END SIDEBAR MENU -->
                         <!-- END SIDEBAR MENU -->

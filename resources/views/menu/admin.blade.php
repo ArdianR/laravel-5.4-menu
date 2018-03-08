@@ -10,19 +10,65 @@
         </li>
         <!-- END SIDEBAR TOGGLER BUTTON -->
         <li class="nav-item">
-            <a href="javascript:;" class="nav-link nav-toggle">
+            <a href="{{ url('/home') }}" class="nav-link nav-toggle">
                 <i class="icon-home"></i>
                 <span class="title">Dashboard</span>
                 <span class="selected"></span>
-                <span class="arrow open"></span>
+            </a>
+        </li>
+        <li class="nav-item  ">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="icon-bar-chart"></i>
+                <span class="title">Management</span>
+                <span class="arrow"></span>
             </a>
             <ul class="sub-menu">
-                <li class="nav-item start active open">
-                    <a href="#" class="nav-link ">
-                        <i class="icon-bar-chart"></i>
-                        <span class="title">Dashboard 1</span>
-                        <span class="selected"></span>
+                <li class="nav-item  ">
+                    <a href="{{ url('/group') }}" class="nav-link ">
+                        <span class="title">Group</span>
                     </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="{{ url('/area') }}" class="nav-link ">
+                        <span class="title">Area</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="{{ url('/user') }}" class="nav-link ">
+                        <span class="title">User</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="#" class="nav-link ">
+                        <span class="title">Google Charts</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="#" class="nav-link ">
+                        <span class="title">eCharts</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="#" class="nav-link ">
+                        <span class="title">Morris Charts</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">HighCharts</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="#" class="nav-link "> HighCharts </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="#" class="nav-link "> HighStock </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="#" class="nav-link "> HighMaps </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </li>

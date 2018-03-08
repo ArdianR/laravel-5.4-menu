@@ -30,16 +30,36 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $casts = [
-        'name' => 'string',
-        'email' => 'string',
-        'password' => 'string'
-    ];
-
     protected $table = 'users';
+
+    // public function DetailUser()
+    // {
+    //   return $this->hasMany('App\DetailUser');
+    // }
+
+    // public function areas()
+    // {
+    //     $areas = [];
+
+    //     foreach ($this->DetailUser as $DetailUser) {
+    //     $areas[] = $DetailUser->areas;
+    //     }
+
+    //     return $areas;
+    // }
 
     public function DetailUser()
     {
-      return $this->hasMany('App\DetailUser');
+        return $this->hasMany('App\DetailUser');
+    }
+
+    public function Groups()
+    {
+        return $this->hasManyThrough('App\Group','App\DetailUser','group_id','id');
+    }
+    
+    public function Areas()
+    {
+        return $this->hasManyThrough('App\Area','App\DetailUser','area_id','id');
     }
 }

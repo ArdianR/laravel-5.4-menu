@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Group;
-use App\DetailUser;
+use App\Area;
 use Auth;
+use App\DetailUser;
 
-class GroupController extends Controller
+class AreaController extends Controller
 {
     
     public function __construct()
@@ -23,8 +23,8 @@ class GroupController extends Controller
     public function index()
     {
         $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        $group = Group::all();
-        return view('group.index',compact('group','DetailUser'))
+        $area = Area::all();
+        return view('area.index',compact('area','DetailUser'))
             ->with('i');
     }
 
@@ -36,7 +36,7 @@ class GroupController extends Controller
     public function create()
     {
         $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        return view('group.create',compact('DetailUser'));
+        return view('area.create',compact('DetailUser'));
     }
 
     /**
@@ -47,13 +47,15 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'name' => 'required|string',
+            'alias' => 'required|string|max:5',
             'active' => 'required|boolean'
         ]);
-        Group::create($request->all());
-        return redirect()->route('group.index')
-            ->with('success','created successfully');
+        Area::create($request->all());
+        return redirect()->route('area.index')
+                        ->with('success','created successfully');
     }
 
     /**
@@ -65,8 +67,8 @@ class GroupController extends Controller
     public function show($id)
     {
         $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        $group = Group::find($id);
-        return view('group.show',compact('group','DetailUser'));
+        $area = Area::find($id);
+        return view('area.show',compact('area','DetailUser'));
     }
 
     /**
@@ -78,8 +80,8 @@ class GroupController extends Controller
     public function edit($id)
     {
         $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        $group = Group::find($id);
-        return view('group.edit',compact('group','DetailUser'));
+        $area = Area::find($id);
+        return view('area.edit',compact('area','DetailUser'));
     }
 
     /**
@@ -93,11 +95,12 @@ class GroupController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string',
+            'alias' => 'required|string|max:5',
             'active' => 'required|boolean'
         ]);
-        Group::find($id)->update($request->all());
-        return redirect()->route('group.index')
-            ->with('success','updated successfully');
+        Area::find($id)->update($request->all());
+        return redirect()->route('area.index')
+                        ->with('success','updated successfully');
     }
 
     /**
@@ -108,8 +111,8 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        Group::find($id)->delete();
-        return redirect()->route('group.index')
+        Area::find($id)->delete();
+        return redirect()->route('area.index')
             ->with('success','deleted successfully');
     }
 }

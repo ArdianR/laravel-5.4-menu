@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Group;
 use App\DetailUser;
 use Auth;
+use App\User;
+use App\Area;
+use App\Group;
 
-class GroupController extends Controller
+class UserController extends Controller
 {
     
     public function __construct()
@@ -23,8 +25,10 @@ class GroupController extends Controller
     public function index()
     {
         $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        $group = Group::all();
-        return view('group.index',compact('group','DetailUser'))
+        // $area = Area::find($DetailUser->area_id);      
+        $user = User::find(Auth::id())->with('areas','groups')->get();
+        // dd($user);exit;
+        return view('user.index',compact('user','DetailUser'))
             ->with('i');
     }
 
@@ -36,7 +40,9 @@ class GroupController extends Controller
     public function create()
     {
         $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        return view('group.create',compact('DetailUser'));
+        $group = Group::all();
+        $area = Area::all();
+        return view('user.create',compact('group', 'area', 'user','DetailUser'));
     }
 
     /**
@@ -48,12 +54,33 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string',
-            'active' => 'required|boolean'
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'area_id' => 'required|integer',
+            'group_id' => 'required|integer',
+            'active' => 'required|boolean',
         ]);
-        Group::create($request->all());
-        return redirect()->route('group.index')
-            ->with('success','created successfully');
+        $User = User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'active' => $request['active'],
+        ]);
+        if($User->save())
+        {
+            $input = $request->all();
+            for ($i=0; $i < count($input['area_id']); ++$i)
+            {
+                $DetailUser= new DetailUser;
+                $DetailUser->user_id = $User->id;
+                $DetailUser->area_id = $input['area_id'][$i];
+                $DetailUser->group_id= $input['group_id'][$i];
+                $DetailUser->save();  
+            }
+            return redirect()->route('user.index')
+                        ->with('success','created successfully');
+        }
     }
 
     /**
@@ -64,9 +91,7 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        $group = Group::find($id);
-        return view('group.show',compact('group','DetailUser'));
+        //
     }
 
     /**
@@ -77,9 +102,7 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        $group = Group::find($id);
-        return view('group.edit',compact('group','DetailUser'));
+        //
     }
 
     /**
@@ -91,13 +114,7 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required|string',
-            'active' => 'required|boolean'
-        ]);
-        Group::find($id)->update($request->all());
-        return redirect()->route('group.index')
-            ->with('success','updated successfully');
+        //
     }
 
     /**
@@ -108,8 +125,6 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        Group::find($id)->delete();
-        return redirect()->route('group.index')
-            ->with('success','deleted successfully');
+        //
     }
 }

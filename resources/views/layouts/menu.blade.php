@@ -72,7 +72,7 @@
                             <li class="dropdown dropdown-user">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
                                     <i class="icon-calendar"></i>
-                                    <span class="username username-hide-on-mobile">{{ date('d-m-y-h:i:s') }}</span>
+                                    <span class="username">{{ date('d-m-y-h:i:s') }}</span>
                                     </a>
                             </li>
                             <li class="dropdown dropdown-user">
@@ -110,8 +110,13 @@
                 <!-- BEGIN SIDEBAR -->
                 <div class="page-sidebar-wrapper">
                     <!-- BEGIN SIDEBAR -->
-                    @component('menu.hq')
-                    @endcomponent
+                    @if ($DetailUser->group_id == 1)
+                        @component('menu.admin')
+                        @endcomponent
+                    @else
+                        @component('menu.hq')
+                        @endcomponent
+                    @endif
                     <!-- END SIDEBAR -->
                 </div>
                 <!-- END SIDEBAR -->
@@ -202,5 +207,13 @@
         <script src="{{ asset('metronic/assets/layouts/global/scripts/quick-nav.min.js')}}" type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
         <script src="{{ asset('metronic/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js')}}" type="text/javascript"></script>
+        <script>
+            function submitForm(btn) {
+                // disable the button
+                btn.disabled = true;
+                // submit the form    
+                btn.form.submit();
+            }
+        </script>
     </body>
 </html>

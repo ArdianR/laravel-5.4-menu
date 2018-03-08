@@ -29,9 +29,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //$alls = User::where('id',Auth::id())->with('')->get();
-        // $groups = DetailUser::All();
-        // dd($groups);exit;
-        return view('home',compact('alls'));
+        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
+        // dd($DetailUser->group_id);exit;
+        return view('home',compact('DetailUser'));
     }
 }

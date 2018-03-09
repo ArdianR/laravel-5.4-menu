@@ -10,7 +10,7 @@
         <!-- BEGIN PAGE TITLE-->
         <div class="portlet-title">
             <div class="caption">
-                <span class="icon-settings font-dark caption-subject font-dark sbold uppercase page-title"> User</span>
+                <span class="icon-settings font-dark caption-subject font-dark sbold uppercase page-title"> Status</span>
             </div>
         </div>
         @if ($message = Session::get('success'))
@@ -27,7 +27,7 @@
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light bordered">
                     <div class="portlet-title">
-                        <a href="{{ route('user.create') }}" class="btn btn-sm green"> Create New
+                        <a href="{{ route('status.create') }}" class="btn btn-sm green"> Create New
                         </a>
                     </div>
                     <div class="portlet-body">
@@ -36,30 +36,16 @@
                                 <tr>
                                     <th class="all">No</th>
                                     <th class="desktop">Name</th>
-                                    <th class="destop">Email</th>
-                                    <th class="destop">Area</th>
-                                    <th class="destop">Group</th>
                                     <th class="desktop">Active</th>
                                     <th class="all">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($user as $user)
+                                @foreach ($status as $status)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $user->name}}</td>
-                                    <td>{{ $user->email}}</td>
-                                    <td>
-                                        @foreach ($user->DetailUser as $DetailUser)
-                                            {{ $DetailUser->area->name}}
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach ($user->DetailUser as $DetailUser)
-                                            {{ $DetailUser->group->name}}
-                                        @endforeach
-                                    </td>
-                                    <td>{{ $user->active}}</td>
+                                    <td>{{ $status->name}}</td>
+                                    <td>{{ $status->active}}</td>
                                     <td>
                                         <div class="btn-group pull-right">
                                             <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -67,17 +53,17 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right">
                                                 <li>
-                                                    <a href="{{ route('user.show',$user->id) }}">
+                                                    <a href="{{ route('status.show',$status->id) }}">
                                                         <i class="fa fa-eye"></i> Show
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('user.edit',$user->id) }}">
+                                                    <a href="{{ route('status.edit',$status->id) }}">
                                                         <i class="fa fa-pencil"></i> Edit
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    {!! Form::open(['method' => 'DELETE','route' => ['user.destroy', $user->id],'style'=>'display:inline']) !!}
+                                                    {!! Form::open(['method' => 'DELETE','route' => ['status.destroy', $status->id],'style'=>'display:inline']) !!}
                                                     <input type="image" src="{{ asset('metronic/assets/global/img/fa-fa-recycle.png') }}" alt="Submit Form" style="cursor: pointer;" />
                                                     {!! Form::close() !!}
                                                 </li>

@@ -39,13 +39,13 @@
                     </a>
                 </li>
                 <li class="nav-item  ">
-                    <a href="#" class="nav-link ">
-                        <span class="title">Google Charts</span>
+                    <a href="{{ url('/status') }}" class="nav-link ">
+                        <span class="title">Status</span>
                     </a>
                 </li>
                 <li class="nav-item  ">
-                    <a href="#" class="nav-link ">
-                        <span class="title">eCharts</span>
+                    <a href="{{ url('/store') }}" class="nav-link ">
+                        <span class="title">Store</span>
                     </a>
                 </li>
                 <li class="nav-item  ">

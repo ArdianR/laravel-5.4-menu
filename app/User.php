@@ -18,7 +18,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password'
+        'password',
+        'active'
     ];
 
     /**
@@ -48,18 +49,29 @@ class User extends Authenticatable
     //     return $areas;
     // }
 
+
     public function DetailUser()
     {
         return $this->hasMany('App\DetailUser');
     }
 
-    public function Groups()
+    public function Area()
     {
-        return $this->hasManyThrough('App\Group','App\DetailUser','group_id','id');
+        return $this->hasMany('App\Area','id');
     }
+
+    public function Group()
+    {
+        return $this->hasMany('App\Group','id');
+    }
+
+    // public function Groups()
+    // {
+    //     return $this->hasManyThrough('App\Group','App\DetailUser','group_id','id');
+    // }
     
-    public function Areas()
-    {
-        return $this->hasManyThrough('App\Area','App\DetailUser','area_id','id');
-    }
+    // public function Areas()
+    // {
+    //     return $this->hasManyThrough('App\Area','App\DetailUser','area_id','id');
+    // }
 }

@@ -23,5 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/group','GroupController');
 Route::resource('/area','AreaController');
 Route::resource('/user','UserController');
+Route::resource('/status','StatusController');
+Route::resource('/store','StoreController');
 
 });

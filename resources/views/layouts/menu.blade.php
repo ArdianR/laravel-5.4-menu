@@ -114,8 +114,8 @@
                         @component('menu.admin')
                         @endcomponent
                     @else
-                        @component('menu.hq')
-                        @endcomponent
+{{--                         @component('menu.hq')
+                        @endcomponent --}}
                     @endif
                     <!-- END SIDEBAR -->
                 </div>

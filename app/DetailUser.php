@@ -15,13 +15,33 @@ class DetailUser extends Model
         'group_id'
     ];
 
+    // public function Groups()
+    // {
+    //     return $this->hasManyThrough('App\Group','App\DetailUser','group_id','id');
+    // }
+    
+
     // public function User()
     // {
-    //   return $this->belongTo('App\User');
+    //   return $this->belongToMany('App\User');
     // }
 
     // public function Area()
     // {
-    //   return $this->hasMany('App\Area','id');
+    //   return $this->hasManyThrough('App\Area','App\User');
     // }
+
+    // public function User()
+    // {
+    //   return $this->belongsTo('App\User');
+    // }
+
+    public function Area()
+    {
+      return $this->belongsTo('App\Area');
+    }
+    public function Group()
+    {
+      return $this->belongsTo('App\Group');
+    }
 }

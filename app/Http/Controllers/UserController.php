@@ -25,10 +25,9 @@ class UserController extends Controller
     public function index()
     {
         $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        // $area = Area::find($DetailUser->area_id);      
-        $user = User::find(Auth::id())->with('areas','groups')->get();
-        // dd($user);exit;
-        return view('user.index',compact('user','DetailUser'))
+        $user = User::with('DetailUser','area')->get();
+                // $area = Area::all();
+        return view('user.index',compact('user','area','DetailUser'))
             ->with('i');
     }
 
@@ -91,7 +90,13 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
+        $User = User::findOrFail($id);
+        $user1 = User::with('DetailUser')->where('id',Auth::id())->get();
+        $Group = Group::all();
+        $Area = Area::all();
+        // dd($User);exit();
+        return view('user.show',compact('User','user1','DetailUser','Group','Area'));
     }
 
     /**
@@ -102,7 +107,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
+        $user = User::findOrFail($id);
+        $group = Group::all();
+        $area = Area::all();
+        return view('user.edit',compact('user', 'group', 'area','DetailUser'));
     }
 
     /**
@@ -114,7 +123,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $users = User::find($id);
+        return view('users.edit',compact('users'));
     }
 
     /**
@@ -125,6 +135,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return redirect()->route('user.index')
+                        ->with('success','deleted successfully');
     }
 }

@@ -14,9 +14,9 @@ class Area extends Model
         'active'
     ];
 
-    // public function DetailUser()
-    // {
-    //   return $this->belongTo('App\DetailUser');
-    // }
+    public function DetailUser()
+    {
+      return $this->hasMany('App\DetailUser');
+    }
 
 }

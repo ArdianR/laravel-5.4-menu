@@ -17,7 +17,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-settings font-dark"></i>
-                            <span class="caption-subject font-dark sbold uppercase">Edit User</span>
+                            <span class="caption-subject font-dark sbold uppercase">Create Status New</span>
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -32,9 +32,9 @@
                             </ul>
                         </div>
                     @endif
-                    {!! Form::model($user, ['method' => 'PATCH','route' => ['user.update', $user->id], 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(array('route' => 'status.store','method'=>'POST', 'class' => 'form-horizontal')) !!}
                     {{ csrf_field() }}
-                    @include('user.form')
+                    @include('status.form')
                     {!! Form::close() !!}
                     <!-- END FORM-->
                     </div>

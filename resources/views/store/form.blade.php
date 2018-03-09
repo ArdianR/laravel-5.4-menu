@@ -8,11 +8,19 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-3">Email
+        <label class="control-label col-md-3">Dealer ID
             <span class="required"> * </span>
         </label>
         <div class="col-md-4">
-            {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+            {!! Form::text('dealer_id', null, array('placeholder' => 'Dealer ID','class' => 'form-control')) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3">Address
+            <span class="required"> * </span>
+        </label>
+        <div class="col-md-4">
+            {!! Form::text('address', null, array('placeholder' => 'Address','class' => 'form-control')) !!}
         </div>
     </div>
     <div class="form-group">
@@ -24,27 +32,11 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-3">Group
+        <label class="control-label col-md-3">Grade
             <span class="required"> * </span>
         </label>
         <div class="col-md-4">
-            {{ Form::select('group_id', $group->pluck('name','id'), null, ['class'=>'form-control']) }}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-3">Password
-            <span class="required"> * </span>
-        </label>
-        <div class="col-md-4">
-            {!! Form::password('password', ['class' => 'form-control','placeholder' => 'Password']) !!}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-3">Confirm Password
-            <span class="required"> * </span>
-        </label>
-        <div class="col-md-4">
-            {!! Form::password('password_confirmation', ['class' => 'form-control','placeholder' => 'Confirm Password']) !!}
+            {!! Form::text('grade', null, array('placeholder' => 'Grade','class' => 'form-control')) !!}
         </div>
     </div>
     <div class="form-group">
@@ -60,7 +52,7 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-9">
             <input id="submitButton" class="btn green" type="button" value="Submit" onclick="submitForm(this);" />
-            <a href="{{ route('user.index') }}" class="btn grey-salsa btn-outline">Cancel</a>
+            <a href="{{ route('store.index') }}" class="btn grey-salsa btn-outline">Cancel</a>
         </div>
     </div>
 </div>

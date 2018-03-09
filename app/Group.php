@@ -14,4 +14,9 @@ class Group extends Model
     	'active'
     ];
 
+    public function DetailUser()
+    {
+      return $this->hasMany('App\DetailUser');
+    }
+
 }

@@ -155,7 +155,7 @@ class CreateUsersTable extends Migration {
 						->onUpdate('no action');
 			$table->integer('group_id')->unsigned();
 			$table->foreign('group_id')->references('id')->on('group')
-						->onDelete('no action')
+						->onDelete('cascade')
 						->onUpdate('no action');
 			$table->timestamps();
 		});

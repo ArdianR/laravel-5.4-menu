@@ -55,19 +55,22 @@ class User extends Authenticatable
         return $this->hasMany('App\DetailUser');
     }
 
-    public function Area()
-    {
-        return $this->hasMany('App\Area','id');
-    }
+    // public function Area()
+    // {
+    //     return $this->hasMany('App\Area','id');
+    // }
 
-    public function Group()
-    {
-        return $this->hasMany('App\Group','id');
-    }
+    // public function Group()
+    // {
+    //     return $this->hasMany('App\Group','id');
+    // }
 
     // public function Groups()
     // {
-    //     return $this->hasManyThrough('App\Group','App\DetailUser','group_id','id');
+    //     return $this->hasManyThrough(
+    //         'App\Group','App\DetailUser',
+    //         'group_id','id'
+    //     );
     // }
     
     // public function Areas()

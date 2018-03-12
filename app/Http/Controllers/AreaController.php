@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Area;
-use Auth;
-use App\DetailUser;
+
 
 class AreaController extends Controller
 {
@@ -22,9 +21,8 @@ class AreaController extends Controller
      */
     public function index()
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
         $area = Area::all();
-        return view('area.index',compact('area','DetailUser'))
+        return view('area.index',compact('area'))
             ->with('i');
     }
 
@@ -35,8 +33,7 @@ class AreaController extends Controller
      */
     public function create()
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        return view('area.create',compact('DetailUser'));
+        return view('area.create');
     }
 
     /**
@@ -66,9 +63,8 @@ class AreaController extends Controller
      */
     public function show($id)
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
         $area = Area::find($id);
-        return view('area.show',compact('area','DetailUser'));
+        return view('area.show',compact('area'));
     }
 
     /**
@@ -79,9 +75,8 @@ class AreaController extends Controller
      */
     public function edit($id)
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
         $area = Area::find($id);
-        return view('area.edit',compact('area','DetailUser'));
+        return view('area.edit',compact('area'));
     }
 
     /**

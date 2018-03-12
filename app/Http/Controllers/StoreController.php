@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
-use App\DetailUser;
 use App\Store;
 use App\Area;
-
+use App\Product;
+use App\ProductStore;
 
 class StoreController extends Controller
 {
@@ -24,10 +23,8 @@ class StoreController extends Controller
      */
     public function index()
     {
-        // $area = Area::all();
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        $store = Store::with('area')->get();
-        return view('store.index',compact('store','area','DetailUser'))
+        $store = Store::all();
+        return view('store.index',compact('store'))
             ->with('i');
     }
 
@@ -39,8 +36,7 @@ class StoreController extends Controller
     public function create()
     {
         $area = Area::all();
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        return view('store.create',compact('DetailUser','area'));
+        return view('store.create',compact('area'));
     }
 
     /**
@@ -72,10 +68,9 @@ class StoreController extends Controller
      */
     public function show($id)
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
         $store = Store::find($id);
         $area = Area::all();
-        return view('store.show',compact('store','area','DetailUser'));
+        return view('store.show',compact('store','area'));
     }
 
     /**
@@ -86,10 +81,9 @@ class StoreController extends Controller
      */
     public function edit($id)
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
         $store = Store::find($id);
         $area = Area::all();
-        return view('store.edit',compact('store','area','DetailUser'));
+        return view('store.edit',compact('store','area'));
     }
 
     /**
@@ -125,5 +119,41 @@ class StoreController extends Controller
         Store::find($id)->delete();
         return redirect()->route('store.index')
             ->with('success','deleted successfully');
+    }
+
+    public function productCreate($id)
+    {
+        $store = Store::find($id);
+        $area = Area::all();
+        $product = Product::all();
+        return view('store.productCreate',compact('store','area','product'));
+    }
+
+    public function productStore(Request $request)
+    {
+        $this->validate($request, [
+            'store_id' => 'required|integer',
+            'product_id' => 'required',
+            'qty' => 'required'
+        ]);
+        $input = $request->all();
+        for ($i=0; $i < count($input['product_id']); ++$i)
+        {
+            $ProductStore= new ProductStore;
+            $ProductStore->store_id = $input['store_id'];
+            $ProductStore->product_id = $input['product_id'][$i];
+            $ProductStore->qty= $input['qty'][$i];
+            $ProductStore->save();  
+        }
+        return redirect()->route('store.index')
+                        ->with('success','created successfully');
+    }
+
+    public function productShow($id)
+    {
+        $store = Store::find($id);
+        $ProductStore = ProductStore::where('store_id',$id)->get();
+        return view('store.productShow',compact('store','area','ProductStore'))
+            ->with('i');
     }
 }

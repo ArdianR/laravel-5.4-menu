@@ -17,12 +17,12 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-settings font-black"></i>
-                            <span class="caption-subject font-black sbold uppercase">SHOW store</span>
+                            <span class="caption-subject font-black sbold uppercase">Show Store Product</span>
                         </div>
                     </div>
                     <div class="portlet-body">
                     <!-- BEGIN FORM-->
-                    {!! Form::model($store, ['method' => 'PATCH','route' => ['store.update', $store->id], 'class' => 'form-horizontal', 'id' => 'form_sample_1']) !!}
+                    {!! Form::model($store, ['method' => 'PATCH','route' => ['store.update', $store->id], 'class' => 'form-horizontal']) !!}
                         <div class="form-body">
                             <div class="form-group">
                                 <label class="control-label col-md-3">Dealer ID
@@ -72,6 +72,24 @@
                                     {!! Form::select('active',  ['0' => 'No', '1' => 'Yes'], $store->active, ['class' => 'form-control', 'readonly'] ) !!}
                                 </div>
                             </div>
+                            <table class="table table-striped table-bordered table-hover dt-responsive" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th class="all">No</th>
+                                        <th class="desktop">Product Name</th>
+                                        <th class="desktop">Qty</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     @foreach ($ProductStore as $ProductStore)
+                                    <tr>
+                                        <td>{{ ++$i }}</td>
+                                        <td>{{ $ProductStore->product->name }}</td>
+                                        <td>{{ $ProductStore->qty }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                         <div class="form-actions">
                             <div class="row">

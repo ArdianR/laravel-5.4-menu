@@ -25,5 +25,10 @@ Route::resource('/area','AreaController');
 Route::resource('/user','UserController');
 Route::resource('/status','StatusController');
 Route::resource('/store','StoreController');
-
+Route::get('/store/productCreate/{id}','StoreController@productCreate')->name('store.productCreate');
+Route::post('/store/productStore','StoreController@productStore')->name('store.productStore');
+Route::get('/store/productShow/{id}','StoreController@productShow')->name('store.productShow');
+Route::resource('/pop','PopController');
+Route::resource('/product','ProductController');
+Route::get('/popstore','PopController@popStore');
 });

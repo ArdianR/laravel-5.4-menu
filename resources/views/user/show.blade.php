@@ -45,9 +45,7 @@
                                         <span class="required"> * </span>
                                     </label>
                                     <div class="col-md-4">
-                                        {!! $user1[0]->area_id !!}
-                                        {{ Form::select('area_id', $Area->pluck('name','id'), $user1[0]->area_id, ['class'=>'form-control','readonly']) }}
-                                        }
+                                        {{ Form::select('area_id', $Area->pluck('name','id'), $DetailUser->area_id, ['class'=>'form-control','readonly']) }}
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -55,7 +53,7 @@
                                         <span class="required"> * </span>
                                     </label>
                                     <div class="col-md-4">
-                                        {{ Form::select('group_id', $Group->pluck('name','id'), null, ['class'=>'form-control','readonly']) }}
+                                        {{ Form::select('group_id', $Group->pluck('name','id'), $DetailUser->group_id, ['class'=>'form-control','readonly']) }}
                                     </div>
                                 </div>
                                 <div class="form-group">

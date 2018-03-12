@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\DetailUser;
-use Auth;
 use App\User;
-use App\Area;
 use App\Group;
+use App\Area;
+use App\DetailUser;
 
 class UserController extends Controller
 {
@@ -24,11 +23,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        $user = User::with('DetailUser','area')->get();
-                // $area = Area::all();
-        return view('user.index',compact('user','area','DetailUser'))
-            ->with('i');
+        $user = User::with('DetailUser')->get();
+        return view('user.index',compact('user'))->with('i');
     }
 
     /**
@@ -38,10 +34,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
         $group = Group::all();
         $area = Area::all();
-        return view('user.create',compact('group', 'area', 'user','DetailUser'));
+        return view('user.create',compact('group', 'area'));
     }
 
     /**
@@ -90,13 +85,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
+        $DetailUser = DetailUser::where('user_id',$id)->first();
         $User = User::findOrFail($id);
-        $user1 = User::with('DetailUser')->where('id',Auth::id())->get();
         $Group = Group::all();
         $Area = Area::all();
-        // dd($User);exit();
-        return view('user.show',compact('User','user1','DetailUser','Group','Area'));
+        return view('user.show',compact('User','DetailUser','Group','Area'));
     }
 
     /**
@@ -107,7 +100,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
+        $DetailUser = DetailUser::where('user_id',$id)->first();
         $user = User::findOrFail($id);
         $group = Group::all();
         $area = Area::all();

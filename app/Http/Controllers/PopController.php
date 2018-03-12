@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Group;
+use App\Store;
+use App\Area;
 
-class GroupController extends Controller
+class PopController extends Controller
 {
     
     public function __construct()
@@ -20,8 +21,14 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $group = Group::all();
-        return view('group.index',compact('group'))->with('i');
+        //
+    }
+
+    public function popStore()
+    {
+        $store = Store::all();
+        return view('pop.store.index',compact('store'))
+            ->with('i');
     }
 
     /**
@@ -31,7 +38,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('group.create');
+        //
     }
 
     /**
@@ -42,13 +49,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string',
-            'active' => 'required|boolean'
-        ]);
-        Group::create($request->all());
-        return redirect()->route('group.index')
-            ->with('success','created successfully');
+        //
     }
 
     /**
@@ -59,8 +60,7 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        $group = Group::find($id);
-        return view('group.show',compact('group'));
+        //
     }
 
     /**
@@ -71,8 +71,7 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        $group = Group::find($id);
-        return view('group.edit',compact('group'));
+        //
     }
 
     /**
@@ -84,13 +83,7 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required|string',
-            'active' => 'required|boolean'
-        ]);
-        Group::find($id)->update($request->all());
-        return redirect()->route('group.index')
-            ->with('success','updated successfully');
+        //
     }
 
     /**
@@ -101,8 +94,6 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        Group::find($id)->delete();
-        return redirect()->route('group.index')
-            ->with('success','deleted successfully');
+        //
     }
 }

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
-use App\DetailUser;
 use App\Status;
 
 class StatusController extends Controller
@@ -22,9 +20,8 @@ class StatusController extends Controller
      */
     public function index()
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
         $status = Status::all();
-        return view('status.index',compact('status','DetailUser'))
+        return view('status.index',compact('status'))
             ->with('i');
     }
 
@@ -35,8 +32,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
-        return view('status.create',compact('DetailUser'));
+        return view('status.create');
     }
 
     /**
@@ -64,9 +60,8 @@ class StatusController extends Controller
      */
     public function show($id)
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
         $status = Status::find($id);
-        return view('status.show',compact('status','DetailUser'));
+        return view('status.show',compact('status'));
     }
 
     /**
@@ -77,9 +72,8 @@ class StatusController extends Controller
      */
     public function edit($id)
     {
-        $DetailUser = DetailUser::where('user_id',Auth::id())->first();
         $status = Status::find($id);
-        return view('status.edit',compact('status','DetailUser'));
+        return view('status.edit',compact('status'));
     }
 
     /**

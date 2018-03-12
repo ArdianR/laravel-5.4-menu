@@ -3,16 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Group;
+use App\Product;
 
-class GroupController extends Controller
+class ProductController extends Controller
 {
-    
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +14,9 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $group = Group::all();
-        return view('group.index',compact('group'))->with('i');
+        $product = Product::all();
+        return view('product.index',compact('product'))
+            ->with('i');
     }
 
     /**
@@ -31,7 +26,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('group.create');
+        return view('product.create');
     }
 
     /**
@@ -46,9 +41,9 @@ class GroupController extends Controller
             'name' => 'required|string',
             'active' => 'required|boolean'
         ]);
-        Group::create($request->all());
-        return redirect()->route('group.index')
-            ->with('success','created successfully');
+        Product::create($request->all());
+        return redirect()->route('product.index')
+                        ->with('success','created successfully');
     }
 
     /**
@@ -59,8 +54,8 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        $group = Group::find($id);
-        return view('group.show',compact('group'));
+        $product = Product::find($id);
+        return view('product.show',compact('product'));
     }
 
     /**
@@ -71,8 +66,8 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        $group = Group::find($id);
-        return view('group.edit',compact('group'));
+        $product = Product::find($id);
+        return view('product.edit',compact('product'));
     }
 
     /**
@@ -88,9 +83,9 @@ class GroupController extends Controller
             'name' => 'required|string',
             'active' => 'required|boolean'
         ]);
-        Group::find($id)->update($request->all());
-        return redirect()->route('group.index')
-            ->with('success','updated successfully');
+        Product::find($id)->update($request->all());
+        return redirect()->route('product.index')
+                        ->with('success','updated successfully');
     }
 
     /**
@@ -101,8 +96,8 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        Group::find($id)->delete();
-        return redirect()->route('group.index')
+        Product::find($id)->delete();
+        return redirect()->route('product.index')
             ->with('success','deleted successfully');
     }
 }

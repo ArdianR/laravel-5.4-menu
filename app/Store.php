@@ -17,8 +17,8 @@ class Store extends Model
         'active'
     ];
 
-    // public function Area()
-    // {
-    //   return $this->hasMany('App\Area','id');
-    // }
+    public function Area()
+    {
+      return $this->belongsTo('App\Area');
+    }
 }

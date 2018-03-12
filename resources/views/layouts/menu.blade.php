@@ -110,11 +110,11 @@
                 <!-- BEGIN SIDEBAR -->
                 <div class="page-sidebar-wrapper">
                     <!-- BEGIN SIDEBAR -->
-                    @if ($DetailUser->group_id == 1)
+                    @if (Auth::user()->DetailUser[0]->group_id == 1)
                         @component('menu.admin')
                         @endcomponent
                     @else
-{{--                         @component('menu.hq')
+{{--                    @component('menu.hq')
                         @endcomponent --}}
                     @endif
                     <!-- END SIDEBAR -->

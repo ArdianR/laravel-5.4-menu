@@ -44,16 +44,16 @@
                     </a>
                 </li>
                 <li class="nav-item  ">
+                    <a href="{{ url('/product') }}" class="nav-link ">
+                        <span class="title">Product</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
                     <a href="{{ url('/store') }}" class="nav-link ">
                         <span class="title">Store</span>
                     </a>
                 </li>
-                <li class="nav-item  ">
-                    <a href="#" class="nav-link ">
-                        <span class="title">Morris Charts</span>
-                    </a>
-                </li>
-                <li class="nav-item  ">
+{{--                 <li class="nav-item  ">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <span class="title">HighCharts</span>
                         <span class="arrow"></span>
@@ -69,7 +69,7 @@
                             <a href="#" class="nav-link "> HighMaps </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </li>
         <li class="nav-item  ">
@@ -80,8 +80,8 @@
             </a>
             <ul class="sub-menu">
                 <li class="nav-item  ">
-                    <a href="#" class="nav-link ">
-                        <span class="title">amChart</span>
+                    <a href="{{ url('/popstore') }}" class="nav-link ">
+                        <span class="title">Store</span>
                     </a>
                 </li>
                 <li class="nav-item  ">

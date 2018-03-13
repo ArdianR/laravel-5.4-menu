@@ -23,7 +23,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $store = Store::all();
+        $store = Store::paginate(2000);
         return view('store.index',compact('store'))
             ->with('i');
     }
@@ -155,5 +155,42 @@ class StoreController extends Controller
         $ProductStore = ProductStore::where('store_id',$id)->get();
         return view('store.productShow',compact('store','area','ProductStore'))
             ->with('i');
+    }
+
+    public function productEdit($id)
+    {
+        $store = Store::find($id);
+        $ProductStore = ProductStore::where('store_id',$id)->get();
+        return view('store.productEdit',compact('store','ProductStore'))
+            ->with('i');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function productUpdate(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required|string',
+            'dealer_id' => 'required|string',
+            'address' => 'required|string',
+            'area_id' => 'required|integer',
+            'grade' => 'required|string',
+            'active' => 'required|boolean'
+        ]);
+        Store::find($id)->update($request->all());
+        return redirect()->route('store.index')
+                        ->with('success','updated successfully');
+    }
+
+    public function productDestroy($id)
+    {
+        Store::find($id)->delete();
+        return redirect()->route('store.index')
+            ->with('success','deleted successfully');
     }
 }

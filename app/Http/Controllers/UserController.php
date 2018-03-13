@@ -23,8 +23,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::with('DetailUser')->get();
-        return view('user.index',compact('user'))->with('i');
+        $users = User::all();
+        return view('user.index',compact('users'))
+            ->with('i');
     }
 
     /**
@@ -85,11 +86,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $DetailUser = DetailUser::where('user_id',$id)->first();
-        $User = User::findOrFail($id);
-        $Group = Group::all();
-        $Area = Area::all();
-        return view('user.show',compact('User','DetailUser','Group','Area'));
+        $detailuser = DetailUser::where('user_id',$id)->get();
+        $users = User::findOrFail($id);
+        $group = Group::all();
+        $area = Area::all();
+        return view('user.show',compact('users','detailuser','group','area'));
     }
 
     /**
@@ -101,10 +102,10 @@ class UserController extends Controller
     public function edit($id)
     {
         $DetailUser = DetailUser::where('user_id',$id)->first();
-        $user = User::findOrFail($id);
+        $users = User::findOrFail($id);
         $group = Group::all();
         $area = Area::all();
-        return view('user.edit',compact('user', 'group', 'area','DetailUser'));
+        return view('user.edit',compact('users', 'group', 'area','DetailUser'));
     }
 
     /**
@@ -117,7 +118,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $users = User::find($id);
-        return view('users.edit',compact('users'));
+        return view('user.index',compact('users'));
     }
 
     /**

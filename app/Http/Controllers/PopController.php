@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Store;
 use App\Area;
+use App\Store;
+use App\DetailUser;
+use Auth;
 
 class PopController extends Controller
 {
@@ -21,13 +23,24 @@ class PopController extends Controller
      */
     public function index()
     {
-        //
+        $store = Store::all();
+        return view('pop.index',compact('store'))
+            ->with('i');
     }
 
-    public function popStore()
+    public function indexHq()
     {
-        $store = Store::all();
-        return view('pop.store.index',compact('store'))
+        $area = Area::all();
+        return view('pop.indexHq',compact('area'))
+            ->with('i');
+    }
+
+    public function indexHr()
+    {
+        $users = Auth::user()->detailuser()->get();
+        $area = Area::find($users[0]->area_id);
+        $store = Store::where('area_id','=',$users[0]->area_id)->get();
+        return view('pop.indexhr',compact('store','area'))
             ->with('i');
     }
 
@@ -38,7 +51,25 @@ class PopController extends Controller
      */
     public function create()
     {
-        //
+        return ('oke');
+    }
+
+    public function createHr($id)
+    {
+        $user_id = Auth::id();
+        $detailuser = DetailUser::where('user_id',$user_id)->first();
+        $area = Area::all();
+        $store_id = $id;
+        $store = Store::all();
+        return view('pop.createHr',compact('user_id','store_id','area','detailuser','store'))
+            ->with('i');
+    }
+
+    public function createArea()
+    {
+        $id = Auth::id();
+        return view('pop.createArea',compact('id'))
+            ->with('i');
     }
 
     /**
@@ -49,7 +80,12 @@ class PopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return ('oke');
+    }
+
+    public function storeArea(Request $request)
+    {
+        return ('oke');
     }
 
     /**
@@ -60,7 +96,15 @@ class PopController extends Controller
      */
     public function show($id)
     {
-        //
+        return ('oke');
+    }
+
+    public function showAreaHq($id)
+    {
+        $area = Area::find($id);
+        $store = Store::where('area_id','=',$id)->get();
+        return view('pop.showAreaHq',compact('store','area'))
+            ->with('i');
     }
 
     /**
@@ -71,7 +115,7 @@ class PopController extends Controller
      */
     public function edit($id)
     {
-        //
+        return ('oke');
     }
 
     /**
@@ -83,7 +127,7 @@ class PopController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return ('oke');
     }
 
     /**
@@ -94,6 +138,6 @@ class PopController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return ('oke');
     }
 }

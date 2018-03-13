@@ -113,9 +113,12 @@
                     @if (Auth::user()->DetailUser[0]->group_id == 1)
                         @component('menu.admin')
                         @endcomponent
+                    @elseif (Auth::user()->DetailUser[0]->group_id == 2)
+                        @component('menu.hq')
+                        @endcomponent
                     @else
-{{--                    @component('menu.hq')
-                        @endcomponent --}}
+                        @component('menu.hr')
+                        @endcomponent                   
                     @endif
                     <!-- END SIDEBAR -->
                 </div>
@@ -199,6 +202,7 @@
         <script src="{{ asset('metronic/assets/pages/scripts/form-input-mask.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/ui-toastr.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/components-bootstrap-touchspin.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/pages/scripts/table-datatables-editable.min.js')}}" type="text/javascript"></script>
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <script src="{{ asset('metronic/assets/layouts/layout/scripts/layout.min.js')}}" type="text/javascript"></script>
@@ -214,6 +218,15 @@
                 // submit the form    
                 btn.form.submit();
             }
+        </script>
+        <script>
+            $(document).ready(function()
+            {
+                $('#clickmewow').click(function()
+                {
+                    $('#radio1003').attr('checked', 'checked');
+                });
+            })
         </script>
     </body>
 </html>

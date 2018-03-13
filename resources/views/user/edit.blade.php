@@ -32,7 +32,7 @@
                             </ul>
                         </div>
                     @endif
-                    {!! Form::model($user, ['method' => 'PATCH','route' => ['user.update', $user->id], 'class' => 'form-horizontal']) !!}
+                    {!! Form::model($users, ['method' => 'PATCH','route' => ['user.update', $users->id], 'class' => 'form-horizontal']) !!}
                     {{ csrf_field() }}
                     @include('user.form')
                     {!! Form::close() !!}

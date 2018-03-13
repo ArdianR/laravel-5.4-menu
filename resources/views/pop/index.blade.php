@@ -10,7 +10,7 @@
         <!-- BEGIN PAGE TITLE-->
         <div class="portlet-title">
             <div class="caption">
-                <span class="icon-settings font-dark caption-subject font-dark sbold uppercase page-title"> Store</span>
+                <span class="icon-settings font-dark caption-subject font-dark sbold uppercase page-title"> pop </span>
             </div>
         </div>
         @if ($message = Session::get('success'))
@@ -38,7 +38,7 @@
                                     <th class="desktop">Name</th>
                                     <th class="desktop">Dealer ID</th>
                                     <th class="desktop">Address</th>
-                                    <th class="desktop">Area</th>
+                                    <th class="desktop">Area_id</th>
                                     <th class="destop">Grade</th>
                                     <th class="desktop">Active</th>
                                     <th class="all">Action</th>
@@ -64,36 +64,6 @@
                                                     <a href="{{ route('store.show',$store->id) }}">
                                                         <i class="fa fa-eye"></i> Show
                                                     </a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ route('store.edit',$store->id) }}">
-                                                        <i class="fa fa-pencil"></i> Edit
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    {!! Form::open(['method' => 'DELETE','route' => ['store.destroy', $store->id],'style'=>'display:inline']) !!}
-                                                    <input type="image" src="{{ asset('metronic/assets/global/img/fa-fa-recycle.png') }}" alt="Submit Form" style="cursor: pointer;" />
-                                                    {!! Form::close() !!}
-                                                </li>
-                                                <li>
-                                                    <a href="{{ route('store.productCreate',$store->id) }}">
-                                                        <i class="fa fa-eye"></i> Product Create
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ route('store.productShow',$store->id) }}">
-                                                        <i class="fa fa-eye"></i> Product Show
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ route('store.productEdit',$store->id) }}">
-                                                        <i class="fa fa-pencil"></i> Product Edit
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    {!! Form::open(['method' => 'DELETE','route' => ['store.destroy', $store->id],'style'=>'display:inline']) !!}
-                                                    <input type="image" src="{{ asset('metronic/assets/global/img/fa-fa-recycle.png') }}" alt="Submit Form" style="cursor: pointer;" />
-                                                    {!! Form::close() !!}
                                                 </li>
                                             </ul>
                                         </div>

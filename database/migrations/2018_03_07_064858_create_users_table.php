@@ -176,10 +176,6 @@ class CreateUsersTable extends Migration {
 			$table->foreign('area_id')->references('area_id')->on('detail_user')
 						->onDelete('no action')
 						->onUpdate('no action');
-			$table->integer('group_id')->unsigned();
-			$table->foreign('group_id')->references('group_id')->on('detail_user')
-						->onDelete('no action')
-						->onUpdate('no action');
 			$table->integer('store_id')->unsigned();
 			$table->foreign('store_id')->references('id')->on('store')
 						->onDelete('no action')

@@ -40,7 +40,7 @@ Route::get('/pop/indexHq','PopController@indexHq')->name('pop.indexHq');
 
 Route::get('/pop/indexHr','PopController@indexHr')->name('pop.indexHr');
 Route::get('/pop/createHr/{id}','PopController@createHr')->name('pop.createHr');
-Route::get('/pop/storeHr','PopController@storeHr')->name('pop.storeHr');
+Route::post('/pop/storeHr','PopController@storeHr');
 
 Route::get('/pop/showAreaHq/{id}','PopController@showAreaHq')->name('pop.showAreaHq');
 Route::get('/pop/createArea','PopController@createArea')->name('pop.createArea');

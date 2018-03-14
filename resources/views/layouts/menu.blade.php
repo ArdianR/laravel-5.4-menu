@@ -31,7 +31,12 @@
         <link href="{{ asset('metronic/assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('metronic/assets/global/plugins/bootstrap-toastr/toastr.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{ asset('metronic/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.css')}}" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
+        <link href="{{ asset('metronic/assets/global/plugins/fancybox/source/jquery.fancybox.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('metronic/assets/global/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('metronic/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('metronic/assets/global/plugins/jquery-file-upload/css/jquery.fileupload-ui.css')}}" rel="stylesheet" type="text/css" />
+
+{{--         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" /> --}}
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL STYLES -->
         <link href="{{ asset('metronic/assets/global/css/components-rounded.min.css')}}" rel="stylesheet" id="style_components" type="text/css" />
@@ -191,7 +196,22 @@
         <script src="{{ asset('metronic/assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/global/plugins/jquery.input-ip-address-control-1.0.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/global/plugins/fuelux/js/spinner.min.js')}}" type="text/javascript"></script>
-        <script src="{{ asset('metronic/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js')}}" type="text/javascript"></script>-->
+        <script src="{{ asset('metronic/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/vendor/tmpl.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/vendor/load-image.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/blueimp-gallery/jquery.blueimp-gallery.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-process.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-audio.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-video.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js')}}" type="text/javascript"></script>
+
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
         <script src="{{ asset('metronic/assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
@@ -203,6 +223,7 @@
         <script src="{{ asset('metronic/assets/pages/scripts/ui-toastr.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/components-bootstrap-touchspin.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/table-datatables-editable.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/pages/scripts/form-fileupload.min.js')}}" type="text/javascript"></script>
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <script src="{{ asset('metronic/assets/layouts/layout/scripts/layout.min.js')}}" type="text/javascript"></script>

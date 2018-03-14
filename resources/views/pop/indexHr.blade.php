@@ -22,11 +22,11 @@
         @endif
         <!-- END PAGE TITLE-->
         <!-- END PAGE HEADER-->
-        <p><b>Regional : </b>{{-- {{ $area->name }}&nbsp;&nbsp;&nbsp;&nbsp; --}}
-        <b>Total Toko : </b>{{-- {{ $area->name->count() }}&nbsp;&nbsp;&nbsp;&nbsp; --}}
-        <b>Uploaded : </b>{{-- {{ $area->name->where('status',0)->count() }}&nbsp;&nbsp;&nbsp;&nbsp; --}}
-        <b>Rejected : </b>{{-- {{ $area->name->where('status',2)->count() }}&nbsp;&nbsp;&nbsp;&nbsp; --}}
-        <b>Approved : </b>{{-- {{ $area->name->where('status',1)->count() }} --}}</p>
+        <p><b>Regional : </b>{{ $area->name }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Total Toko : </b>{{ $store->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Uploaded : </b>{{ $pop->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Rejected : </b>{{ $pop->where('status_id',2)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Approved : </b>{{ $pop->where('status_id',3)->count() }}</p>
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
@@ -59,7 +59,7 @@
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light bordered">
                     <div class="portlet-title">
-                        <a href="" class="btn btn-sm green"> Create New
+                        <a>
                         </a>
                     </div>
                     <div class="portlet-body">

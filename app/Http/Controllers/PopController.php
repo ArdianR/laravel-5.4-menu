@@ -13,6 +13,8 @@ use App\DetailUser;
 use App\DetailPop;
 use App\PhotoPop;
 use Auth;
+use Illuminate\Support\Facades\Storage;
+use File;
 
 class PopController extends Controller
 {
@@ -140,64 +142,20 @@ class PopController extends Controller
         {
             $id = $pop->id;
             $store_id = $pop->store_id;
-            // $input = $request->all();
-
-            // foreach ($request->photo as $photo)
-            // {
-            //     $filename = $photo->store('images');
-            //     PhotoPop::create([
-            //         'pop_id' => $id,
-            //         'type' => $request->type,
-            //         'photo' => $filename
-            //     ]);
-            // }
-
             $input = $request->all();
-            $photo = array();
-
 
             foreach ($request->photo as $photo)
             {
-                $name=$photo->getClientOriginalName();
-                $photo->move('image',$name);
-                $images[]=$name;
-
-                $random = md5($photo);
-                $imageName = time().$random;
                 $imgPath = 'images/'.$store_id;
                 Storage::makeDirectory($imgPath, $mode = 0775, true);
-                $imgDestinationPath = $imgPath.'/';
-                $uploaded = $file->move($imgDestinationPath, $imageName.'.png');
-                $photopop->pop_id = $id;
-                $photopop->type = $request->type;
-                $photopop->photo = $imageName;
-                $photopop->save();
+                $imgDestinationPath = $imgPath.'';
+                $filename = $photo->store($imgDestinationPath);
+                PhotoPop::create([
+                    'pop_id' => $id,
+                    'type' => $request->type,
+                    'photo' => $filename
+                ]);
             }
-
-            dd($photopop);exit;
-            dd($files=$request->file('photo'));exit;
-            /*Insert your data*/
-
-            Detail::insert( [
-                'images'=>  implode("|",$images),
-                'description' =>$input['description'],
-                //you can put other insertion here
-            ]);
-
-
-            return redirect('redirecting page');
-
-            // $file = $input['photo'][$i];
-            // $random = md5($file);
-            // $imageName = time().$random;
-            // $imgPath = 'images/'.$store_id;
-            // Storage::makeDirectory($imgPath, $mode = 0775, true);
-            // $imgDestinationPath = $imgPath.'/';
-            // dd($imgDestinationPath);exit;
-            // $uploaded = $file->move($imgDestinationPath, $imageName.'.png');
-            //  $pops->photo = $imageName;
-
-
             
         }
         return redirect()->action('PopController@indexHr')

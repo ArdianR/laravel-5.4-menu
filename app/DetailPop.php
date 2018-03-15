@@ -13,4 +13,9 @@ class DetailPop extends Model
         'product_id',
         'qty'
     ];
+
+    public function Product()
+    {
+        return $this->belongsTo('App\Product');
+    }
 }

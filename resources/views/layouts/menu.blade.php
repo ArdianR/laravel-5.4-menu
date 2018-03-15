@@ -211,7 +211,9 @@
         <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-video.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js')}}" type="text/javascript"></script>
-
+        <script src="{{ asset('metronic/assets/global/plugins/jquery.pulsate.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/jquery-bootpag/jquery.bootpag.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/holder.js')}}" type="text/javascript"></script>
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
         <script src="{{ asset('metronic/assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
@@ -224,6 +226,7 @@
         <script src="{{ asset('metronic/assets/pages/scripts/components-bootstrap-touchspin.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/table-datatables-editable.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/form-fileupload.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/pages/scripts/ui-general.min.js')}}" type="text/javascript"></script>
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <script src="{{ asset('metronic/assets/layouts/layout/scripts/layout.min.js')}}" type="text/javascript"></script>

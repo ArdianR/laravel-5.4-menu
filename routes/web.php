@@ -1,5 +1,8 @@
 <?php
 
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Factory;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,15 +20,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/group','GroupController');
 Route::resource('/area','AreaController');
 Route::resource('/user','UserController');
 Route::resource('/status','StatusController');
-
-
+Route::resource('/product','ProductController');
 Route::resource('/store','StoreController');
 Route::get('/store/productCreate/{id}','StoreController@productCreate')->name('store.productCreate');
 Route::post('/store/productStore','StoreController@productStore')->name('store.productStore');
@@ -41,10 +43,18 @@ Route::get('/pop/indexHq','PopController@indexHq')->name('pop.indexHq');
 Route::get('/pop/indexHr','PopController@indexHr')->name('pop.indexHr');
 Route::get('/pop/createHr/{id}','PopController@createHr')->name('pop.createHr');
 Route::post('/pop/storeHr','PopController@storeHr');
+Route::get('/pop/list','PopController@list');
+Route::get('/pop/showPop/{id}','PopController@showPop')->name('pop.showPop');
 
 Route::get('/pop/showAreaHq/{id}','PopController@showAreaHq')->name('pop.showAreaHq');
 Route::get('/pop/createArea','PopController@createArea')->name('pop.createArea');
 Route::get('/pop/storeArea','PopController@storeArea')->name('pop.storeArea');
-Route::resource('/product','ProductController');
+Route::get('/pop/listPopHq','PopController@listPopHq');
+Route::get('/pop/showPopHq/{id}','PopController@showPopHq')->name('pop.showPopHq');
+});
 
+
+Route::group(['middleware' => ['auth']], function ($id) {
+dd($id);exit;
+	Route::get('/home', 'HomeController@index')->name('home');
 });

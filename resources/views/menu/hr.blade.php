@@ -29,36 +29,9 @@
                     </a>
                 </li>
                 <li class="nav-item  ">
-                    <a href="#" class="nav-link ">
-                        <span class="title">Google Charts</span>
+                    <a href="{{action('PopController@list')}}" class="nav-link ">
+                        <span class="title">List Pop</span>
                     </a>
-                </li>
-                <li class="nav-item  ">
-                    <a href="#" class="nav-link ">
-                        <span class="title">eCharts</span>
-                    </a>
-                </li>
-                <li class="nav-item  ">
-                    <a href="#" class="nav-link ">
-                        <span class="title">Morris Charts</span>
-                    </a>
-                </li>
-                <li class="nav-item  ">
-                    <a href="javascript:;" class="nav-link nav-toggle">
-                        <span class="title">HighCharts</span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu">
-                        <li class="nav-item ">
-                            <a href="#" class="nav-link "> HighCharts </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="#" class="nav-link "> HighStock </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a href="#" class="nav-link "> HighMaps </a>
-                        </li>
-                    </ul>
                 </li>
             </ul>
         </li>

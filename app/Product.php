@@ -12,4 +12,9 @@ class Product extends Model
         'name',
         'active'
     ];
+
+    // public function DetailPop()
+    // {
+    //     return $this->hasMany('App\DetailPop');
+    // }
 }

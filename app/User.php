@@ -55,6 +55,11 @@ class User extends Authenticatable
         return $this->hasMany('App\DetailUser');
     }
 
+    // public function Pop()
+    // {
+    //     return $this->belongsTo('App\Pop','user_id');
+    // }
+
     // public function Area()
     // {
     //     return $this->hasMany('App\Area','id');

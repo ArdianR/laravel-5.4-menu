@@ -15,6 +15,7 @@ use App\PhotoPop;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 use File;
+use DB;
 
 class PopController extends Controller
 {
@@ -49,7 +50,39 @@ class PopController extends Controller
         $area = Area::find($users[0]->area_id);
         $store = Store::where('area_id','=',$users[0]->area_id)->get();
         $pop = Pop::where('area_id','=',$users[0]->area_id)->get();
-        return view('pop.indexhr',compact('store','area','pop'))
+        $alls = DB::table('pop')
+        ->leftjoin('detail_pop', 'pop.id', '=', 'detail_pop.pop_id')
+        ->leftjoin('product', 'detail_pop.product_id', '=', 'product.id')
+        ->where('area_id', $users[0]->area_id)
+        ->select('product.id as id','product.name as name', DB::raw("sum(detail_pop.qty) as sum"))
+        ->groupBy('product.id','product.name')
+        ->get();
+        return view('pop.indexhr',compact('alls','store','area','pop'))
+            ->with('i');
+    }
+
+    public function list()
+    {
+        $users = Auth::user()->detailuser()->get();
+        $area = Area::find($users[0]->area_id);
+        $store = Store::where('area_id','=',$users[0]->area_id)->get();
+        $pop = Pop::where('area_id','=',$users[0]->area_id)->with('user')->get();
+        $alls = DB::table('pop')
+        ->leftjoin('detail_pop', 'pop.id', '=', 'detail_pop.pop_id')
+        ->leftjoin('product', 'detail_pop.product_id', '=', 'product.id')
+        ->where('area_id', $users[0]->area_id)
+        ->select('product.id as id','product.name as name', DB::raw("sum(detail_pop.qty) as sum"))
+        ->groupBy('product.id','product.name')
+        ->get();
+        return view('pop.list',compact('alls','store','area','pop'))
+            ->with('i');
+    }
+
+    public function listPopHq()
+    {
+        $users = Auth::user()->detailuser()->get();
+        $pop = Pop::all();
+        return view('pop.listpophq',compact('pop'))
             ->with('i');
     }
 
@@ -178,6 +211,34 @@ class PopController extends Controller
         $area = Area::find($id);
         $store = Store::where('area_id','=',$id)->get();
         return view('pop.showAreaHq',compact('store','area'))
+            ->with('i');
+    }
+
+    public function showPop($id)
+    {
+        
+        $pop = Pop::find($id);
+        $photopop = PhotoPop::where('pop_id',$id)->get();
+        $detailpop = DetailPop::where('pop_id',$id)->get();
+        $area = Area::all();
+        $store = Store::all();
+        $status = Status::all();
+        $group = Group::all();
+        return view('pop.showPop',compact('detailpop','pop','area','group','store','status','photopop'))
+            ->with('i');
+    }
+
+    public function showPopHq($id)
+    {
+        
+        $pop = Pop::find($id);
+        $photopop = PhotoPop::where('pop_id',$id)->get();
+        $detailpop = DetailPop::where('pop_id',$id)->get();
+        $area = Area::all();
+        $store = Store::all();
+        $status = Status::all();
+        $group = Group::all();
+        return view('pop.showPopHq',compact('detailpop','pop','area','group','store','status','photopop'))
             ->with('i');
     }
 

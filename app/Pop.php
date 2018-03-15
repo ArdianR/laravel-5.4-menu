@@ -20,4 +20,40 @@ class Pop extends Model
         'status_id',
         'active'
     ];
+
+    public function User()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function Group()
+    {
+        return $this->belongsTo('App\Group');
+    }
+
+    public function Area()
+    {
+        return $this->belongsTo('App\Area');
+    }
+
+    public function Store()
+    {
+        return $this->belongsTo('App\Store');
+    }
+
+    public function Status()
+    {
+        return $this->belongsTo('App\Status');
+    }
+
+    // public function DetailPop()
+    // {
+    //     return $this->belongsTo('App\DetailPop');
+    // }
+
+    public function PhotoPop()
+    {
+        return $this->hasMany('App\PhotoPop');
+    }
+
 }

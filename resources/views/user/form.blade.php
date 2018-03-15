@@ -20,7 +20,7 @@
             <span class="required"> * </span>
         </label>
         <div class="col-md-4">
-            {{ Form::select('area_id', $area->pluck('name','id'), null, ['class'=>'form-control']) }}
+            {{ Form::select('area_id[]', $area->pluck('name','id'), null, ['class'=>'form-control select2-multiple','id'=>'multiple', 'multiple']) }}
         </div>
     </div>
     <div class="form-group">

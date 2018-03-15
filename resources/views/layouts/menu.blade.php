@@ -152,6 +152,7 @@
         <script src="{{asset('metronic/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}" type="text/javascript"></script>
         <!-- END CORE PLUGINS -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <script src="{{asset('metronic/assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('metronic/assets/global/plugins/moment.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('metronic/assets/global/plugins/morris/morris.min.js')}}" type="text/javascript"></script>
@@ -219,6 +220,7 @@
         <script src="{{ asset('metronic/assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
         <!-- END THEME GLOBAL SCRIPTS -->
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
+        <script src="{{ asset('metronic/assets/pages/scripts/components-select2.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/table-datatables-buttons.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/form-validation.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/form-input-mask.min.js')}}" type="text/javascript"></script>

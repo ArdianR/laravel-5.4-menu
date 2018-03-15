@@ -82,4 +82,9 @@ class User extends Authenticatable
     // {
     //     return $this->hasManyThrough('App\Area','App\DetailUser','area_id','id');
     // }
+
+
+
+
+    
 }

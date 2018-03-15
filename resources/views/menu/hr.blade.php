@@ -16,7 +16,7 @@
                 <span class="selected"></span>
             </a>
         </li>
-        <li class="nav-item">
+{{--         <li class="nav-item">
             <a href="javascript:;" class="nav-link nav-toggle">
                 <i class="icon-bar-chart"></i>
                 <span class="title">POP</span>
@@ -24,7 +24,7 @@
             </a>
             <ul class="sub-menu">
                 <li class="nav-item  ">
-                    <a href="{{ url('pop/indexHr') }}" class="nav-link ">
+                    <a href="{{ route('pop.indexHr',Auth::id()) }}" class="nav-link ">
                         <span class="title">Index</span>
                     </a>
                 </li>
@@ -34,7 +34,7 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li> --}}
     </ul>
     <!-- END SIDEBAR MENU -->
     <!-- END SIDEBAR MENU -->

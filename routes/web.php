@@ -1,8 +1,7 @@
 <?php
 
 use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Contracts\Auth\Factory;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +21,7 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/group','GroupController');
 Route::resource('/area','AreaController');
 Route::resource('/user','UserController');
@@ -54,7 +53,10 @@ Route::get('/pop/showPopHq/{id}','PopController@showPopHq')->name('pop.showPopHq
 });
 
 
-Route::group(['middleware' => ['auth']], function ($id) {
-dd($id);exit;
-	Route::get('/home', 'HomeController@index')->name('home');
-});
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+
+// Route::group(['providers' => 'users'], function() {
+    // Route::get('/home', 'HomeController@index')->name('home')->middleware('group');
+// });

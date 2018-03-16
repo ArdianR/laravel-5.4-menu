@@ -7,6 +7,13 @@
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
         <!-- BEGIN DASHBOARD STATS 1-->
+        @if ($message = Session::get('error'))
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+            <strong>{{ $message }}</strong>
+            <a href="" class="alert-link"></a>
+        </div>
+        @endif
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <a class="dashboard-stat dashboard-stat-v2 blue" href="#">

@@ -52,7 +52,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'area_id' => 'required|integer',
+            'area_id' => 'required',
             'group_id' => 'required|integer',
             'active' => 'required|boolean',
         ]);
@@ -65,15 +65,16 @@ class UserController extends Controller
         if($User->save())
         {
             $input = $request->all();
-            for ($i=0; $i < count($input['area_id']); ++$i)
-            {
-                $DetailUser= new DetailUser;
-                $DetailUser->user_id = $User->id;
-                $DetailUser->area_id = $input['area_id'][$i];
-                $DetailUser->group_id= $input['group_id'][$i];
-                $DetailUser->save();  
-            }
-            return redirect()->route('user.index')
+            $area_id = $request->input('area_id');
+            $area_id = implode(',', $area_id);
+
+            $DetailUser= new DetailUser;
+            $DetailUser->user_id = $User->id;
+            $DetailUser->area_id = $area_id;
+            $DetailUser->group_id= $request->input('group_id');
+            $DetailUser->save();
+
+            return redirect()->action('UserController@index')
                         ->with('success','created successfully');
         }
     }
@@ -86,11 +87,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $detailuser = DetailUser::where('user_id',$id)->get();
         $users = User::findOrFail($id);
+        $detailuser = User::findOrFail($id)->detailuser;
         $group = Group::all();
         $area = Area::all();
-        return view('user.show',compact('users','detailuser','group','area'));
+        $area_id = explode(',', $detailuser->area_id);
+        return view('user.show',compact('users','detailuser','group','area','area_id'));
     }
 
     /**
@@ -101,11 +103,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $DetailUser = DetailUser::where('user_id',$id)->first();
         $users = User::findOrFail($id);
+        $detailuser = User::findOrFail($id)->detailuser;
         $group = Group::all();
         $area = Area::all();
-        return view('user.edit',compact('users', 'group', 'area','DetailUser'));
+        $area_id = explode(',', $detailuser->area_id);
+        return view('user.edit',compact('users', 'group', 'area','area_id'));
     }
 
     /**
@@ -117,8 +120,26 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $users = User::find($id);
-        return view('user.index',compact('users'));
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6|confirmed',
+            'area_id' => 'required',
+            'group_id' => 'required|integer',
+            'active' => 'required|boolean',
+        ]);
+        $users = User::find($id)->update([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'active' => $request['active'],
+        ]);
+        $detailuser = DetailUser::where('user_id',$id)->update([
+            'area_id' => implode(',', $request['area_id']),
+            'group_id' => $request['group_id'],
+        ]);
+        return redirect()->action('UserController@index')
+            ->with('success','created successfully');
     }
 
     /**
@@ -130,7 +151,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('user.index')
+        return redirect()->action('UserController@index')
                         ->with('success','deleted successfully');
     }
 }

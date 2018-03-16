@@ -49,16 +49,8 @@
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $user->name}}</td>
                                     <td>{{ $user->email}}</td>
-                                    <td>
-                                        @foreach ($user->DetailUser as $DetailUser)
-                                            {{ $DetailUser->area->name}}
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach ($user->DetailUser as $DetailUser)
-                                            {{ $DetailUser->group->name}}
-                                        @endforeach
-                                    </td>
+                                    <td>{{ $user->detailuser->area->name}}</td>
+                                    <td>{{ $user->detailuser->group->name}}</td>
                                     <td>{{ $user->active}}</td>
                                     <td>
                                         <div class="btn-group pull-right">

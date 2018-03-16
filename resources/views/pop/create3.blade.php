@@ -85,7 +85,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::text('periode', 1, array('placeholder' => 'Periode','class' => 'form-control')) !!}
+                                    {!! Form::text('periode', 1, array('placeholder' => 'Periode','class' => 'form-control','readonly','required')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -93,7 +93,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::text('user_id', $user_id, array('placeholder' => 'User ID','class' => 'form-control')) !!}
+                                    {!! Form::text('user_id', $user_id, array('placeholder' => 'User ID','class' => 'form-control','readonly','required')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -101,7 +101,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('area_id', $area->pluck('name','id'), $detailuser->area_id, ['class'=>'form-control']) }}
+                                    {{ Form::select('area_id', $area->pluck('name','id'), $detailuser->area_id, ['class'=>'form-control','readonly','required']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -109,7 +109,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('group_id', $group->pluck('name','id'), $detailuser->group_id, ['class'=>'form-control']) }}
+                                    {{ Form::select('group_id', $group->pluck('name','id'), $detailuser->group_id, ['class'=>'form-control','readonly','required']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -117,7 +117,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('store_id', $store->pluck('name','id'), $store_id, ['class'=>'form-control']) }}
+                                    {{ Form::select('store_id', $store->pluck('name','id'), $store_id, ['class'=>'form-control','readonly','required']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -150,7 +150,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::textarea('note', null, array('placeholder' => 'Note','class' => 'form-control')) !!}
+                                    {!! Form::textarea('note', null, array('placeholder' => 'Note','class' => 'form-control','readonly','required')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -158,7 +158,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('status_id', $status->pluck('name','id'), 1, ['class'=>'form-control']) }}
+                                    {{ Form::select('status_id', $status->pluck('name','id'), 1, ['class'=>'form-control','readonly','required']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -166,7 +166,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::select('active', ['0' => 'No', '1' => 'Yes'], 1, ['class' => 'form-control']) !!}
+                                    {!! Form::select('active', ['0' => 'No', '1' => 'Yes'], 1, ['class' => 'form-control','readonly','required']) !!}
                                 </div>
                             </div>
                         </div>
@@ -193,7 +193,7 @@
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-9">
                                     <input id="submitButton" class="btn green" type="button" value="Submit" onclick="submitForm(this);" />
-                                    <a href="{{ route('pop.indexHr') }}" class="btn grey-salsa btn-outline">Cancel</a>
+                                    <a href="{{action('PopController@index3')}}" class="btn grey-salsa btn-outline">Cancel</a>
                                 </div>
                             </div>
                         </div>

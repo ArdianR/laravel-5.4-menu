@@ -55,7 +55,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::text('periode', $pop->periode, array('placeholder' => 'Periode','class' => 'form-control')) !!}
+                                    {!! Form::text('periode', $pop->periode, array('placeholder' => 'Periode','class' => 'form-control','readonly')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -63,7 +63,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::text('user_id', $pop->user->name, array('placeholder' => 'User ID','class' => 'form-control')) !!}
+                                    {!! Form::text('user_id', $pop->user->name, array('placeholder' => 'User ID','class' => 'form-control','readonly')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -71,7 +71,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('area_id', $area->pluck('name','id'), $pop->area_id, ['class'=>'form-control']) }}
+                                    {{ Form::select('area_id', $area->pluck('name','id'), $pop->area_id, ['class'=>'form-control','readonly']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -79,7 +79,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('group_id', $group->pluck('name','id'), $pop->group_id, ['class'=>'form-control']) }}
+                                    {{ Form::select('group_id', $group->pluck('name','id'), $pop->group_id, ['class'=>'form-control','readonly']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -87,7 +87,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('store_id', $store->pluck('name','id'), $pop->store_id, ['class'=>'form-control']) }}
+                                    {{ Form::select('store_id', $store->pluck('name','id'), $pop->store_id, ['class'=>'form-control','readonly']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -107,7 +107,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::select('posisi', ['0' => 'No', '1' => 'Yes'], $pop->posisi, ['class' => 'form-control']) !!}
+                                    {!! Form::select('posisi', ['0' => 'No', '1' => 'Yes'], $pop->posisi, ['class' => 'form-control','readonly']) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -115,7 +115,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::select('ukuran', ['0' => 'No', '1' => 'Yes'], $pop->ukuran, ['class' => 'form-control']) !!}
+                                    {!! Form::select('ukuran', ['0' => 'No', '1' => 'Yes'], $pop->ukuran, ['class' => 'form-control','readonly']) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -123,7 +123,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('status_id', $status->pluck('name','id'), $pop->status_id, ['class'=>'form-control']) }}
+                                    {{ Form::select('status_id', $status->pluck('name','id'), $pop->status_id, ['class'=>'form-control','readonly']) }}
                                 </div>
                             </div>
                             <table class="table table-striped table-bordered table-hover dt-responsive" width="100%">
@@ -149,7 +149,7 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-9">
-                                    <a href="{{ route('pop.indexHr') }}" class="btn grey-salsa btn-outline">Cancel</a>
+                                    <a href="{{action('PopController@index3')}}" class="btn grey-salsa btn-outline">Cancel</a>
                                 </div>
                             </div>
                         </div>

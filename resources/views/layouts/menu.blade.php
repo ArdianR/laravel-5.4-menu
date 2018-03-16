@@ -115,10 +115,10 @@
                 <!-- BEGIN SIDEBAR -->
                 <div class="page-sidebar-wrapper">
                     <!-- BEGIN SIDEBAR -->
-                    @if (Auth::user()->DetailUser[0]->group_id == 1)
+                    @if (Auth::user()->DetailUser->group_id == 1)
                         @component('menu.admin')
                         @endcomponent
-                    @elseif (Auth::user()->DetailUser[0]->group_id == 2)
+                    @elseif (Auth::user()->DetailUser->group_id == 2)
                         @component('menu.hq')
                         @endcomponent
                     @else

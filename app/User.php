@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function DetailUser()
     {
-        return $this->hasMany('App\DetailUser');
+        return $this->hasOne('App\DetailUser');
     }
 
     // public function Pop()

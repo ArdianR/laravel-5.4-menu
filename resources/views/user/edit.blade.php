@@ -34,7 +34,7 @@
                     @endif
                     {!! Form::model($users, ['method' => 'PATCH','route' => ['user.update', $users->id], 'class' => 'form-horizontal']) !!}
                     {{ csrf_field() }}
-                    @include('user.form')
+                    @include('user.form-edit')
                     {!! Form::close() !!}
                     <!-- END FORM-->
                     </div>

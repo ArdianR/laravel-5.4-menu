@@ -7,6 +7,7 @@ use App\Store;
 use App\Area;
 use App\Product;
 use App\ProductStore;
+use Datatables;
 
 class StoreController extends Controller
 {
@@ -23,7 +24,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $store = Store::paginate(2000);
+        $store = Store::with('area')->get();
         return view('store.index',compact('store'))
             ->with('i');
     }

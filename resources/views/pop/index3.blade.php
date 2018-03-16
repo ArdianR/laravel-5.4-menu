@@ -67,65 +67,23 @@
                             <thead>
                                 <tr>
                                     <th class="all">No</th>
-                                    <th class="desktop">Periode</th>
-                                    <th class="desktop">User</th>
-                                    <th class="none">Group</th>
-                                    <th class="none">Area</th>
                                     <th class="desktop">Dealer ID</th>
-                                    <th class="none">Store</th>
-                                    <th class="none">Posisi</th>
-                                    <th class="none">Ukuran</th>
-                                    <th class="none">Note</th>
-                                    <th class="desktop">Status</th>
-                                    <th class="desktop">Created Date</th>
+                                    <th class="desktop">Name Store</th>
+                                    <th class="none">Address</th>
+                                    <th class="desktop">Area</th>
+                                    <th class="desktop">Grade</th>
                                     <th class="all">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($pop as $pop)
+                                @foreach ($store as $store)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $pop->periode}}</td>
-                                    <td>{{ $pop->user->name }}</td>
-                                    <td>{{ $pop->group->name }}</td>
-                                    <td>{{ $pop->area->name }}</td>
-                                    <td>{{ $pop->store->dealer_id }}</td>
-                                    <td>{{ $pop->store->name }}</td>
-                                    <td>
-                                        @if ($pop->posisi == 1)
-                                            <span>Yes</span>
-                                        @else
-                                            <span>No</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($pop->ukuran == 1)
-                                            <span>Yes</span>
-                                        @else
-                                            <span>No</span>
-                                        @endif
-                                    </td>
-                                    <td>{{ $pop->note }}</td>
-                                    <td>
-                                        @if ($pop->status_id == 1)
-                                            <span class="badge badge-info">
-                                                {{ $pop->status->name }}
-                                            </span>
-                                        @elseif ($pop->status_id == 2)
-                                            <span class="badge badge-warning">
-                                                {{ $pop->status->name }}
-                                            </span>
-                                        @elseif ($pop->status_id == 3)
-                                            <span class="badge badge-success">
-                                                {{ $pop->status->name }}
-                                            </span>
-                                        @else
-                                            <span class="badge badge-danger">
-                                                {{ $pop->status->name }}
-                                            </span>
-                                        @endif
-                                    </td>
-                                    <td>{{ $pop->created_at }}</td>
+                                    <td>{{ $store->dealer_id}}</td>
+                                    <td>{{ $store->name }}</td>
+                                    <td>{{ $store->address}}</td>
+                                    <td>{{ $store->area->name}}</td>
+                                    <td>{{ $store->grade}}</td>
                                     <td>
                                         <div class="btn-group pull-right">
                                             <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -133,8 +91,8 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right">
                                                 <li>
-                                                    <a href="{{ route('pop.showPop',$pop->id) }}">
-                                                        <i class="fa fa-eye"></i> Show
+                                                    <a href="{{action('PopController@create3', $store->id)}}">
+                                                        <i class="fa fa-eye"></i> Create
                                                     </a>
                                                 </li>
                                             </ul>

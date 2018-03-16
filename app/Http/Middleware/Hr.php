@@ -4,10 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\User;
-use App\DetailUser;
 use Auth;
 
-class Group
+class Hr
 {
     /**
      * Handle an incoming request.
@@ -18,8 +17,11 @@ class Group
      */
     public function handle($request, Closure $next)
     {
-        $detailuser = DetailUser::where('user_id',Auth::id())->get()->toArray();
-        dd($detailuser);exit;
-        return $next($request);
+        $check = User::find(Auth::id());
+        $users = $check->detailuser->group_id;
+        if ($users == 3) {
+           return $next($request);
+        }
+        return redirect('home')->with('error','You have not access');
     }
 }

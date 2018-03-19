@@ -96,8 +96,8 @@
                                 </label>
                                 <div class="col-md-4">
                                     @foreach ($pop->photopop->where('type',1) as $photopop)
-                                    <a class="fancybox img-responsive" rel="gallery1" href="{{ url(asset($photopop->photo)) }}" title="">
-                                        <img src="{{ url(asset($photopop->photo)) }}" alt="" />
+                                    <a data-fancybox class="thumbnail" href="{{ url(asset($photopop->photo)) }}">
+                                        <img src="{{ url(asset($photopop->photo)) }}" class="img-responsiv" />
                                     </a>
                                     @endforeach
                                 </div>
@@ -149,7 +149,7 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-9">
-                                    <a href="{{action('PopController@index3')}}" class="btn grey-salsa btn-outline">Cancel</a>
+                                    <a href="{{action('PopController@list3')}}" class="btn grey-salsa btn-outline">Cancel</a>
                                 </div>
                             </div>
                         </div>

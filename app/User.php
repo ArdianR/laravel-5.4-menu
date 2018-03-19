@@ -70,17 +70,14 @@ class User extends Authenticatable
     //     return $this->hasMany('App\Group','id');
     // }
 
-    // public function Groups()
+    // public function Pop()
     // {
-    //     return $this->hasManyThrough(
-    //         'App\Group','App\DetailUser',
-    //         'group_id','id'
-    //     );
+    //     return $this->hasMany('App\Pop');
     // }
     
-    // public function Areas()
+    // public function User()
     // {
-    //     return $this->hasManyThrough('App\Area','App\DetailUser','area_id','id');
+    //     return $this->hasManyThrough('App\User','App\Pop','id','user_id');
     // }
 
 

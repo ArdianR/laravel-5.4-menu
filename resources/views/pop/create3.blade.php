@@ -77,7 +77,7 @@
                             </ul>
                         </div>
                     @endif
-                    {!! Form::open(array('url' => 'pop/storeHr','method'=>'POST', 'class' => 'form-horizontal','enctype' => 'multipart/form-data','files' => 'true')) !!}
+                    {!! Form::open(array('url' => 'pop/store3','method'=>'POST', 'class' => 'form-horizontal','enctype' => 'multipart/form-data','files' => 'true')) !!}
                         {{ csrf_field() }}
                         <div class="form-body">
                             <div class="form-group">
@@ -85,7 +85,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::text('periode', 1, array('placeholder' => 'Periode','class' => 'form-control','readonly','required')) !!}
+                                    {!! Form::text('periode', 1, array('placeholder' => 'Periode','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -93,7 +93,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::text('user_id', $user_id, array('placeholder' => 'User ID','class' => 'form-control','readonly','required')) !!}
+                                    {!! Form::text('user_id', $user_id, array('placeholder' => 'User ID','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -101,7 +101,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('area_id', $area->pluck('name','id'), $detailuser->area_id, ['class'=>'form-control','readonly','required']) }}
+                                    {{ Form::select('area_id', $area->pluck('name','id'), $detailuser->area_id, ['class'=>'form-control','readonly'=>'true','required'=>'true']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -109,7 +109,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('group_id', $group->pluck('name','id'), $detailuser->group_id, ['class'=>'form-control','readonly','required']) }}
+                                    {{ Form::select('group_id', $group->pluck('name','id'), $detailuser->group_id, ['class'=>'form-control','readonly'=>'true','required'=>'true']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -117,7 +117,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('store_id', $store->pluck('name','id'), $store_id, ['class'=>'form-control','readonly','required']) }}
+                                    {{ Form::select('store_id', $store->pluck('name','id'), $store_id, ['class'=>'form-control','readonly'=>'true','required'=>'true']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -126,7 +126,7 @@
                                 </label>
                                 <div class="col-md-4">
                                     {!! Form::hidden('type', 1, array('class' => 'form-control')) !!}
-                                    <input type="file" name="photo[]" class="form-control" multiple/>
+                                    <input type="file" name="photo[]" class="form-control" multiple="true" required="true" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -134,7 +134,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::select('posisi', ['0' => 'No', '1' => 'Yes'], null, ['class' => 'form-control']) !!}
+                                    {!! Form::select('posisi', ['0' => 'No', '1' => 'Yes'], null, ['class' => 'form-control','readonly'=>'true','required'=>'true']) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -142,7 +142,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::select('ukuran', ['0' => 'No', '1' => 'Yes'], null, ['class' => 'form-control']) !!}
+                                    {!! Form::select('ukuran', ['0' => 'No', '1' => 'Yes'], null, ['class' => 'form-control','readonly'=>'true','required'=>'true']) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -150,7 +150,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::textarea('note', null, array('placeholder' => 'Note','class' => 'form-control','readonly','required')) !!}
+                                    {!! Form::textarea('note', null, array('placeholder' => 'Note','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -158,7 +158,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('status_id', $status->pluck('name','id'), 1, ['class'=>'form-control','readonly','required']) }}
+                                    {{ Form::select('status_id', $status->pluck('name','id'), 1, ['class'=>'form-control','readonly'=>'true','required'=>'true']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -166,7 +166,7 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::select('active', ['0' => 'No', '1' => 'Yes'], 1, ['class' => 'form-control','readonly','required']) !!}
+                                    {!! Form::select('active', ['0' => 'No', '1' => 'Yes'], 1, ['class' => 'form-control','readonly'=>'true','required'=>'true']) !!}
                                 </div>
                             </div>
                         </div>
@@ -176,13 +176,13 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-3">
-                                    {{ Form::select('product_id[]', $product->pluck('name','id'), null, ['class'=>'form-control','id'=>'product']) }}
+                                    {{ Form::select('product_id[]', $product->pluck('name','id'), null, ['class'=>'form-control','id'=>'product','readonly'=>'true','required'=>'true']) }}
                                 </div>
                                 <label class="control-label col-md-1">Qty
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-1">
-                                    <input type="text" id="qty" name="qty[]" class="form-control" required autofocus>
+                                    <input type="text" id="qty" name="qty[]" class="form-control" required="true" autofocus="true">
                                 </div>
                                 <div class="col-md-1">
                                     <button type="button" name="add" id="add" class="form-control btn btn-icon-only green fa fa-plus"></button>
@@ -192,7 +192,7 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-9">
-                                    <input id="submitButton" class="btn green" type="button" value="Submit" onclick="submitForm(this);" />
+                                    <button type="submit" class="btn green button-prevent-sbm"><i class="spinner fa fa-spinner fa-spin"></i> Submit</button>
                                     <a href="{{action('PopController@index3')}}" class="btn grey-salsa btn-outline">Cancel</a>
                                 </div>
                             </div>
@@ -223,7 +223,7 @@
         var i=1;  
             $('#add').click(function(){  
                 i++;  
-                $('#dynamic_field').append('<div class="form-group" id="row'+i+'"><label class="control-label col-md-3"><span class="required"></span></label><div class="col-md-3">{{ Form::select('product_id[]', $product->pluck('name','id'), null, ['class'=>'form-control','id'=>'product']) }}</div><label class="control-label col-md-1">Qty<span class="required">*</span></label><div class="col-md-1"><input type="text" id="qty" name="qty[]" value="" class="form-control" required autofocus></div><div class="col-md-1"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div></div>');
+                $('#dynamic_field').append('<div class="form-group" id="row'+i+'"><label class="control-label col-md-3"><span class="required"></span></label><div class="col-md-3">{{ Form::select('product_id[]', $product->pluck('name','id'), null, ['class'=>'form-control','id'=>'product']) }}</div><label class="control-label col-md-1">Qty<span class="required">*</span></label><div class="col-md-1"><input type="text" id="qty" name="qty[]" value="" class="form-control" required="true" autofocus="true"></div><div class="col-md-1"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div></div>');
             });  
             $(document).on('click', '.btn_remove', function(){  
                var button_id = $(this).attr("id");   

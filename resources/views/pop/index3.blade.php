@@ -24,7 +24,7 @@
         <!-- END PAGE HEADER-->
         <p><b>Regional : </b>{{ $area->name }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Total Toko : </b>{{ $store->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Uploaded : </b>{{ $pop->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Uploaded : </b>{{ $pop->where('status_id',1)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Rejected : </b>{{ $pop->where('status_id',2)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Approved : </b>{{ $pop->where('status_id',3)->count() }}</p>
         <div class="row">
@@ -72,6 +72,7 @@
                                     <th class="none">Address</th>
                                     <th class="desktop">Area</th>
                                     <th class="desktop">Grade</th>
+                                    <th class="desktop">Request</th>
                                     <th class="all">Action</th>
                                 </tr>
                             </thead>
@@ -84,6 +85,7 @@
                                     <td>{{ $store->address}}</td>
                                     <td>{{ $store->area->name}}</td>
                                     <td>{{ $store->grade}}</td>
+                                    <td>{{ $store->pop->count() }}</td>
                                     <td>
                                         <div class="btn-group pull-right">
                                             <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -93,6 +95,11 @@
                                                 <li>
                                                     <a href="{{action('PopController@create3', $store->id)}}">
                                                         <i class="fa fa-eye"></i> Create
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{action('PopController@history3', $store->id)}}">
+                                                        <i class="fa fa-eye"></i> History
                                                     </a>
                                                 </li>
                                             </ul>

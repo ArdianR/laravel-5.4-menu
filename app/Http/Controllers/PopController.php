@@ -31,7 +31,7 @@ class PopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index1() // for admin grou
+    public function index1() // for admin group
     {
         $store = Store::all();
         return view('pop.index',compact('store'))
@@ -40,8 +40,8 @@ class PopController extends Controller
 
     public function index2() //for hq group
     {
-        $area = Area::all();
-        return view('pop.indexHq',compact('area'))
+        $area = Area::with('store','pop')->where('active','=',1)->get();
+        return view('pop.index2',compact('area'))
             ->with('i');
     }
 
@@ -49,7 +49,7 @@ class PopController extends Controller
     {
         $detailuser = User::find(Auth::id())->detailuser;
         $area = Area::find($detailuser->area_id);
-        $store = Store::where('area_id','=',$detailuser->area_id)->with('area')->get();
+        $store = Store::where('area_id','=',$detailuser->area_id)->with('area','pop')->get();
         $pop = Pop::where('area_id','=',$detailuser->area_id)->get();
         $alls = DB::table('pop')
         ->leftjoin('detail_pop', 'pop.id', '=', 'detail_pop.pop_id')
@@ -62,7 +62,15 @@ class PopController extends Controller
             ->with('i');
     }
 
-    public function list3()
+    public function list2() // list pop for hq group
+    {
+        $users = Auth::user()->detailuser()->get();
+        $pop = Pop::all();
+        return view('pop.list2',compact('pop'))
+            ->with('i');
+    }
+
+    public function list3() // list pop for hr group
     {
         $detailuser = User::find(Auth::id())->detailuser;
         $area = Area::find($detailuser->area_id);
@@ -76,14 +84,6 @@ class PopController extends Controller
         ->groupBy('product.id','product.name')
         ->get();
         return view('pop.list3',compact('alls','store','area','pop'))
-            ->with('i');
-    }
-
-    public function listPopHq()
-    {
-        $users = Auth::user()->detailuser()->get();
-        $pop = Pop::all();
-        return view('pop.listpophq',compact('pop'))
             ->with('i');
     }
 
@@ -129,7 +129,7 @@ class PopController extends Controller
         return ('oke');
     }
 
-    public function storeHr(Request $request)
+    public function store3(Request $request) // for hq group
     {
         $this->validate($request, [
             'periode' => 'required|integer',
@@ -206,11 +206,19 @@ class PopController extends Controller
         return ('oke');
     }
 
-    public function showAreaHq($id)
+    public function show2($id) // show area for hq group
     {
         $area = Area::find($id);
-        $store = Store::where('area_id','=',$id)->get();
-        return view('pop.showAreaHq',compact('store','area'))
+        $alls = DB::table('pop')
+        ->leftjoin('detail_pop', 'pop.id', '=', 'detail_pop.pop_id')
+        ->leftjoin('product', 'detail_pop.product_id', '=', 'product.id')
+        ->where('area_id', $id)
+        ->select('product.id as id','product.name as name', DB::raw("sum(detail_pop.qty) as sum"))
+        ->groupBy('product.id','product.name')
+        ->get();
+        $store = Store::with('area')->where('area_id','=',$id)->get();
+        $pop = Pop::where('area_id','=',$id)->get();
+        return view('pop.show2',compact('store','area','alls','pop'))
             ->with('i');
     }
 
@@ -228,7 +236,7 @@ class PopController extends Controller
             ->with('i');
     }
 
-    public function showPopHq($id)
+    public function show4($id)
     {
         
         $pop = Pop::find($id);
@@ -238,7 +246,7 @@ class PopController extends Controller
         $store = Store::all();
         $status = Status::all();
         $group = Group::all();
-        return view('pop.showPopHq',compact('detailpop','pop','area','group','store','status','photopop'))
+        return view('pop.show4',compact('detailpop','pop','area','group','store','status','photopop'))
             ->with('i');
     }
 
@@ -275,4 +283,39 @@ class PopController extends Controller
     {
         return ('oke');
     }
+
+    public function approve(Request $request, $id) // approve & reject only for hq group
+    {
+        if ($request->approve) {
+            $pop = Pop::findOrFail($id)->update([
+                'status_id' => '3',
+                'note' => $request->note,
+            ]);
+            return redirect()->action('PopController@list2')
+                ->with('success','Approve successfully');
+        } else {
+            $pop = Pop::findOrFail($id)->update([
+                'status_id' => '2',
+                'note' => $request->note,
+            ]);
+            return redirect()->action('PopController@list2')
+                ->with('warning','Reject successfully');
+        }
+    }
+
+    public function history3($id) // approve & reject only for hq group
+    {
+        $store = Store::findOrFail($id);
+        $pop = Pop::where('store_id',$id)->with('area','user','store','group','status')->get();
+        $alls = DB::table('pop')
+        ->leftjoin('detail_pop', 'pop.id', '=', 'detail_pop.pop_id')
+        ->leftjoin('product', 'detail_pop.product_id', '=', 'product.id')
+        ->where('store_id', $id)
+        ->select('product.id as id','product.name as name', DB::raw("sum(detail_pop.qty) as sum"))
+        ->groupBy('product.id','product.name')
+        ->get();
+        return view('pop.history3',compact('pop','store','alls'))
+            ->with('i');
+    }
+
 }

@@ -24,9 +24,9 @@ class Area extends Model
       return $this->hasMany('App\Store');
     }
 
-    // public function Areas()
-    // {
-    //     return $this->hasManyThrough('App\Area','App\DetailUser','area_id','id');
-    // }
+    public function Pop()
+    {
+        return $this->hasMany('App\Pop');
+    }
 
 }

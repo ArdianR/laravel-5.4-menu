@@ -37,7 +37,7 @@
                                     <th class="desktop">Region</th>
                                     <th class="desktop">Total Toko V2</th>
                                     <th class="desktop">Upload</th>
-                                    <th class="desktop">Request</th>
+                                    <th class="desktop">Approve</th>
                                     <th class="all">Action</th>
                                 </tr>
                             </thead>
@@ -47,8 +47,8 @@
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $area->name}}</td>
                                     <td>{{ $area->store->count()}}</td>
-                                    <td>{{ $area->id }}</td>
-                                    <td>{{ $area->id }}</td>
+                                    <td>{{ $area->pop->where('status_id',1)->count() }}</td>
+                                    <td>{{ $area->pop->where('status_id',3)->count() }}</td>
                                     <td>
                                         <div class="btn-group pull-right">
                                             <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -56,7 +56,7 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right">
                                                 <li>
-                                                    <a href="{{ route('pop.showAreaHq',$area->id) }}">
+                                                    <a href="{{action('PopController@show2',$area->id)}}">
                                                         <i class="fa fa-eye"></i> Show
                                                     </a>
                                                 </li>

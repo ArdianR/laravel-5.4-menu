@@ -67,12 +67,12 @@
                             <thead>
                                 <tr>
                                     <th class="all">No</th>
-                                    <th class="desktop">Periode</th>
-                                    <th class="desktop">User</th>
+                                    <th class="none">Periode</th>
+                                    <th class="none">User</th>
                                     <th class="none">Group</th>
                                     <th class="none">Area</th>
                                     <th class="desktop">Dealer ID</th>
-                                    <th class="none">Store</th>
+                                    <th class="desktop">Store</th>
                                     <th class="none">Posisi</th>
                                     <th class="none">Ukuran</th>
                                     <th class="none">Note</th>

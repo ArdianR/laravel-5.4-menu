@@ -96,7 +96,7 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-1">
-                                    {!! Form::text('qty', null, array('class' => 'form-control','name'=>'qty[]','required autofocus')) !!}
+                                    {!! Form::text('qty', null, array('class' => 'form-control','name'=>'qty[]','required'=>'true','autofocus'=>'true')) !!}
                                 </div>
                                 <div class="col-md-1">
                                     <button type="button" name="add" id="add" class="form-control btn btn-icon-only green fa fa-plus"></button>
@@ -106,7 +106,7 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-9">
-                                    <input id="submitButton" class="btn green" type="button" value="Submit" onclick="submitForm(this);" />
+                                    <button type="submit" class="btn green button-prevent-sbm"><i class="spinner fa fa-spinner fa-spin"></i> Submit</button>
                                     <a href="{{ route('store.index') }}" class="btn default">Cancel</a>
                                 </div>
                             </div>
@@ -123,6 +123,16 @@
 </div>
 <!-- END CONTENT -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" >
+    $(document).ready(function(){
+        $('.spinner').hide();
+        $('.form-prevent-sbm').on('submit',function(){
+            $('.button-prevent-sbm').attr('disabled','true');
+            $('.spinner').show();
+        })
+    });
+</script>
 <script type="text/javascript" >
     $(document).ready(function(){
         var i=1;  

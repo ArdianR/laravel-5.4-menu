@@ -24,7 +24,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $store = Store::with('area')->get();
+        $store = Store::with('area')->limit(10)->get();
         return view('store.index',compact('store'))
             ->with('i');
     }
@@ -38,6 +38,14 @@ class StoreController extends Controller
     {
         $area = Area::all();
         return view('store.create',compact('area'));
+    }
+
+    public function create1($id)
+    {
+        $store = Store::find($id);
+        $area = Area::all();
+        $product = Product::all();
+        return view('store.create1',compact('store','area','product'));
     }
 
     /**
@@ -122,13 +130,7 @@ class StoreController extends Controller
             ->with('success','deleted successfully');
     }
 
-    public function productCreate($id)
-    {
-        $store = Store::find($id);
-        $area = Area::all();
-        $product = Product::all();
-        return view('store.productCreate',compact('store','area','product'));
-    }
+
 
     public function productStore(Request $request)
     {

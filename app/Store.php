@@ -21,4 +21,24 @@ class Store extends Model
     {
       return $this->belongsTo('App\Area');
     }
+
+    public function Pop()
+    {
+      return $this->hasMany('App\Pop');
+    }
+    
+    // public function User()
+    // {
+    //     return $this->hasManyThrough('App\User','App\Pop','1user_id','id');
+    // }
+
+    // public function Group()
+    // {
+    //     return $this->hasManyThrough('App\Group','App\Pop','group_id','id');
+    // }
+
+    // public function Status()
+    // {
+    //     return $this->hasManyThrough('App\Status','App\Pop','status_id','id');
+    // }
 }

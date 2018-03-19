@@ -24,12 +24,12 @@
             </a>
             <ul class="sub-menu">
                 <li class="nav-item  ">
-                    <a href="{{ url('pop/indexHq') }}" class="nav-link ">
+                    <a href="{{action('PopController@index2')}}" class="nav-link ">
                         <span class="title">Index</span>
                     </a>
                 </li>
                 <li class="nav-item  ">
-                    <a href="{{action('PopController@listPopHq')}}" class="nav-link ">
+                    <a href="{{action('PopController@list2')}}" class="nav-link ">
                         <span class="title">List Pop</span>
                     </a>
                 </li>

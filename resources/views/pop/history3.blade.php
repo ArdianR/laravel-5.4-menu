@@ -7,26 +7,19 @@
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
-        <!-- BEGIN PAGE TITLE-->
+        <!-- END PAGE HEADER-->
         <div class="portlet-title">
             <div class="caption">
-                <span class="icon-settings font-dark caption-subject font-dark sbold uppercase page-title"> Area {{ $area->name }}</span>
+                <span class="icon-settings font-dark caption-subject font-dark sbold uppercase page-title"> History </span>
             </div>
         </div>
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-            <strong>{{ $message }}</strong>
-            <a href="" class="alert-link"></a>
-        </div>
-        @endif
         <!-- END PAGE TITLE-->
         <!-- END PAGE HEADER-->
-        <p><b>Regional : </b>{{-- {{ $area->name }}&nbsp;&nbsp;&nbsp;&nbsp; --}}
-        <b>Total Toko : </b>{{-- {{ $area->name->count() }}&nbsp;&nbsp;&nbsp;&nbsp; --}}
-        <b>Uploaded : </b>{{-- {{ $area->name->where('status',0)->count() }}&nbsp;&nbsp;&nbsp;&nbsp; --}}
-        <b>Rejected : </b>{{-- {{ $area->name->where('status',2)->count() }}&nbsp;&nbsp;&nbsp;&nbsp; --}}
-        <b>Approved : </b>{{-- {{ $area->name->where('status',1)->count() }} --}}</p>
+        <p><b>Regional : {{ $store->area->name }}</b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Name Store : {{ $store->name }}</b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Uploaded : </b>{{ $pop->where('status_id',1)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Rejected : </b>{{ $pop->where('status_id',2)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Approved : </b>{{ $pop->where('status_id',3)->count() }}</p>
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
@@ -43,12 +36,12 @@
                         <table class="table table-striped table-bordered table-hover dt-responsive">
                             <th>Nama Produk</th>
                             <th>Total</th>
-{{--                             @foreach ($alls as $all) --}}
+                            @foreach ($alls as $all)
                             <tr>                        
-{{--                                 <td>{{ $all->name }}</td> 
-                                <td><b>{{ $all->sum }}</b></td>   --}}                      
+                                <td>{{ $all->name }}</td> 
+                                <td><b>{{ $all->sum }}</b></td>                        
                             </tr> 
-{{--                             @endforeach   --}}                                       
+                            @endforeach                                         
                          </table>   
                     </div>
                 </div>
@@ -59,7 +52,7 @@
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light bordered">
                     <div class="portlet-title">
-                        <a href="" class="btn btn-sm green"> Create New
+                        <a>
                         </a>
                     </div>
                     <div class="portlet-body">
@@ -69,28 +62,23 @@
                                     <th class="all">No</th>
                                     <th class="desktop">Dealer ID</th>
                                     <th class="desktop">Name Store</th>
+                                    <th class="none">Address</th>
+                                    <th class="desktop">Area</th>
                                     <th class="desktop">Grade</th>
                                     <th class="desktop">Request</th>
-                                    <th class="desktop">Status</th>
                                     <th class="all">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($store as $store)
+                                @foreach ($pop as $pop)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $store->dealer_id}}</td>
-                                    <td>{{ $store->name }}</td>
-                                    <td>{{ $store->grade}}</td>
-                                    <td>{{ $store->id}}</td>
-                                    <td>
-                                        <span class="label label-sm label-success">
-                                            {{-- class="label label-sm label-danger"
-                                                 class="label label-sm label-info"
-                                                --}}
-                                            {{ $store->id}}        
-                                        </span>
-                                    </td>
+                                    <td>{{ $pop->store->dealer_id}}</td>
+                                    <td>{{ $pop->store->name }}</td>
+                                    <td>{{ $pop->store->address}}</td>
+                                    <td>{{ $pop->store->area->name}}</td>
+                                    <td>{{ $pop->store->grade}}</td>
+                                    <td>{{ $pop->status->name }}</td>
                                     <td>
                                         <div class="btn-group pull-right">
                                             <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -98,19 +86,9 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right">
                                                 <li>
-                                                    <a href="">
+                                                    <a href="{{action('PopController@show3', $pop->id)}}">
                                                         <i class="fa fa-eye"></i> Show
                                                     </a>
-                                                </li>
-                                                <li>
-                                                    <a href="">
-                                                        <i class="fa fa-pencil"></i> Edit
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    {!! Form::open(['method' => 'DELETE','route' => ['area.destroy', $store->id],'style'=>'display:inline']) !!}
-                                                    <input type="image" src="{{ asset('metronic/assets/global/img/fa-fa-recycle.png') }}" alt="Submit Form" style="cursor: pointer;" />
-                                                    {!! Form::close() !!}
                                                 </li>
                                             </ul>
                                         </div>
@@ -125,7 +103,16 @@
             </div>
         </div>
     </div>
-    <!-- END CONTENT BODY -->
+<!-- END CONTENT BODY -->
 </div>
 <!-- END CONTENT -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" >
+$(document).ready(function() {
+    $(".fancybox").fancybox({
+        openEffect  : 'none',
+        closeEffect : 'none'
+    });
+});
+</script>
 @endsection

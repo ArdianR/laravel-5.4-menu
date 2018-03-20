@@ -7,24 +7,17 @@
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
-        <!-- BEGIN PAGE TITLE-->
+        <!-- END PAGE HEADER-->
         <div class="portlet-title">
             <div class="caption">
-                <span class="icon-settings font-dark caption-subject font-dark sbold uppercase page-title"> Area {{ $area->name }}</span>
+                <span class="icon-settings font-dark caption-subject font-dark sbold uppercase page-title"> History </span>
             </div>
         </div>
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-            <strong>{{ $message }}</strong>
-            <a href="" class="alert-link"></a>
-        </div>
-        @endif
         <!-- END PAGE TITLE-->
         <!-- END PAGE HEADER-->
-        <p><b>Regional : </b>{{ $area->name }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Total Toko : </b>{{ $store->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Uploaded : </b>{{ $pop->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <p><b>Regional : {{ $store->area->name }}</b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Name Store : {{ $store->name }}</b>&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Uploaded : </b>{{ $pop->where('status_id',1)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Rejected : </b>{{ $pop->where('status_id',2)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Approved : </b>{{ $pop->where('status_id',3)->count() }}</p>
         <div class="row">
@@ -67,17 +60,12 @@
                             <thead>
                                 <tr>
                                     <th class="all">No</th>
-{{--                                     <th class="none">Periode</th>
-                                    <th class="none">User</th>
-                                    <th class="none">Group</th> --}}
-                                    <th class="none">Area</th>
                                     <th class="desktop">Dealer ID</th>
-                                    <th class="desktop">Store</th>
-                                    <th class="none">Posisi</th>
-                                    <th class="none">Ukuran</th>
-                                    <th class="none">Note</th>
-                                    <th class="desktop">Status</th>
-                                    <th class="desktop">Created Date</th>
+                                    <th class="desktop">Name Store</th>
+                                    <th class="none">Address</th>
+                                    <th class="desktop">Area</th>
+                                    <th class="desktop">Grade</th>
+                                    <th class="desktop">Request</th>
                                     <th class="all">Action</th>
                                 </tr>
                             </thead>
@@ -85,47 +73,12 @@
                                 @foreach ($pop as $pop)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-{{--                                     <td>{{ $pop->periode}}</td>
-                                    <td>{{ $pop->user->name }}</td>
-                                    <td>{{ $pop->group->name }}</td> --}}
-                                    <td>{{ $pop->area->name }}</td>
-                                    <td>{{ $pop->store->dealer_id }}</td>
+                                    <td>{{ $pop->store->dealer_id}}</td>
                                     <td>{{ $pop->store->name }}</td>
-                                    <td>
-                                        @if ($pop->posisi == 1)
-                                            <span>Yes</span>
-                                        @else
-                                            <span>No</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($pop->ukuran == 1)
-                                            <span>Yes</span>
-                                        @else
-                                            <span>No</span>
-                                        @endif
-                                    </td>
-                                    <td>{{ $pop->note }}</td>
-                                    <td>
-                                        @if ($pop->status_id == 1)
-                                            <span class="badge badge-info">
-                                                {{ $pop->status->name }}
-                                            </span>
-                                        @elseif ($pop->status_id == 2)
-                                            <span class="badge badge-warning">
-                                                {{ $pop->status->name }}
-                                            </span>
-                                        @elseif ($pop->status_id == 3)
-                                            <span class="badge badge-success">
-                                                {{ $pop->status->name }}
-                                            </span>
-                                        @else
-                                            <span class="badge badge-danger">
-                                                {{ $pop->status->name }}
-                                            </span>
-                                        @endif
-                                    </td>
-                                    <td>{{ $pop->created_at }}</td>
+                                    <td>{{ $pop->store->address}}</td>
+                                    <td>{{ $pop->store->area->name}}</td>
+                                    <td>{{ $pop->store->grade}}</td>
+                                    <td>{{ $pop->status->name }}</td>
                                     <td>
                                         <div class="btn-group pull-right">
                                             <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -133,7 +86,7 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right">
                                                 <li>
-                                                    <a href="{{action('PopController@show3',$pop->id)}}">
+                                                    <a href="{{action('PopController@show4', $pop->id)}}">
                                                         <i class="fa fa-eye"></i> Show
                                                     </a>
                                                 </li>
@@ -150,7 +103,16 @@
             </div>
         </div>
     </div>
-    <!-- END CONTENT BODY -->
+<!-- END CONTENT BODY -->
 </div>
 <!-- END CONTENT -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" >
+$(document).ready(function() {
+    $(".fancybox").fancybox({
+        openEffect  : 'none',
+        closeEffect : 'none'
+    });
+});
+</script>
 @endsection

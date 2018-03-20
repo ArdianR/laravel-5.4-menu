@@ -24,7 +24,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $store = Store::with('area')->limit(10)->get();
+        $store = Store::with('area')->limit(100)->get();
         return view('store.index',compact('store'))
             ->with('i');
     }

@@ -59,8 +59,8 @@
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light bordered">
                     <div class="portlet-title">
-                        <a href="" class="btn btn-sm green"> Create New
-                        </a>
+{{--                         <a href="" class="btn btn-sm green"> Create New
+                        </a> --}}
                     </div>
                     <div class="portlet-body">
                         <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="sample_1">
@@ -88,24 +88,43 @@
                                                 <i class="fa fa-angle-down"></i>
                                             </button>
                                             <ul class="dropdown-menu pull-right">
+{{--                                                 <li>
+                                                    <a href="{{action('PopController@create3', $store->id)}}">
+                                                        <i class="fa fa-eye"></i> Create
+                                                    </a>
+                                                </li> --}}
+                                                <li>
+                                                    <a href="{{action('PopController@history4', $store->id)}}">
+                                                        <i class="fa fa-eye"></i> History
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+{{--                                     <td>
+                                        <div class="btn-group pull-right">
+                                            <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+                                                <i class="fa fa-angle-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right">
                                                 <li>
                                                     <a href="">
                                                         <i class="fa fa-eye"></i> Show
                                                     </a>
                                                 </li>
-{{--                                                 <li>
+                                                <li>
                                                     <a href="">
                                                         <i class="fa fa-pencil"></i> Edit
                                                     </a>
-                                                </li> --}}
-{{--                                                 <li>
+                                                </li>
+                                                <li>
                                                     {!! Form::open(['method' => 'DELETE','route' => ['area.destroy', $store->id],'style'=>'display:inline']) !!}
                                                     <input type="image" src="{{ asset('metronic/assets/global/img/fa-fa-recycle.png') }}" alt="Submit Form" style="cursor: pointer;" />
                                                     {!! Form::close() !!}
-                                                </li> --}}
+                                                </li>
                                             </ul>
                                         </div>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>

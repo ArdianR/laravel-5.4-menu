@@ -33,9 +33,9 @@
                             <thead>
                                 <tr>
                                     <th class="all">No</th>
-                                    <th class="none">Periode</th>
+{{--                                     <th class="none">Periode</th>
                                     <th class="none">User</th>
-                                    <th class="none">Group</th>
+                                    <th class="none">Group</th> --}}
                                     <th class="none">Area</th>
                                     <th class="desktop">Dealer ID</th>
                                     <th class="desktop">Store</th>
@@ -51,9 +51,9 @@
                                 @foreach ($pop as $pop)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $pop->periode}}</td>
+{{--                                     <td>{{ $pop->periode}}</td>
                                     <td>{{ $pop->user->name }}</td>
-                                    <td>{{ $pop->group->name }}</td>
+                                    <td>{{ $pop->group->name }}</td> --}}
                                     <td>{{ $pop->area->name }}</td>
                                     <td>{{ $pop->store->dealer_id }}</td>
                                     <td>{{ $pop->store->name }}</td>

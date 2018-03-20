@@ -8,7 +8,7 @@
     <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
         <!-- BEGIN PAGE TITLE-->
-        <div class="row">
+{{--         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
                     <div class="portlet-title">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- END PAGE TITLE-->
         <!-- END PAGE HEADER-->
         <div class="row">
@@ -50,7 +50,7 @@
                     {!! Form::open(array('class' => 'form-horizontal')) !!}
                         {{ csrf_field() }}
                         <div class="form-body">
-                            <div class="form-group">
+{{--                             <div class="form-group">
                                 <label class="control-label col-md-3">Periode
                                     <span class="required"> * </span>
                                 </label>
@@ -65,7 +65,7 @@
                                 <div class="col-md-4">
                                     {!! Form::text('user_id', $pop->user->name, array('placeholder' => 'User ID','class' => 'form-control','readonly')) !!}
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label class="control-label col-md-3">Area
                                     <span class="required"> * </span>
@@ -74,14 +74,14 @@
                                     {{ Form::select('area_id', $area->pluck('name','id'), $pop->area_id, ['class'=>'form-control','readonly']) }}
                                 </div>
                             </div>
-                            <div class="form-group">
+{{--                             <div class="form-group">
                                 <label class="control-label col-md-3">Group
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
                                     {{ Form::select('group_id', $group->pluck('name','id'), $pop->group_id, ['class'=>'form-control','readonly']) }}
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label class="control-label col-md-3">Store
                                     <span class="required"> * </span>
@@ -118,14 +118,14 @@
                                     {!! Form::select('ukuran', ['0' => 'No', '1' => 'Yes'], $pop->ukuran, ['class' => 'form-control','readonly']) !!}
                                 </div>
                             </div>
-                            <div class="form-group">
+{{--                             <div class="form-group">
                                 <label class="control-label col-md-3">Status
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
                                     {{ Form::select('status_id', $status->pluck('name','id'), $pop->status_id, ['class'=>'form-control','readonly']) }}
                                 </div>
-                            </div>
+                            </div> --}}
                             <table class="table table-striped table-bordered table-hover dt-responsive" width="100%">
                                 <thead>
                                     <tr>

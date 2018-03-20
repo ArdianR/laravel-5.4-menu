@@ -26,19 +26,17 @@ Route::group(['middleware' => ['admin']], function () {
 /*end route group admin*/
 
 /*start hq route group*/ 
-
 Route::group(['middleware' => ['hq']], function () {
     Route::get('/pop/index2','PopController@index2');
     Route::get('/pop/list2','PopController@list2');
 	Route::get('/pop/show2/{id}','PopController@show2');
 	Route::get('/pop/show4/{id}','PopController@show4');
    	Route::post('/pop/approve/{id}','PopController@approve');
+   	Route::get('/pop/history4/{id}','PopController@history4');
 });
-
 /*end hq route group*/
 
 /*start route group hr*/
-
 Route::group(['middleware' => ['hr']], function () {
 	Route::get('/pop/index3','PopController@index3'); 
 	Route::get('/pop/create3/{id}','PopController@create3');
@@ -47,11 +45,16 @@ Route::group(['middleware' => ['hr']], function () {
 	Route::post('/pop/store3','PopController@store3');
 	Route::get('/pop/history3/{id}','PopController@history3');
 });
-
 /*end route group hr*/
 
-/*start route group admin*/
+/*start route group move*/
+Route::group(['middleware' => ['move']], function () {
+	Route::get('/move/index','MoveController@index'); 
+	Route::get('/move/create/{id}','MoveController@create');
+});
+/*end route group move*/
 
+/*start route group admin*/
 Route::group(['middleware' => 'admin'], function() {
 	Route::resource('/group','GroupController');
 	Route::resource('/area','AreaController');
@@ -65,9 +68,12 @@ Route::group(['middleware' => 'admin'], function() {
 	Route::get('/store/product/{id}/Edit','StoreController@productEdit')->name('store.productEdit');
 	Route::put('/store/productUpdate/{id}','StoreController@productUpdate')->name('store.productUpdate');
 	Route::delete('/store/productDestroy/{id}','StoreController@productDestroy')->name('store.productDestroy');
+	Route::resource('/pop','PopController');
 });
-
 /*end route group admin*/
+
+
+
 
 // Route::group(['middleware' => ['auth']], function () {
 
@@ -77,7 +83,7 @@ Route::group(['middleware' => 'admin'], function() {
 
 
 
-// // Route::resource('/pop','PopController');
+
 // Route::get('/pop/indexHq','PopController@indexHq')->name('pop.indexHq');
 
 // Route::get('/pop/indexHr','PopController@indexHr')->name('pop.indexHr');

@@ -119,6 +119,9 @@
                     @elseif (Auth::user()->DetailUser->group_id == 2)
                         @component('menu.hq')
                         @endcomponent
+                    @elseif (Auth::user()->DetailUser->group_id == 4)
+                        @component('menu.move')
+                        @endcomponent
                     @else
                         @component('menu.hr')
                         @endcomponent                   
@@ -198,6 +201,7 @@
         <script src="{{ asset('metronic/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js')}}" type="text/javascript"></script>
 {{--         <script src="{{ asset('metronic/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js')}}" type="text/javascript"></script> --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+        <script src="{{ asset('metronic/assets/pages/scripts/table-datatables-editable.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/vendor/tmpl.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/vendor/load-image.min.js')}}" type="text/javascript"></script>
@@ -226,10 +230,11 @@
         <script src="{{ asset('metronic/assets/pages/scripts/form-input-mask.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/ui-toastr.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/components-bootstrap-touchspin.min.js')}}" type="text/javascript"></script>
-        <script src="{{ asset('metronic/assets/pages/scripts/table-datatables-editable.min.js')}}" type="text/javascript"></script>
+{{--         <script src="{{ asset('metronic/assets/pages/scripts/table-datatables-editable.min.js')}}" type="text/javascript"></script> --}}
         <script src="{{ asset('metronic/assets/pages/scripts/form-fileupload.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/ui-general.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/ui-bootbox.min.js')}}" type="text/javascript"></script>
+{{--         <script src="{{ asset('metronic/assets/pages/scripts/table-datatables-responsive.min.js')}}" type="text/javascript"></script> --}}
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <script src="{{ asset('metronic/assets/layouts/layout/scripts/layout.min.js')}}" type="text/javascript"></script>

@@ -13,8 +13,8 @@ class Product extends Model
         'active'
     ];
 
-    // public function DetailPop()
+    // public function ProductStore()
     // {
-    //     return $this->hasMany('App\DetailPop');
+    //     return $this->belongsTo('App\ProductStore','product_id');
     // }
 }

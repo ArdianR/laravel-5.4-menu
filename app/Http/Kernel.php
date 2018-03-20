@@ -59,5 +59,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\Admin::class,
         'hq' => \App\Http\Middleware\Hq::class,
         'hr' => \App\Http\Middleware\Hr::class,
+        'move' => \App\Http\Middleware\Move::class,
     ];
 }

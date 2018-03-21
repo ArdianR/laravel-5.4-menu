@@ -27,6 +27,8 @@ class Store extends Model
       return $this->hasMany('App\Pop');
     }
 
+
+
     public function ProductStore()
     {
       return $this->hasMany('App\ProductStore');

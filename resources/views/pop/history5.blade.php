@@ -33,11 +33,22 @@
                     <form action="{{ URL('pop/approve/'. $pop->id) }}" method="POST" class="form-horizontal">
                         {{ csrf_field() }}
                         <div class="form-body">
-
-                                    {!! Form::hidden('periode', $pop->periode, array('placeholder' => 'Periode','class' => 'form-control','readonly'=>'')) !!}
-
-                                    {!! Form::hidden('user_id', $pop->user->name, array('placeholder' => 'User ID','class' => 'form-control','readonly'=>'')) !!}
-
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Periode
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    {!! Form::text('periode', $pop->periode, array('placeholder' => 'Periode','class' => 'form-control','readonly'=>'')) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">User
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    {!! Form::text('user_id', $pop->user->name, array('placeholder' => 'User ID','class' => 'form-control','readonly'=>'')) !!}
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">Area
                                     <span class="required"> * </span>
@@ -46,9 +57,14 @@
                                     {{ Form::select('area_id', $area->pluck('name','id'), $pop->area_id, ['class'=>'form-control','readonly'=>'']) }}
                                 </div>
                             </div>
-
-                                    {{ Form::hidden('group_id', $pop->group_id, ['class'=>'form-control','readonly'=>'']) }}
-
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Group
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    {{ Form::select('group_id', $group->pluck('name','id'), $pop->group_id, ['class'=>'form-control','readonly'=>'']) }}
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">Store
                                     <span class="required"> * </span>
@@ -58,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3">Ilustrasi Pemasangan
+                                <label class="control-label col-md-3">Image
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
@@ -69,20 +85,6 @@
                                     @endforeach
                                 </div>
                             </div>
-                            @if ($pop->status_id == 11)
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Foto Pemasangan
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    @foreach ($pop->photopop->where('type',2) as $photopop)
-                                    <a data-fancybox class="thumbnail" href="{{ url(asset($photopop->photo)) }}">
-                                        <img src="{{ url(asset($photopop->photo)) }}" class="img-responsiv" />
-                                    </a>
-                                    @endforeach
-                                </div>
-                            </div>
-                            @endif
                             <div class="form-group">
                                 <label class="control-label col-md-3">Posisi
                                     <span class="required"> * </span>
@@ -99,9 +101,14 @@
                                     {!! Form::select('ukuran', ['0' => 'No', '1' => 'Yes'], $pop->ukuran, ['class' => 'form-control','readonly'=>'']) !!}
                                 </div>
                             </div>
-
-                                    {{ Form::hidden('status_id', $pop->status_id, ['class'=>'form-control','readonly'=>'']) }}
-
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Status
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    {{ Form::select('status_id', $status->pluck('name','id'), $pop->status_id, ['class'=>'form-control','readonly'=>'']) }}
+                                </div>
+                            </div>
                             <table class="table table-striped table-bordered table-hover dt-responsive" width="100%">
                                 <thead>
                                     <tr>
@@ -122,20 +129,14 @@
                             </table>
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    {!! Form::textarea('note', null, array('placeholder' => 'Note','class' => 'form-control','required'=>'true')) !!}
+                                    {!! Form::textarea('note', null, array('placeholder' => 'Note','class' => 'form-control','required'=>'')) !!}
                                 </div>
                             </div>
                         </div>
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-2 col-md-9">
-                                    @if ($pop->status_id == 9)
-                                    <button type="submit" name="done" value="done" class="btn btn-primary">Done</button>
-                                    @else
-                                    <button type="submit" name="approve" value="approve" class="btn btn-primary">Approve</button>
-                                    @endif
-                                    <button type="submit" name="reject" value="reject" class="btn btn-danger">Reject</button>
-                                    <a href="{{action('PopController@list2')}}" class="btn grey-salsa btn-outline">Cancel</a>
+                                    <a href="{{ URL::previous() }}" class="btn grey-salsa btn-outline">Cancel</a>
                                 </div>
                             </div>
                         </div>

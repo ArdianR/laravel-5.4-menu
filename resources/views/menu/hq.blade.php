@@ -30,7 +30,7 @@
                 </li>
                 <li class="nav-item  ">
                     <a href="{{action('PopController@list2')}}" class="nav-link ">
-                        <span class="title">List Pop</span>
+                        <span class="title">Order Status</span>
                     </a>
                 </li>
             </ul>

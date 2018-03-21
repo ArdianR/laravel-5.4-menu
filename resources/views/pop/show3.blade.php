@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3">Image
+                                <label class="control-label col-md-3">Ilustrasi Pemasangan
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
@@ -102,6 +102,17 @@
                                     @endforeach
                                 </div>
                             </div>
+                            @if ($pop->status_id == 9)
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Foto Pemasangan
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    {!! Form::hidden('type', 2, array('class' => 'form-control')) !!}
+                                    <input type="file" name="photo[]" class="form-control" multiple="true" required="true" />
+                                </div>
+                            </div>
+                            @endif
                             <div class="form-group">
                                 <label class="control-label col-md-3">Posisi
                                     <span class="required"> * </span>
@@ -149,6 +160,9 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-9">
+                                    @if ($pop->status_id == 9)
+                                    <a href="{{action('PopController@list3')}}" class="btn grey-salsa btn-outline">Submit</a>
+                                    @endif
                                     <a href="{{action('PopController@list3')}}" class="btn grey-salsa btn-outline">Cancel</a>
                                 </div>
                             </div>

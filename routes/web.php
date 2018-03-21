@@ -33,6 +33,7 @@ Route::group(['middleware' => ['hq']], function () {
 	Route::get('/pop/show4/{id}','PopController@show4');
    	Route::post('/pop/approve/{id}','PopController@approve');
    	Route::get('/pop/history4/{id}','PopController@history4');
+   	Route::get('/pop/history5/{id}','PopController@history5');
 });
 /*end hq route group*/
 
@@ -40,6 +41,10 @@ Route::group(['middleware' => ['hq']], function () {
 Route::group(['middleware' => ['hr']], function () {
 	Route::get('/pop/index3','PopController@index3'); 
 	Route::get('/pop/create3/{id}','PopController@create3');
+	Route::get('/pop/edit3/{id}','PopController@edit3');
+	Route::get('/pop/edit4/{id}','PopController@edit4');
+	Route::match(['put', 'patch'], '/pop/update3/{id}','PopController@update3');
+	Route::get('/pop/move/{id}','PopController@move');
 	Route::get('/pop/list3','PopController@list3');
 	Route::get('/pop/show3/{id}','PopController@show3');
 	Route::post('/pop/store3','PopController@store3');
@@ -51,6 +56,9 @@ Route::group(['middleware' => ['hr']], function () {
 Route::group(['middleware' => ['move']], function () {
 	Route::get('/move/index','MoveController@index'); 
 	Route::get('/move/create/{id}','MoveController@create');
+	Route::post('/move/store','MoveController@store');
+	Route::get('/move/list','MoveController@list');
+	Route::get('/move/show/{id}','MoveController@show');
 });
 /*end route group move*/
 

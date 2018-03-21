@@ -32,33 +32,46 @@
                             </ul>
                         </div>
                     @endif
-                    {!! Form::open(array('route' => 'area.store','method'=>'POST', 'class' => 'form-horizontal')) !!}
+                    {!! Form::open(array('url' => 'move/store','method'=>'POST', 'class' => 'form-horizontal')) !!}
                     {{ csrf_field() }}
                         <div class="form-body">
-                            <div class="form-group">
-                                <label class="control-label col-md-3">From
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    {{ Form::select('from_store_id', $store->pluck('name','id'), $from->id, ['class'=>'form-control','readonly'=>'true','required'=>'true']) }}
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label class="control-label col-md-3">Area
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::text('area_id', $from->area_id, array('placeholder' => 'Area','class' => 'form-control','required'=>'true','readonly'=>'true')) !!}
+                                    {!! Form::hidden('area_id', $from->area->id, array('placeholder' => 'Area','class' => 'form-control','required'=>'true','readonly'=>'true')) !!}
+                                    {!! Form::text('area', $from->area->name, array('placeholder' => 'Area','class' => 'form-control','required'=>'true','readonly'=>'true')) !!}
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3">User
+                                <label class="control-label col-md-3">From
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::text('user_id', Auth::id(), array('placeholder' => 'User','class' => 'form-control','required'=>'true','readonly'=>'true')) !!}
+                                    {!! Form::hidden('from_store_id', $from->id, array('placeholder' => 'Store','class' => 'form-control','required'=>'true','readonly'=>'true')) !!}
+                                    {!! Form::text('store', $from->name, array('placeholder' => 'Store','class' => 'form-control','required'=>'true','readonly'=>'true')) !!}
                                 </div>
                             </div>
+                            <table class="table table-striped table-bordered table-hover dt-responsive" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th class="all">No</th>
+                                        <th class="all">Product Name</th>
+                                        <th class="all">Qty</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($store2 as $store3)
+                                    <tr>
+                                        <td>{{ ++$i }}</td>
+                                        <td>{{ $store3->product->name }}</td>
+                                        <td>{{ $store3->qty }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {!! Form::hidden('user_id', Auth::id(), array('placeholder' => 'User','class' => 'form-control','required'=>'true','readonly'=>'true')) !!}
                             <div class="form-group">
                                 <label class="control-label col-md-3">Note
                                     <span class="required"> * </span>
@@ -72,35 +85,36 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('from_store_id', $store->pluck('name','id'), null, ['class'=>'form-control','required'=>'true']) }}
+                                    {{ Form::select('to_store_id', $store->pluck('name','id'), null, ['class'=>'form-control','required'=>'true']) }}
                                 </div>
                             </div>
+                            {!! Form::hidden('status_id', 5, array('placeholder' => 'status_id','class' => 'form-control','required'=>'true','readonly'=>'true')) !!}
+                            {!! Form::hidden('active', 1, array('placeholder' => 'active','class' => 'form-control','required'=>'true','readonly'=>'true')) !!}
+                        </div>
+                        <div id="dynamic_field">
                             <div class="form-group">
-                                <label class="control-label col-md-3">Status
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    {{ Form::select('status_id', $status->pluck('name','id'), 5, ['class'=>'form-control','readonly'=>'true','required'=>'true']) }}
-                                </div>
-                            </div>
-                            @foreach($product as $product)
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Product Store List
+                                <label class="control-label col-md-3">POP Material List
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-4">
-                                    <select id="product" name="product_id[]" class="form-control" required autofocus>
-                                        <option value="{{$product->product_id}}">{{$product->product->name}} = {{$product->qty}}</option>
-                                    </select>
+                                    {{ Form::select('product_id[]', $product->pluck('name','id'), null, ['class'=>'form-control','id'=>'product','required'=>'true']) }}
+                                </div>
+                                <label class="control-label col-md-1">Qty
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-1">
+                                    <input type="text" id="qty" name="qty[]" class="form-control" required autofocus>
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" name="add" id="add" class="form-control btn btn-icon-only green fa fa-plus"></button>
                                 </div>
                             </div>
-                            @endforeach
                         </div>
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-9">
-                                    <input id="submitButton" class="btn green" type="button" value="Submit" onclick="submitForm(this);" />
-                                    <a href="{{ route('area.index') }}" class="btn grey-salsa btn-outline">Cancel</a>
+                                    <button type="submit" class="btn green button-prevent-sbm"><i class="spinner fa fa-spinner fa-spin"></i> Submit</button>
+                                    <a href="{{action('MoveController@index')}}" class="btn grey-salsa btn-outline">Cancel</a>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +144,7 @@
         var i=1;  
             $('#add').click(function(){  
                 i++;  
-                $('#dynamic_field').append('<div class="form-group" id="row'+i+'"><label class="control-label col-md-3"><span class="required"></span></label><div class="col-md-3"><select id="product" name="product_id[]" class="form-control" required autofocus>@foreach($product as $product)<option value="{{$product}}">{{$product}}</option>@endforeach</select></div><label class="control-label col-md-1">Qty<span class="required">*</span></label><div class="col-md-1"><input type="text" id="qty" name="qty[]" value="" class="form-control" required autofocus></div><div class="col-md-1"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div></div>');
+                $('#dynamic_field').append('<div class="form-group" id="row'+i+'"><label class="control-label col-md-3">POP Material List<span class="required">*</span></label><div class="col-md-4">{{ Form::select('product_id[]', $product->pluck('name','id'), null, ['class'=>'form-control','id'=>'product','required'=>'true']) }}</div><label class="control-label col-md-1">Qty<span class="required">*</span></label><div class="col-md-1"><input type="text" id="qty" name="qty[]" class="form-control" required="true" autofocus="true"></div><div class="col-md-1"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div></div>');
             });  
             $(document).on('click', '.btn_remove', function(){  
                var button_id = $(this).attr("id");   

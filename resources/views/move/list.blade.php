@@ -10,7 +10,7 @@
         <!-- BEGIN PAGE TITLE-->
         <div class="portlet-title">
             <div class="caption">
-                <span class="icon-settings font-dark caption-subject font-dark sbold uppercase page-title"> List Pop</span>
+                <span class="icon-settings font-dark caption-subject font-dark sbold uppercase page-title"> List Move Pop</span>
             </div>
         </div>
         @if ($message = Session::get('success'))
@@ -33,69 +33,49 @@
                             <thead>
                                 <tr>
                                     <th class="all">No</th>
-{{--                                     <th class="none">Periode</th>
-                                    <th class="none">User</th>
-                                    <th class="none">Group</th> --}}
-                                    <th class="none">Area</th>
+                                    <th class="desktop">User</th>
+                                    <th class="desktop">Area</th>
                                     <th class="desktop">Dealer ID</th>
                                     <th class="desktop">Store</th>
-                                    <th class="desktop">Posisi</th>
-                                    <th class="desktop">Ukuran</th>
-                                    <th class="none">Note</th>
+                                    <th class="desktop">Note</th>
                                     <th class="desktop">Status</th>
                                     <th class="desktop">Created Date</th>
                                     <th class="all">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($pop as $pop)
+                                @foreach ($moves as $move)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-{{--                                     <td>{{ $pop->periode}}</td>
-                                    <td>{{ $pop->user->name }}</td>
-                                    <td>{{ $pop->group->name }}</td> --}}
-                                    <td>{{ $pop->area->name }}</td>
-                                    <td>{{ $pop->store->dealer_id }}</td>
-                                    <td>{{ $pop->store->name }}</td>
+                                    <td>{{ $move->user->name }}</td>
+                                    <td>{{ $move->area->name }}</td>
+                                    <td>{{ $move->store }}</td>
+                                    <td>{{ $move->store }}</td>
+                                    <td>{{ $move->note }}</td>
                                     <td>
-                                        @if ($pop->posisi == 1)
-                                            <span>Yes</span>
-                                        @else
-                                            <span>No</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($pop->ukuran == 1)
-                                            <span>Yes</span>
-                                        @else
-                                            <span>No</span>
-                                        @endif
-                                    </td>
-                                    <td>{{ $pop->note }}</td>
-                                    <td>
-                                        @if ($pop->status_id == 1)
+                                        @if ($move->status_id == 5)
                                             <span class="badge badge-info">
-                                                {{ $pop->status->name }}
+                                                {{ $move->status->name }}
                                             </span>
-                                        @elseif ($pop->status_id == 2)
+                                        @elseif ($move->status_id == 2)
                                             <span class="badge badge-warning">
-                                                {{ $pop->status->name }}
+                                                {{ $move->status->name }}
                                             </span>
-                                        @elseif ($pop->status_id == 3)
+                                        @elseif ($move->status_id == 3)
                                             <span class="badge badge-success">
-                                                {{ $pop->status->name }}
+                                                {{ $move->status->name }}
                                             </span>
-                                        @elseif ($pop->status_id == 9)
+                                        @elseif ($move->status_id == 9)
                                             <span class="badge badge-success">
-                                                {{ $pop->status->name }}
+                                                {{ $move->status->name }}
                                             </span>
                                         @else
                                             <span class="badge badge-danger">
-                                                {{ $pop->status->name }}
+                                                {{ $move->status->name }}
                                             </span>
                                         @endif
                                     </td>
-                                    <td>{{ $pop->created_at }}</td>
+                                    <td>{{ $move->created_at }}</td>
                                     <td>
                                         <div class="btn-group pull-right">
                                             <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
@@ -103,7 +83,7 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right">
                                                 <li>
-                                                    <a href="{{action('PopController@show4',$pop->id)}}">
+                                                    <a href="{{action('MoveController@show',$move->id)}}">
                                                         <i class="fa fa-eye"></i> Show
                                                     </a>
                                                 </li>

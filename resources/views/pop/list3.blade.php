@@ -119,6 +119,10 @@
                                             <span class="badge badge-success">
                                                 {{ $pop->status->name }}
                                             </span>
+                                        @elseif ($pop->status_id == 9)
+                                            <span class="badge badge-success">
+                                                {{ $pop->status->name }}
+                                            </span>
                                         @else
                                             <span class="badge badge-danger">
                                                 {{ $pop->status->name }}
@@ -132,10 +136,19 @@
                                                 <i class="fa fa-angle-down"></i>
                                             </button>
                                             <ul class="dropdown-menu pull-right">
-                                                <li>
+                                                <li>@if ($pop->status_id == 2)
+                                                    <a href="{{action('PopController@edit3',$pop->id)}}">
+                                                        <i class="fa fa-eye"></i> Edit
+                                                    </a>
+                                                    @elseif ($pop->status_id == 9)
+                                                    <a href="{{action('PopController@edit4',$pop->id)}}">
+                                                        <i class="fa fa-eye"></i> Upload
+                                                    </a>
+                                                    @else
                                                     <a href="{{action('PopController@show3',$pop->id)}}">
                                                         <i class="fa fa-eye"></i> Show
                                                     </a>
+                                                    @endif
                                                 </li>
                                             </ul>
                                         </div>

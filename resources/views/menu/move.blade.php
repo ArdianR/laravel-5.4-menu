@@ -28,8 +28,8 @@
                     </a>
                 </li>
                 <li class="nav-item  ">
-                    <a href="{{action('PopController@list3')}}" class="nav-link ">
-                        <span class="title">List Pop</span>
+                    <a href="{{action('MoveController@list')}}" class="nav-link ">
+                        <span class="title">List Move</span>
                     </a>
                 </li>
             </ul>

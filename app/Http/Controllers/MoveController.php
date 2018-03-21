@@ -11,6 +11,8 @@ use App\Store;
 use Auth;
 use App\ProductStore;
 use App\Status;
+use App\DetailMove;
+use Illuminate\Support\Facades\DB;
 
 
 class MoveController extends Controller
@@ -18,7 +20,7 @@ class MoveController extends Controller
     
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('move');
     }
 
     /**
@@ -60,10 +62,13 @@ class MoveController extends Controller
     public function create($id)
     {
         $from = Store::find($id);
-        $product = ProductStore::where('store_id',$id)->with('product')->get();
-        $store = Store::all();
-        $status = Status::all();
-        return view('move.create',compact('from','store','status','product'));
+        $product = DB::table('product_store')
+        ->leftjoin('product', 'product_store.product_id', '=', 'product.id')
+        ->where('store_id', $id)
+        ->get();
+        $store2 = ProductStore::where('store_id',$id)->get();
+        $store = Store::where('area_id',Auth::user()->detailuser->area_id)->get();
+        return view('move.create',compact('from','store','product','store2'))->with('i');
     }
 
     /**
@@ -74,14 +79,32 @@ class MoveController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
-            'name' => 'required|string',
-            'alias' => 'required|string|max:5',
+            'from_store_id' => 'required|integer',
+            'user_id' => 'required|integer',
+            'area_id' => 'required|integer',
+            'note' => 'required|string',
+            'status_id' => 'required|integer',
+            'to_store_id' => 'required|integer',
+            'product_id' => 'required|array:integer',
+            'qty' => 'required|array:integer',
             'active' => 'required|boolean'
         ]);
-        Area::create($request->all());
-        return redirect()->route('area.index')
+        $move = Move::create($request->all());
+        if($move->save())
+        {
+            $id = $move->id;
+            $input = $request->all();
+            for ($i=0; $i < count($input['product_id']); ++$i)
+            {
+                $detailmove= new DetailMove;
+                $detailmove->move_id = $id;
+                $detailmove->product_id = $input['product_id'][$i];
+                $detailmove->qty= $input['qty'][$i];
+                $detailmove->save();  
+            }
+        }
+        return redirect()->action('MoveController@index')
                         ->with('success','created successfully');
     }
 
@@ -93,6 +116,7 @@ class MoveController extends Controller
      */
     public function show($id)
     {
+        dd('oke');
         $area = Area::find($id);
         return view('area.show',compact('area'));
     }
@@ -139,5 +163,12 @@ class MoveController extends Controller
         Area::find($id)->delete();
         return redirect()->route('area.index')
             ->with('success','deleted successfully');
+    }
+
+    public function list() // list move for move group
+    {
+        $moves = Move::orderBy('created_at', 'desc')->with('user','area','status','store')->get();
+        return view('move.list',compact('moves'))
+            ->with('i');
     }
 }

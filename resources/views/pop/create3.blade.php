@@ -81,16 +81,17 @@
                         {{ csrf_field() }}
                         <div class="form-body">
                             {!! Form::hidden('periode', 1, array('placeholder' => 'Periode','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
-                            {!! Form::hidden('user_id', $user_id, array('placeholder' => 'User ID','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
+                            {!! Form::hidden('user_id', Auth::id(), array('placeholder' => 'User ID','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
                             <div class="form-group">
                                 <label class="control-label col-md-3">Area
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('area_id', $area->pluck('name','id'), $detailuser->area_id, ['class'=>'form-control','readonly'=>'true','required'=>'true']) }}
+                                    {!! Form::hidden('area_id', Auth::user()->detailuser->area->id, array('placeholder' => 'area_id','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
+                                    {!! Form::text('area', Auth::user()->detailuser->area->name, array('placeholder' => 'area_id','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
                                 </div>
                             </div>
-                            {!! Form::hidden('group_id', $detailuser->group_id, array('placeholder' => 'group_id','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
+                            {!! Form::hidden('group_id', Auth::user()->detailuser->group_id, array('placeholder' => 'group_id','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
                             <div class="form-group">
                                 <label class="control-label col-md-3">Store
                                     <span class="required"> * </span>

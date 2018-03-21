@@ -23,13 +23,13 @@
             </a>
             <ul class="sub-menu">
                 <li class="nav-item  ">
-                    <a href="{{action('PopController@index3')}}" class="nav-link ">
-                        <span class="title">Index</span>
+                    <a href="{{action('PopController@list3')}}" class="nav-link ">
+                        <span class="title">Order Status</span>
                     </a>
                 </li>
                 <li class="nav-item  ">
-                    <a href="{{action('PopController@list3')}}" class="nav-link ">
-                        <span class="title">List Pop</span>
+                    <a href="{{action('PopController@index3')}}" class="nav-link ">
+                        <span class="title">List Store</span>
                     </a>
                 </li>
             </ul>

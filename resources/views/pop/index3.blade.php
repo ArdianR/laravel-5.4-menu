@@ -102,6 +102,11 @@
                                                         <i class="fa fa-eye"></i> History
                                                     </a>
                                                 </li>
+                                                <li>
+                                                    <a href="">
+                                                        <i class="fa fa-eye"></i> Move
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>

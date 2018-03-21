@@ -18,4 +18,24 @@ class Move extends Model
         'active'
     ];
 
+    public function Store()
+    {
+        return $this->belongsTo('App\Store');
+    }
+
+    public function Area()
+    {
+        return $this->belongsTo('App\Area');
+    }
+
+    public function User()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function Status()
+    {
+        return $this->belongsTo('App\Status');
+    }
+
 }

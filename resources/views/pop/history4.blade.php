@@ -86,7 +86,7 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right">
                                                 <li>
-                                                    <a href="{{action('PopController@show4', $pop->id)}}">
+                                                    <a href="{{action('PopController@history5', $pop->id)}}">
                                                         <i class="fa fa-eye"></i> Show
                                                     </a>
                                                 </li>

@@ -15,7 +15,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-settings font-dark"></i>
-                            <span class="caption-subject font-dark sbold uppercase">Show Pop</span>
+                            <span class="caption-subject font-dark sbold uppercase">Show Move</span>
                         </div>
                     </div>
                     <div class="portlet-body">
@@ -63,6 +63,18 @@
                                 </label>
                                 <div class="col-md-4">
                                     {{ Form::textarea('store_id', $move->note, ['class'=>'form-control','readonly']) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Bukti Kirim
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    @foreach ($photomove->where('type',1) as $photomove)
+                                    <a data-fancybox class="thumbnail" href="{{ url(asset($photomove->photo)) }}">
+                                        <img src="{{ url(asset($photomove->photo)) }}" class="img-responsiv" />
+                                    </a>
+                                    @endforeach
                                 </div>
                             </div>
                             <table class="table table-striped table-bordered table-hover dt-responsive" width="100%">

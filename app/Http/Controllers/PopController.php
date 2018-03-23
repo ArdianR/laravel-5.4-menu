@@ -245,7 +245,7 @@ class PopController extends Controller
                 $detailmove->save();  
             }
         }
-        return redirect()->action('PopController@list3')
+        return redirect()->action('PopController@list33')
                         ->with('success','created successfully');
     }
 
@@ -293,14 +293,14 @@ class PopController extends Controller
     {
         $move = Move::find($id);
         $detailmove = DetailMove::where('move_id',$id)->with('product')->get();
-        // $photopop = PhotoPop::where('pop_id',$id)->get();
+        $photomove = PhotoMove::where('move_id',$id)->get();
         // dd($detailmove);
 
         // $area = Area::all();
         // $store = Store::all();
         // $status = Status::all();
         // $group = Group::all();
-        return view('pop.show33',compact('move','detailmove'))
+        return view('pop.show33',compact('move','detailmove','photomove'))
             ->with('i');
     }
 
@@ -348,13 +348,13 @@ class PopController extends Controller
     public function edit33($id)
     {
         $move = Move::find($id);
-       // $photomove = PhotoMove::where('move_id',$id)->get();
+        $photomove = PhotoMove::where('move_id',$id)->get();
         $detailmove = DetailMove::where('move_id',$id)->get();
         // $area = Area::all();
         $store = Store::all();
         // $status = Status::all();
         // $group = Group::all();
-        return view('pop.edit33',compact('detailmove','move','area','group','store','status','photopop'))
+        return view('pop.edit33',compact('detailmove','move','area','group','store','status','photomove'))
             ->with('i');
     }
 
@@ -456,7 +456,27 @@ class PopController extends Controller
             }
             $move = Move::where('id',$id)->update(['status_id' => 10]);
         }
-
+        if ($request->status == 12) {
+            $this->validate($request, [
+                'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            if ($request->hasFile('photo')) {
+                File::delete($request);
+            }
+            PhotoMove::where('move_id',$id)->where('type',2)->delete();
+            foreach ($request->photo as $photo)
+            {
+                $imgPath = 'images/'.$request->from_store_id.$request->to_store_id;
+                $imgDestinationPath = $imgPath.'';
+                $filename = $photo->store($imgDestinationPath);
+                PhotoMove::create([
+                    'move_id' => $id,
+                    'type' => 2,
+                    'photo' => $filename
+                ]);
+            }
+            $move = Move::where('id',$id)->update(['status_id' => 13]);
+        }
         return redirect()->action('PopController@list33')
             ->with('success','update successfully');
     }

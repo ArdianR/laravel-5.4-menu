@@ -94,7 +94,31 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    @foreach ($move->photomove->where('type',1) as $photomove)
+                                    @foreach ($photomove->where('type',1) as $photomove)
+                                    <a data-fancybox class="thumbnail" href="{{ url(asset($photomove->photo)) }}">
+                                        <img src="{{ url(asset($photomove->photo)) }}" class="img-responsiv" />
+                                    </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endif
+                            @if ($move->status_id == 12)
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Bukti Terima
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    {!! Form::hidden('type', 2, array('class' => 'form-control')) !!}
+                                    <input type="file" name="photo[]" class="form-control" multiple="true" required="true" />
+                                </div>
+                            </div>
+                            @else
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Bukti Terima
+                                    <span class="required"> * </span>
+                                </label>
+                                <div class="col-md-4">
+                                    @foreach ($photomove->where('type',2) as $photomove)
                                     <a data-fancybox class="thumbnail" href="{{ url(asset($photomove->photo)) }}">
                                         <img src="{{ url(asset($photomove->photo)) }}" class="img-responsiv" />
                                     </a>
@@ -128,6 +152,8 @@
                                     <button type="submit" name="status" value="8" class="btn green button-prevent-sbm"><i class="spinner fa fa-spinner fa-spin"></i> Submit</button>
                                     @elseif ($move->status_id == 9 || $move->status_id == 11)
                                     <button type="submit" name="status" value="9" class="btn green button-prevent-sbm"><i class="spinner fa fa-spinner fa-spin"></i> Submit</button>
+                                    @elseif ($move->status_id == 12)
+                                    <button type="submit" name="status" value="12" class="btn green button-prevent-sbm"><i class="spinner fa fa-spinner fa-spin"></i> Submit</button>
                                     @endif
                                     <a href="{{action('PopController@list33')}}" class="btn grey-salsa btn-outline">Cancel</a>
                                 </div>

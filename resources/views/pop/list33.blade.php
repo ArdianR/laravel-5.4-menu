@@ -114,7 +114,7 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right">
                                                 <li>
-                                                    @if ($move->status_id == 8 || $move->status_id == 11)
+                                                    @if ($move->status_id == 8 || $move->status_id == 11 || $move->status_id == 14)
                                                     <a href="{{action('PopController@edit33',$move->id)}}">
                                                         <i class="fa fa-eye"></i> Edit
                                                     </a>

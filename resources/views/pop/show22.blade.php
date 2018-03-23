@@ -62,7 +62,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            @if ($pop->status_id == 4)
+                            @if ($pop->status_id !== 1 || $pop->status_id !== 2)
                             <div class="form-group">
                                 <label class="control-label col-md-3">Foto Pemasangan
                                     <span class="required"> * </span>

@@ -10,7 +10,7 @@
         <!-- BEGIN PAGE TITLE-->
         <div class="portlet-title">
             <div class="caption">
-                <span class="icon-settings font-dark caption-subject font-dark sbold uppercase page-title"> Area {{ $area->name }}</span>
+                <span class="icon-settings font-dark caption-subject font-dark sbold uppercase page-title"> Area {{ Auth::user()->detailuser->area->name }}</span>
             </div>
         </div>
         @if ($message = Session::get('success'))
@@ -22,11 +22,12 @@
         @endif
         <!-- END PAGE TITLE-->
         <!-- END PAGE HEADER-->
-        <p><b>Regional : </b>{{ $area->name }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <p><b>Regional : </b>{{ Auth::user()->detailuser->area->name }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Total Toko : </b>{{ $store->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Uploaded : </b>{{ $pop->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Rejected : </b>{{ $pop->where('status_id',2)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Approved : </b>{{ $pop->where('status_id',3)->count() }}</p>
+        <b>Request POP: </b>{{ $pop->where('status_id',1)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Request Move: </b>{{ $pop->where('status_id',6)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>POP Done : </b>{{ $pop->where('status_id',5)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Move Done : </b>{{ $pop->where('status_id',12)->count() }}</p>
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
@@ -67,9 +68,6 @@
                             <thead>
                                 <tr>
                                     <th class="all">No</th>
-{{--                                     <th class="none">Periode</th>
-                                    <th class="none">User</th>
-                                    <th class="none">Group</th> --}}
                                     <th class="none">Area</th>
                                     <th class="desktop">Dealer ID</th>
                                     <th class="desktop">Store</th>
@@ -85,9 +83,6 @@
                                 @foreach ($pop as $pop)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-{{--                                     <td>{{ $pop->periode}}</td>
-                                    <td>{{ $pop->user->name }}</td>
-                                    <td>{{ $pop->group->name }}</td> --}}
                                     <td>{{ $pop->area->name }}</td>
                                     <td>{{ $pop->store->dealer_id }}</td>
                                     <td>{{ $pop->store->name }}</td>
@@ -136,12 +131,12 @@
                                                 <i class="fa fa-angle-down"></i>
                                             </button>
                                             <ul class="dropdown-menu pull-right">
-                                                <li>@if ($pop->status_id == 2)
+                                                <li>@if ($pop->status_id == 2 || $pop->status_id == 5)
                                                     <a href="{{action('PopController@edit3',$pop->id)}}">
                                                         <i class="fa fa-eye"></i> Edit
                                                     </a>
-                                                    @elseif ($pop->status_id == 9)
-                                                    <a href="{{action('PopController@edit4',$pop->id)}}">
+                                                    @elseif ($pop->status_id == 3)
+                                                    <a href="{{action('PopController@edit3',$pop->id)}}">
                                                         <i class="fa fa-eye"></i> Upload
                                                     </a>
                                                     @else

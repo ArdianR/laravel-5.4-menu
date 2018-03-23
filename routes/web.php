@@ -30,10 +30,12 @@ Route::group(['middleware' => ['hq']], function () {
     Route::get('/pop/index2','PopController@index2');
     Route::get('/pop/list2','PopController@list2');
 	Route::get('/pop/show2/{id}','PopController@show2');
-	Route::get('/pop/show4/{id}','PopController@show4');
+	Route::get('/pop/show22/{id}','PopController@show22');
    	Route::post('/pop/approve/{id}','PopController@approve');
-   	Route::get('/pop/history4/{id}','PopController@history4');
+   	Route::get('/pop/history2/{id}','PopController@history2');
    	Route::get('/pop/history5/{id}','PopController@history5');
+    Route::get('/pop/list22','PopController@list22');
+    Route::get('/pop/show222/{id}','PopController@show222');
 });
 /*end hq route group*/
 
@@ -42,20 +44,34 @@ Route::group(['middleware' => ['hr']], function () {
 	Route::get('/pop/index3','PopController@index3'); 
 	Route::get('/pop/create3/{id}','PopController@create3');
 	Route::get('/pop/edit3/{id}','PopController@edit3');
-	Route::get('/pop/edit4/{id}','PopController@edit4');
 	Route::match(['put', 'patch'], '/pop/update3/{id}','PopController@update3');
-	Route::get('/pop/move/{id}','PopController@move');
-	Route::get('/pop/list3','PopController@list3');
 	Route::get('/pop/show3/{id}','PopController@show3');
 	Route::post('/pop/store3','PopController@store3');
 	Route::get('/pop/history3/{id}','PopController@history3');
+
+
+	//Route::get('/pop/edit4/{id}','PopController@edit4');
+	//Route::match(['put', 'patch'], '/pop/update4/{id}','PopController@update4');
+	
+	Route::get('/pop/move/{id}','PopController@move');
+
+
+	Route::get('/pop/list3','PopController@list3');
+
+
+	Route::get('/pop/create33/{id}','PopController@create33');
+	Route::post('/pop/store33','PopController@store33');
+	Route::get('/pop/show33/{id}','PopController@show33');
+	Route::get('/pop/list33','PopController@list33');
+	Route::get('/pop/edit33/{id}','PopController@edit33');
+	Route::match(['put', 'patch'], '/pop/update33/{id}','PopController@update33');
 });
 /*end route group hr*/
 
 /*start route group move*/
 Route::group(['middleware' => ['move']], function () {
 	Route::get('/move/index','MoveController@index'); 
-	Route::get('/move/create/{id}','MoveController@create');
+
 	Route::post('/move/store','MoveController@store');
 	Route::get('/move/list','MoveController@list');
 	Route::get('/move/show/{id}','MoveController@show');

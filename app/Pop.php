@@ -9,10 +9,9 @@ class Pop extends Model
 	protected $table = 'pop';
 
     protected $fillable = [
-        'periode',
+        'periode_id',
         'user_id',
         'area_id',
-        'group_id',
         'store_id',
         'posisi',
         'ukuran',

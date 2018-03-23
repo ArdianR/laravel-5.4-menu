@@ -18,18 +18,23 @@
         <li class="nav-item">
             <a href="javascript:;" class="nav-link nav-toggle">
                 <i class="icon-bar-chart"></i>
-                <span class="title">POP</span>
+                <span class="title">Menu</span>
                 <span class="arrow"></span>
             </a>
             <ul class="sub-menu">
                 <li class="nav-item  ">
-                    <a href="{{action('PopController@list3')}}" class="nav-link ">
-                        <span class="title">Order Status</span>
+                    <a href="{{action('PopController@index3')}}" class="nav-link ">
+                        <span class="title">List Store</span>
                     </a>
                 </li>
                 <li class="nav-item  ">
-                    <a href="{{action('PopController@index3')}}" class="nav-link ">
-                        <span class="title">List Store</span>
+                    <a href="{{action('PopController@list3')}}" class="nav-link ">
+                        <span class="title">List Request Pop</span>
+                    </a>
+                </li>
+                <li class="nav-item  ">
+                    <a href="{{action('PopController@list33')}}" class="nav-link ">
+                        <span class="title">List Request Move</span>
                     </a>
                 </li>
             </ul>

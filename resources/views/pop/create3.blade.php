@@ -80,24 +80,25 @@
                     {!! Form::open(array('url' => 'pop/store3','method'=>'POST', 'class' => 'form-horizontal','enctype' => 'multipart/form-data','files' => 'true')) !!}
                         {{ csrf_field() }}
                         <div class="form-body">
-                            {!! Form::hidden('periode', 1, array('placeholder' => 'Periode','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
-                            {!! Form::hidden('user_id', Auth::id(), array('placeholder' => 'User ID','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
+                            {!! Form::hidden('periode_id', 1) !!}
+                            {!! Form::hidden('user_id', Auth::id()) !!}
+                            {!! Form::hidden('area_id', Auth::user()->detailuser->area->id) !!}
+                            {!! Form::hidden('status_id', 1) !!}
+                            {!! Form::hidden('active', 1) !!}
                             <div class="form-group">
                                 <label class="control-label col-md-3">Area
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::hidden('area_id', Auth::user()->detailuser->area->id, array('placeholder' => 'area_id','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
                                     {!! Form::text('area', Auth::user()->detailuser->area->name, array('placeholder' => 'area_id','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
                                 </div>
                             </div>
-                            {!! Form::hidden('group_id', Auth::user()->detailuser->group_id, array('placeholder' => 'group_id','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
                             <div class="form-group">
                                 <label class="control-label col-md-3">Store
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('store_id', $store->pluck('name','id'), $store_id, ['class'=>'form-control','readonly'=>'true','required'=>'true']) }}
+                                    {{ Form::select('store_id', $store->pluck('name','id'), $id, ['class'=>'form-control','readonly'=>'true','required'=>'true']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -105,7 +106,6 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::hidden('type', 1, array('class' => 'form-control')) !!}
                                     <input type="file" name="photo[]" class="form-control" multiple="true" required="true" />
                                 </div>
                             </div>
@@ -125,9 +125,6 @@
                                     {!! Form::select('ukuran', ['0' => 'No', '1' => 'Yes'], null, ['class' => 'form-control','required'=>'true']) !!}
                                 </div>
                             </div>
-                            {!! Form::hidden('note', null, array('placeholder' => 'Note','class' => 'form-control','readonly'=>'true','required'=>'false')) !!}
-                            {!! Form::hidden('status_id', 1, array('placeholder' => 'status_id','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
-                            {!! Form::hidden('active', 1, array('placeholder' => 'active','class' => 'form-control','readonly'=>'true','required'=>'true')) !!}
                         </div>
                         <div id="dynamic_field">
                             <div class="form-group">

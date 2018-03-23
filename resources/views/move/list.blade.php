@@ -33,25 +33,25 @@
                             <thead>
                                 <tr>
                                     <th class="all">No</th>
-                                    <th class="desktop">User</th>
+                                    <th class="none">User</th>
                                     <th class="desktop">Area</th>
-                                    <th class="desktop">Dealer ID</th>
-                                    <th class="desktop">Store</th>
+                                    <th class="desktop">From</th>
                                     <th class="desktop">Note</th>
+                                    <th class="desktop">To</th>
                                     <th class="desktop">Status</th>
                                     <th class="desktop">Created Date</th>
                                     <th class="all">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($moves as $move)
+                                @foreach ($move as $move)
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $move->user->name }}</td>
                                     <td>{{ $move->area->name }}</td>
-                                    <td>{{ $move->store }}</td>
-                                    <td>{{ $move->store }}</td>
+                                    <td>{{ $move->fromstore->name }}</td>
                                     <td>{{ $move->note }}</td>
+                                    <td>{{ $move->tostore->name }}</td>
                                     <td>
                                         @if ($move->status_id == 5)
                                             <span class="badge badge-info">

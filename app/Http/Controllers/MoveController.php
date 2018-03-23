@@ -34,16 +34,6 @@ class MoveController extends Controller
         $detailuser = User::find(Auth::id())->detailuser;
         $area = Area::find($detailuser->area_id);
         $store = Store::where('area_id','=',$detailuser->area_id)->with('area','pop','productstore')->get();
-
-        // dd($store);exit;
-        // $pop = Pop::where('area_id','=',$detailuser->area_id)->get();
-        // $alls = DB::table('pop')
-        // ->leftjoin('detail_pop', 'pop.id', '=', 'detail_pop.pop_id')
-        // ->leftjoin('product', 'detail_pop.product_id', '=', 'product.id')
-        // ->where('area_id', $detailuser->area_id)
-        // ->select('product.id as id','product.name as name', DB::raw("sum(detail_pop.qty) as sum"))
-        // ->groupBy('product.id','product.name')
-        // ->get();
         return view('move.index',compact('store','area'))
             ->with('i');
     }
@@ -116,9 +106,8 @@ class MoveController extends Controller
      */
     public function show($id)
     {
-        dd('oke');
-        $area = Area::find($id);
-        return view('area.show',compact('area'));
+        $move = Move::find($id);
+        return view('move.show',compact('move'));
     }
 
     /**
@@ -167,8 +156,8 @@ class MoveController extends Controller
 
     public function list() // list move for move group
     {
-        $moves = Move::orderBy('created_at', 'desc')->with('user','area','status','store')->get();
-        return view('move.list',compact('moves'))
+        $move = Move::orderBy('created_at', 'desc')->with('user','area','status','fromstore','tostore')->get();
+        return view('move.list',compact('move'))
             ->with('i');
     }
 }

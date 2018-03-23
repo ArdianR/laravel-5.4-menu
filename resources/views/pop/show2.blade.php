@@ -24,9 +24,10 @@
         <!-- END PAGE HEADER-->
         <p><b>Regional : </b>{{ $area->name }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Total Toko : </b>{{ $store->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Uploaded : </b>{{ $pop->where('status_id',1)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Rejected : </b>{{ $pop->where('status_id',2)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Approved : </b>{{ $pop->where('status_id',3)->count() }}</p>
+        <b>Request POP: </b>{{ $pop->where('status_id',1)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Request Move: </b>{{ $pop->where('status_id',6)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>POP Done : </b>{{ $pop->where('status_id',5)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Move Done : </b>{{ $pop->where('status_id',12)->count() }}</p>
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
@@ -88,43 +89,14 @@
                                                 <i class="fa fa-angle-down"></i>
                                             </button>
                                             <ul class="dropdown-menu pull-right">
-{{--                                                 <li>
-                                                    <a href="{{action('PopController@create3', $store->id)}}">
-                                                        <i class="fa fa-eye"></i> Create
-                                                    </a>
-                                                </li> --}}
                                                 <li>
-                                                    <a href="{{action('PopController@history4', $store->id)}}">
+                                                    <a href="{{action('PopController@history2', $store->id)}}">
                                                         <i class="fa fa-eye"></i> History
                                                     </a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </td>
-{{--                                     <td>
-                                        <div class="btn-group pull-right">
-                                            <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
-                                                <i class="fa fa-angle-down"></i>
-                                            </button>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <a href="">
-                                                        <i class="fa fa-eye"></i> Show
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="">
-                                                        <i class="fa fa-pencil"></i> Edit
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    {!! Form::open(['method' => 'DELETE','route' => ['area.destroy', $store->id],'style'=>'display:inline']) !!}
-                                                    <input type="image" src="{{ asset('metronic/assets/global/img/fa-fa-recycle.png') }}" alt="Submit Form" style="cursor: pointer;" />
-                                                    {!! Form::close() !!}
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>

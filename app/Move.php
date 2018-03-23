@@ -18,9 +18,14 @@ class Move extends Model
         'active'
     ];
 
-    public function Store()
+    public function FromStore()
     {
-        return $this->belongsTo('App\Store');
+        return $this->belongsTo('App\Store','from_store_id');
+    }
+
+    public function ToStore()
+    {
+        return $this->belongsTo('App\Store','to_store_id');
     }
 
     public function Area()

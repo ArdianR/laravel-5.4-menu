@@ -24,9 +24,10 @@
         <!-- END PAGE HEADER-->
         <p><b>Regional : </b>{{ $area->name }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Total Toko : </b>{{ $store->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Uploaded : </b>{{ $pop->where('status_id',1)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Rejected : </b>{{ $pop->where('status_id',2)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Approved : </b>{{ $pop->where('status_id',3)->count() }}</p>
+        <b>Request POP: </b>{{ $pop->where('status_id',1)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Request Move: </b>{{ $pop->where('status_id',6)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>POP Done : </b>{{ $pop->where('status_id',5)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Move Done : </b>{{ $pop->where('status_id',12)->count() }}</p>
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
@@ -103,7 +104,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="">
+                                                    <a href="{{action('PopController@create33', $store->id)}}">
                                                         <i class="fa fa-eye"></i> Move
                                                     </a>
                                                 </li>

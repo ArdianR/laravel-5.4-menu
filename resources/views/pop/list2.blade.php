@@ -33,17 +33,14 @@
                             <thead>
                                 <tr>
                                     <th class="all">No</th>
-{{--                                     <th class="none">Periode</th>
-                                    <th class="none">User</th>
-                                    <th class="none">Group</th> --}}
-                                    <th class="none">Area</th>
+                                    <th class="desktop">Area</th>
                                     <th class="desktop">Dealer ID</th>
                                     <th class="desktop">Store</th>
-                                    <th class="desktop">Posisi</th>
-                                    <th class="desktop">Ukuran</th>
+                                    <th class="none">Posisi</th>
+                                    <th class="none">Ukuran</th>
                                     <th class="none">Note</th>
                                     <th class="desktop">Status</th>
-                                    <th class="desktop">Created Date</th>
+                                    <th class="none">Created Date</th>
                                     <th class="all">Action</th>
                                 </tr>
                             </thead>
@@ -51,9 +48,6 @@
                                 @foreach ($pop as $pop)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-{{--                                     <td>{{ $pop->periode}}</td>
-                                    <td>{{ $pop->user->name }}</td>
-                                    <td>{{ $pop->group->name }}</td> --}}
                                     <td>{{ $pop->area->name }}</td>
                                     <td>{{ $pop->store->dealer_id }}</td>
                                     <td>{{ $pop->store->name }}</td>
@@ -103,7 +97,7 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right">
                                                 <li>
-                                                    <a href="{{action('PopController@show4',$pop->id)}}">
+                                                    <a href="{{action('PopController@show22',$pop->id)}}">
                                                         <i class="fa fa-eye"></i> Show
                                                     </a>
                                                 </li>

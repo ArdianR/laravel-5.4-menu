@@ -15,4 +15,9 @@ class DetailMove extends Model
         'qty'
     ];
 
+    public function Product()
+    {
+        return $this->belongsTo('App\Product');
+    }
+
 }

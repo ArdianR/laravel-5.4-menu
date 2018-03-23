@@ -17,6 +17,11 @@ use Auth;
 use Illuminate\Support\Facades\Storage;
 use File;
 use DB;
+use App\ProductStore;
+use App\Move;
+use App\DetailMove;
+use App\PhotoMove;
+
 
 class PopController extends Controller
 {
@@ -61,47 +66,59 @@ class PopController extends Controller
             ->with('i');
     }
 
-    // public function index4() // for move group
-    // {
-    //     $detailuser = User::find(Auth::id())->detailuser;
-    //     $area = Area::find($detailuser->area_id);
-    //     $store = Store::where('area_id','=',$detailuser->area_id)->with('area','pop')->get();
-
-    //     // dd($area);exit;
-    //     // $pop = Pop::where('area_id','=',$detailuser->area_id)->get();
-    //     // $alls = DB::table('pop')
-    //     // ->leftjoin('detail_pop', 'pop.id', '=', 'detail_pop.pop_id')
-    //     // ->leftjoin('product', 'detail_pop.product_id', '=', 'product.id')
-    //     // ->where('area_id', $detailuser->area_id)
-    //     // ->select('product.id as id','product.name as name', DB::raw("sum(detail_pop.qty) as sum"))
-    //     // ->groupBy('product.id','product.name')
-    //     // ->get();
-    //     return view('pop.index4',compact('store','area'))
-    //         ->with('i');
-    // }
-
     public function list2() // list pop for hq group
     {
-        $users = Auth::user()->detailuser()->get();
-        $pop = Pop::orderBy('created_at', 'desc')->where('status_id', '!=', 10)->where('status_id', '!=', 2)->with('area','group','status','store','user')->get();
+        //$users = Auth::user()->detailuser()->get();
+        $pop = Pop::orderBy('created_at', 'desc')->with('area','group','status','store','user')->get();
         return view('pop.list2',compact('pop'))
+            ->with('i');
+    }
+
+    public function list22() // list pop for hq group
+    {
+        $move = Move::orderBy('created_at', 'desc')
+            ->where('status_id','!=',8)
+            ->where('status_id','!=',9)
+            ->where('status_id','!=',11)
+            ->where('status_id','!=',12)
+            ->with('area','fromstore','tostore','status')->get();
+        return view('pop.list22',compact('move'))
             ->with('i');
     }
 
     public function list3() // list pop for hr group
     {
-        $detailuser = User::find(Auth::id())->detailuser;
-        $area = Area::find($detailuser->area_id);
-        $store = Store::where('area_id','=',$detailuser->area_id)->get();
-        $pop = Pop::where('area_id','=',$detailuser->area_id)->with('user','group','area','store','status')->orderBy('created_at', 'desc')->get();
+        $store = Store::where('area_id','=',Auth::user()->detailuser->area_id)->get();
+        $pop = Pop::where('area_id','=',Auth::user()->detailuser->area_id)->with('user','group','area','store','status')->orderBy('created_at', 'desc')->get();
+        // $move = Move::where('area_id','=',Auth::user()->detailuser->area_id)->with('user','group','area','store','status')->orderBy('created_at', 'desc')->get();
         $alls = DB::table('pop')
         ->leftjoin('detail_pop', 'pop.id', '=', 'detail_pop.pop_id')
         ->leftjoin('product', 'detail_pop.product_id', '=', 'product.id')
-        ->where('area_id', $detailuser->area_id)
+        ->where('area_id', Auth::user()->detailuser->area_id)
         ->select('product.id as id','product.name as name', DB::raw("sum(detail_pop.qty) as sum"))
         ->groupBy('product.id','product.name')
         ->get();
+
         return view('pop.list3',compact('alls','store','area','pop'))
+            ->with('i');
+    }
+
+    public function list33() // list pop for hr group
+    {
+        $store = Store::where('area_id','=',Auth::user()->detailuser->area_id)->get();
+        $move = Move::where('area_id','=',Auth::user()->detailuser->area_id)->with('user')->orderBy('created_at', 'desc')->get();
+        // dd($move);
+
+
+        // $alls = DB::table('pop')
+        // ->leftjoin('detail_pop', 'pop.id', '=', 'detail_pop.pop_id')
+        // ->leftjoin('product', 'detail_pop.product_id', '=', 'product.id')
+        // ->where('area_id', Auth::user()->detailuser->area_id)
+        // ->select('product.id as id','product.name as name', DB::raw("sum(detail_pop.qty) as sum"))
+        // ->groupBy('product.id','product.name')
+        // ->get();
+
+        return view('pop.list33',compact('store','move'))
             ->with('i');
     }
 
@@ -115,17 +132,27 @@ class PopController extends Controller
         return ('oke');
     }
 
-    public function create3($id) // for hr group
+    public function create3($id)
     {
-        // $detailuser = DetailUser::where('user_id',Auth::id())->first();
-        // $area = Area::all();
-        $store_id = $id;
+        $id;
         $store = Store::all();
         $product = Product::all();
-        // $group = Group::all();
-        return view('pop.create3',compact('product','store_id','store'))
+        return view('pop.create3',compact('product','id','store'))
             ->with('i');
     }
+
+    public function create33($id)
+    {
+        $from = Store::find($id);
+        $product = DB::table('product_store')
+        ->leftjoin('product', 'product_store.product_id', '=', 'product.id')
+        ->where('store_id', $id)
+        ->get();
+        $store2 = ProductStore::where('store_id',$id)->get();
+        $store = Store::where('area_id',Auth::user()->detailuser->area_id)->get();
+        return view('pop.create33',compact('from','product','store2','store'))
+            ->with('i');
+    }    
 
     public function createArea()
     {
@@ -146,69 +173,80 @@ class PopController extends Controller
     }
 
     public function store3(Request $request) // for hr group
-    {
+    { 
         $this->validate($request, [
-            'periode' => 'required|integer',
+            'periode_id' => 'required|integer',
             'user_id' => 'required|integer',
             'area_id' => 'required|integer',
-            'group_id' => 'required|integer',
             'store_id' => 'required|integer',
             'posisi' => 'required|integer',
             'ukuran' => 'required|integer',
-            'note' => '',
-            'status_id' => 'required|integer',
             'active' => 'required|boolean',
-            'type' => 'required|integer',
-            'photo' => 'required',
-            'product_id' => 'required',
-            'qty' => 'required'
+            'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'product_id.*' => 'required|different:product_id',
+            'qty' => 'required|array:integer'
         ]);
-        $pop = new Pop;
-        $pop->periode = $request->periode;
-        $pop->user_id = $request->user_id;
-        $pop->area_id = $request->area_id;
-        $pop->group_id = $request->group_id;
-        $pop->store_id = $request->store_id;
-        $pop->posisi = $request->posisi;
-        $pop->ukuran = $request->ukuran;
-        $pop->note = $request->note;
-        $pop->status_id = $request->status_id;
-        $pop->active = $request->active;
+        $pop = Pop::create($request->all());
         if ($pop->save())
         {
-            $id = $pop->id;
             $input = $request->all();
             for ($i=0; $i < count($input['product_id']); ++$i)
             {
                 $detailpop= new DetailPop;
-                $detailpop->pop_id = $id;
+                $detailpop->pop_id = $pop->id;
                 $detailpop->product_id = $input['product_id'][$i];
                 $detailpop->qty= $input['qty'][$i];
                 $detailpop->save();  
             }
         }
-
         if ($request->hasFile('photo'))
         {
-            $id = $pop->id;
-            $store_id = $pop->store_id;
-            $input = $request->all();
-
             foreach ($request->photo as $photo)
             {
-                $imgPath = 'images/'.$store_id;
+                $imgPath = 'images/'.$request->store_id;
                 Storage::makeDirectory($imgPath, $mode = 0775, true);
                 $imgDestinationPath = $imgPath.'';
                 $filename = $photo->store($imgDestinationPath);
                 PhotoPop::create([
-                    'pop_id' => $id,
-                    'type' => $request->type,
+                    'pop_id' => $pop->id,
+                    'type' => 1,
                     'photo' => $filename
                 ]);
             }
         }
         return redirect()->action('PopController@index3')
             ->with('success','created successfully');
+    }
+
+    public function store33(Request $request)
+    {
+        $this->validate($request, [
+            'from_store_id' => 'required|integer',
+            'user_id' => 'required|integer',
+            'area_id' => 'required|integer',
+            'note' => 'required|string',
+            'status_id' => 'required|integer',
+            'to_store_id' => 'required|integer',
+            'product_id.*' => 'required|different:product_id',
+            'qty' => 'required|array:integer',
+            'active' => 'required|boolean'
+        ]);
+        $move = Move::create($request->all());
+        if($move->save())
+        {
+            $id = $move->id;
+            $input = $request->all();
+            for ($i=0; $i < count($input['product_id']); ++$i)
+            {
+                $detailmove= new DetailMove;
+                $detailmove->move_id = $id;
+                $detailmove->product_id = $input['product_id'][$i];
+                $detailmove->qty= $input['qty'][$i];
+                $detailmove->save();  
+            }
+        }
+        return redirect()->action('PopController@list3')
+                        ->with('success','created successfully');
     }
 
     /**
@@ -240,7 +278,6 @@ class PopController extends Controller
 
     public function show3($id) // show pop for hr group
     {
-        
         $pop = Pop::find($id);
         $photopop = PhotoPop::where('pop_id',$id)->get();
         $detailpop = DetailPop::where('pop_id',$id)->get();
@@ -252,17 +289,35 @@ class PopController extends Controller
             ->with('i');
     }
 
-    public function show4($id)
+    public function show33($id) // show pop for hr group
     {
-        
+        $move = Move::find($id);
+        $detailmove = DetailMove::where('move_id',$id)->with('product')->get();
+        // $photopop = PhotoPop::where('pop_id',$id)->get();
+        // dd($detailmove);
+
+        // $area = Area::all();
+        // $store = Store::all();
+        // $status = Status::all();
+        // $group = Group::all();
+        return view('pop.show33',compact('move','detailmove'))
+            ->with('i');
+    }
+
+    public function show22($id)
+    {
         $pop = Pop::find($id);
-        $photopop = PhotoPop::where('pop_id',$id)->get();
         $detailpop = DetailPop::where('pop_id',$id)->get();
-        $area = Area::all();
-        $store = Store::all();
-        $status = Status::all();
-        $group = Group::all();
-        return view('pop.show4',compact('detailpop','pop','area','group','store','status','photopop'))
+        return view('pop.show22',compact('detailpop','pop'))
+            ->with('i');
+    }
+
+    public function show222($id)
+    {
+        $move = Move::find($id);
+        $detailmove = DetailMove::where('move_id',$id)->get();
+        $photomove = PhotoMove::where('move_id',$id)->get();
+        return view('pop.show222',compact('detailmove','move','photomove'))
             ->with('i');
     }
 
@@ -290,9 +345,21 @@ class PopController extends Controller
             ->with('i');
     }
 
+    public function edit33($id)
+    {
+        $move = Move::find($id);
+       // $photomove = PhotoMove::where('move_id',$id)->get();
+        $detailmove = DetailMove::where('move_id',$id)->get();
+        // $area = Area::all();
+        $store = Store::all();
+        // $status = Status::all();
+        // $group = Group::all();
+        return view('pop.edit33',compact('detailmove','move','area','group','store','status','photopop'))
+            ->with('i');
+    }
+
     public function edit4($id)
     {
-        dd('oke');
         $pop = Pop::find($id);
         $photopop = PhotoPop::where('pop_id',$id)->get();
         $detailpop = DetailPop::where('pop_id',$id)->get();
@@ -300,7 +367,7 @@ class PopController extends Controller
         $store = Store::all();
         $status = Status::all();
         $group = Group::all();
-        return view('pop.edit3',compact('detailpop','pop','area','group','store','status','photopop'))
+        return view('pop.edit4',compact('detailpop','pop','area','group','store','status','photopop'))
             ->with('i');
     }
 
@@ -319,13 +386,13 @@ class PopController extends Controller
     public function update3(Request $request, $id)
     {
         $this->validate($request, [
-            'photo' => 'required'
+            'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $imgPath = 'images/'.$request->store_id;
-        File::deleteDirectory($imgPath);
-        PhotoPop::where('pop_id',$id)->delete();
-        if ($request->hasFile('photo'))
+        if ($request->type == 1)
         {
+            $imgPath = 'images/'.$request->store_id;
+            File::deleteDirectory($imgPath);
+            PhotoPop::where('pop_id',$id)->delete();
             foreach ($request->photo as $photo)
             {
                 $imgPath = 'images/'.$request->store_id;
@@ -333,13 +400,91 @@ class PopController extends Controller
                 $imgDestinationPath = $imgPath.'';
                 $filename = $photo->store($imgDestinationPath);
                 PhotoPop::create([
-                    'pop_id' => $request->pop_id,
+                    'pop_id' => $id,
+                    'type' => $request->type,
+                    'photo' => $filename
+                ]);
+            }
+            $pop = Pop::where('id',$id)->update(['status_id' => 1]);
+        }
+        if ($request->type == 2)
+        {
+            if ($request->hasFile('photo')) {
+                File::delete($request);
+            }
+            PhotoPop::where('pop_id',$id)->where('type',2)->delete();
+            foreach ($request->photo as $photo)
+            {
+                $imgPath = 'images/'.$request->store_id;
+                $imgDestinationPath = $imgPath.'';
+                $filename = $photo->store($imgDestinationPath);
+                PhotoPop::create([
+                    'pop_id' => $id,
+                    'type' => $request->type,
+                    'photo' => $filename
+                ]);
+            }
+            $pop = Pop::where('id',$id)->update(['status_id' => 4]);
+        }
+        return redirect()->action('PopController@list3')
+            ->with('success','update successfully');
+    }
+
+    public function update33(Request $request, $id)
+    {
+        if ($request->status == 8) {
+            $move = Move::where('id',$id)->update([
+                'status_id' => 7,
+                'to_store_id' => $request->to_store_id,
+            ]);          
+        }
+        if ($request->status == 9) {
+            $this->validate($request, [
+                'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            foreach ($request->photo as $photo)
+            {
+                $imgPath = 'images/'.$request->from_store_id.$request->to_store_id;
+                Storage::makeDirectory($imgPath, $mode = 0775, true);
+                $imgDestinationPath = $imgPath.'';
+                $filename = $photo->store($imgDestinationPath);
+                PhotoMove::create([
+                    'move_id' => $id,
+                    'type' => 1,
+                    'photo' => $filename
+                ]);
+            }
+            $move = Move::where('id',$id)->update(['status_id' => 10]);
+        }
+
+        return redirect()->action('PopController@list33')
+            ->with('success','update successfully');
+    }
+
+
+    public function update4(Request $request, $id)
+    {
+        $this->validate($request, [
+            'photo' => 'required'
+        ]);
+        if ($request->hasFile('photo'))
+        {
+            $files = $request->photo2;
+            File::delete($files);
+            PhotoPop::where('pop_id',$id)->where('type',2)->delete();
+            foreach ($request->photo as $photo)
+            {
+                $imgPath = 'images/'.$request->store_id;
+                $imgDestinationPath = $imgPath.'';
+                $filename = $photo->store($imgDestinationPath);
+                PhotoPop::create([
+                    'pop_id' => $id,
                     'type' => $request->type,
                     'photo' => $filename
                 ]);
             }
         }
-        $pop = Pop::where('id',$id)->update(['status_id' => 1]);
+        $pop = Pop::where('id',$id)->update(['status_id' => 11]);
         return redirect()->action('PopController@index3')
             ->with('success','update successfully');
     }
@@ -357,28 +502,74 @@ class PopController extends Controller
 
     public function approve(Request $request, $id) // approve & reject only for hq group
     {
-        if ($request->approve) {
+        if ($request->approve_pop) {
             $pop = Pop::findOrFail($id)->update([
-                'status_id' => '9',
+                'status_id' => '3',
                 'note' => $request->note,
             ]);
             return redirect()->action('PopController@list2')
-                ->with('success','Approve successfully');
-        } elseif ($request->done) {
-            $pop = Pop::findOrFail($id)->update([
-                'status_id' => '10',
-                'note' => $request->note,
-            ]);
-            return redirect()->action('PopController@list2')
-                ->with('success','Approve successfully');
-        } else {
+                ->with('success','Approve POP successfully');              
+        } 
+        if ($request->reject_pop) {
             $pop = Pop::findOrFail($id)->update([
                 'status_id' => '2',
                 'note' => $request->note,
             ]);
             return redirect()->action('PopController@list2')
-                ->with('warning','Reject successfully');
+                ->with('warning','Reject POP successfully');
+        } 
+        if ($request->pop_done) {
+            $pop = Pop::findOrFail($id)->update([
+                'status_id' => '6',
+                'note' => $request->note,
+            ]);
+            return redirect()->action('PopController@list2')
+                ->with('success','POP Done successfully');
         }
+        if ($request->reject_pp) {
+            $pop = Pop::findOrFail($id)->update([
+                'status_id' => '5',
+                'note' => $request->note,
+            ]);
+            return redirect()->action('PopController@list2')
+                ->with('success','Reject POP successfully');
+        } 
+        if ($request->approve_move) {
+            $move = Move::findOrFail($id)->update([
+                'status_id' => '9',
+                'note' => $request->note,
+            ]);
+            return redirect()->action('PopController@list22')
+                ->with('success','Approve POP successfully');
+        }
+        if ($request->reject_move) {
+            $move = Move::findOrFail($id)->update([
+                'status_id' => '8',
+                'note' => $request->note,
+            ]);
+            return redirect()->action('PopController@list22')
+                ->with('warning','Reject POP successfully');
+        }
+        if ($request->approve_upload) {
+            $move = Move::findOrFail($id)->update([
+                'status_id' => '12',
+                'note' => $request->note,
+            ]);
+            return redirect()->action('PopController@list22')
+                ->with('success','Approve POP successfully');
+        }
+        if ($request->reject_upload) {
+            $move = Move::findOrFail($id)->update([
+                'status_id' => '11',
+                'note' => $request->note,
+            ]);
+            return redirect()->action('PopController@list22')
+                ->with('warning','Reject POP successfully');
+        } 
+        //else {
+        //     return redirect()->action('PopController@list2');
+        // }
+
     }
 
     public function history3($id) // history  per store hr group
@@ -396,7 +587,7 @@ class PopController extends Controller
             ->with('i');
     }
 
-    public function history4($id) //  for hq group
+    public function history2($id) //  for hq group
     {
         $store = Store::findOrFail($id);
         $pop = Pop::where('store_id',$id)->where('status_id',10)->with('area','user','store','group','status')->get();
@@ -407,7 +598,7 @@ class PopController extends Controller
         ->select('product.id as id','product.name as name', DB::raw("sum(detail_pop.qty) as sum"))
         ->groupBy('product.id','product.name')
         ->get();
-        return view('pop.history4',compact('pop','store','alls'))
+        return view('pop.history2',compact('pop','store','alls'))
             ->with('i');
     }
 

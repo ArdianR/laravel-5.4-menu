@@ -84,24 +84,44 @@
                                     <td>{{ $move->tostore->name }}</td>
                                     <td>{{ $move->note }}</td>
                                     <td>
-                                        @if ($move->status_id == 1)
+                                        @if ($move->status_id == 7)
                                             <span class="badge badge-info">
                                                 {{ $move->status->name }}
                                             </span>
-                                        @elseif ($move->status_id == 2)
+                                        @elseif ($move->status_id == 8)
                                             <span class="badge badge-warning">
-                                                {{ $move->status->name }}
-                                            </span>
-                                        @elseif ($move->status_id == 3)
-                                            <span class="badge badge-success">
                                                 {{ $move->status->name }}
                                             </span>
                                         @elseif ($move->status_id == 9)
                                             <span class="badge badge-success">
                                                 {{ $move->status->name }}
                                             </span>
-                                        @else
-                                            <span class="badge badge-danger">
+                                        @elseif ($move->status_id == 10)
+                                            <span class="badge badge-success">
+                                                {{ $move->status->name }}
+                                            </span>
+                                        @elseif ($move->status_id == 11)
+                                            <span class="badge badge-success">
+                                                {{ $move->status->name }}
+                                            </span>
+                                        @elseif ($move->status_id == 11)
+                                            <span class="badge badge-success">
+                                                {{ $move->status->name }}
+                                            </span>
+                                        @elseif ($move->status_id == 12)
+                                            <span class="badge badge-success">
+                                                {{ $move->status->name }}
+                                            </span>
+                                        @elseif ($move->status_id == 13)
+                                            <span class="badge badge-success">
+                                                {{ $move->status->name }}
+                                            </span>
+                                        @elseif ($move->status_id == 14)
+                                            <span class="badge badge-success">
+                                                {{ $move->status->name }}
+                                            </span>
+                                        @elseif ($move->status_id == 15)
+                                            <span class="badge badge-success">
                                                 {{ $move->status->name }}
                                             </span>
                                         @endif
@@ -114,7 +134,7 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right">
                                                 <li>
-                                                    @if ($move->status_id == 8 || $move->status_id == 11 || $move->status_id == 14)
+                                                    @if ($move->status_id == 8 || $move->status_id == 11 || $move->status_id == 13)
                                                     <a href="{{action('PopController@edit33',$move->id)}}">
                                                         <i class="fa fa-eye"></i> Edit
                                                     </a>

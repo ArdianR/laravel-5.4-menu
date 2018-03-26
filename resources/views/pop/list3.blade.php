@@ -25,9 +25,7 @@
         <p><b>Regional : </b>{{ Auth::user()->detailuser->area->name }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Total Toko : </b>{{ $store->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Request POP: </b>{{ $pop->where('status_id',1)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Request Move: </b>{{ $pop->where('status_id',6)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>POP Done : </b>{{ $pop->where('status_id',5)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Move Done : </b>{{ $pop->where('status_id',12)->count() }}</p>
+        <b>POP Done : </b>{{ $pop->where('status_id',6)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
@@ -114,12 +112,16 @@
                                             <span class="badge badge-success">
                                                 {{ $pop->status->name }}
                                             </span>
-                                        @elseif ($pop->status_id == 9)
+                                        @elseif ($pop->status_id == 4)
                                             <span class="badge badge-success">
                                                 {{ $pop->status->name }}
                                             </span>
-                                        @else
-                                            <span class="badge badge-danger">
+                                        @elseif ($pop->status_id == 5)
+                                            <span class="badge badge-success">
+                                                {{ $pop->status->name }}
+                                            </span>
+                                        @elseif ($pop->status_id == 6)
+                                            <span class="badge badge-success">
                                                 {{ $pop->status->name }}
                                             </span>
                                         @endif
@@ -139,11 +141,10 @@
                                                     <a href="{{action('PopController@edit3',$pop->id)}}">
                                                         <i class="fa fa-eye"></i> Upload
                                                     </a>
-                                                    @else
+                                                    @endif
                                                     <a href="{{action('PopController@show3',$pop->id)}}">
                                                         <i class="fa fa-eye"></i> Show
                                                     </a>
-                                                    @endif
                                                 </li>
                                             </ul>
                                         </div>

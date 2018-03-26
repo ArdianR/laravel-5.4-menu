@@ -34,9 +34,18 @@
                     </a>
                 </li>
                 <li class="nav-item  ">
-                    <a href="{{ url('/user') }}" class="nav-link ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
                         <span class="title">User</span>
+                        <span class="arrow"></span>
                     </a>
+                    <ul class="sub-menu">
+                        <li class="nav-item ">
+                            <a href="{{ url('/user') }}" class="nav-link "> User </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="" class="nav-link "> Active </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item  ">
                     <a href="{{ url('/status') }}" class="nav-link ">

@@ -94,6 +94,8 @@ Route::group(['middleware' => 'admin'], function() {
 	Route::delete('/store/productDestroy/{id}','StoreController@productDestroy')->name('store.productDestroy');
 	Route::resource('/pop','PopController');
 });
+
+
 /*end route group admin*/
 
 

@@ -40,6 +40,13 @@ class UserController extends Controller
         return view('user.create',compact('group', 'area'));
     }
 
+    public function create2()
+    {
+        $group = Group::all();
+        $area = Area::all();
+        return view('user.create',compact('group', 'area'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -61,20 +61,20 @@
                                     @endforeach
                                 </div>
                             </div>
-                            @if ($pop->status_id == 4 || $pop->status_id == 6)
                             <div class="form-group">
                                 <label class="control-label col-md-3">Foto Pemasangan
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
+                                    @if ($pop->status_id == 4 || $pop->status_id == 6)
                                     @foreach ($pop->photopop->where('type',2) as $photopop)
                                     <a data-fancybox class="thumbnail" href="{{ url(asset($photopop->photo)) }}">
                                         <img src="{{ url(asset($photopop->photo)) }}" class="img-responsiv" />
                                     </a>
                                     @endforeach
+                                    @endif
                                 </div>
                             </div>
-                            @endif
                             <div class="form-group">
                                 <label class="control-label col-md-3">Posisi
                                     <span class="required"> * </span>
@@ -110,7 +110,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-9">

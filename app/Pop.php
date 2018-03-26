@@ -45,10 +45,12 @@ class Pop extends Model
         return $this->belongsTo('App\Status');
     }
 
-    // public function DetailPop()
-    // {
-    //     return $this->belongsTo('App\DetailPop');
-    // }
+    public function DetailPop()
+    {
+        return $this->hasMany('App\DetailPop');
+    }
+
+    
 
     public function PhotoPop()
     {

@@ -30,12 +30,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($store2 as $store3)
-                                    <tr>
-                                        <td>{{ ++$i }}</td>
-                                        <td>{{ $store3->product->name }}</td>
-                                        <td>{{ $store3->qty }}</td>
-                                    </tr>
+                                    @foreach ($pops as $pop)
+                                        
+                                        <tr>
+                                            <td>{{ ++$i }}</td>
+                                            @foreach ($pop->detailpop as $detailpop)
+                                            <td>{{ $detailpop->product->name }}</td>
+                                            <td>{{ $detailpop->qty }}</td>
+                                            @endforeach
+                                        </tr>
+                                        
                                     @endforeach
                                 </tbody>                                     
                          </table>   
@@ -112,7 +116,11 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::select('product_id[]', $product->pluck('name','id'), null, ['class'=>'form-control','id'=>'product','required'=>'true']) }}
+                                    <select id="product" name="product_id[]" class="form-control" required autofocus>
+                                    @foreach($pops as $pop)
+                                        <option value="{{$detailpop->product_id}}">{{$detailpop->product->name}} = ({{$detailpop->qty}})</option>
+                                    @endforeach
+                                    </select>
                                 </div>
                                 <label class="control-label col-md-1">Qty
                                     <span class="required">*</span>
@@ -154,7 +162,7 @@
         })
     });
 </script>
-<script type="text/javascript" >
+{{-- <script type="text/javascript" >
     $(document).ready(function(){
         var i=1;  
             $('#add').click(function(){  
@@ -166,5 +174,5 @@
                $('#row'+button_id+'').remove();  
             });
         });  
-</script>
+</script> --}}
 @endsection

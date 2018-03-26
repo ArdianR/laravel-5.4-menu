@@ -43,4 +43,9 @@ class Move extends Model
         return $this->belongsTo('App\Status');
     }
 
+    public function DetailMove()
+    {
+        return $this->hasMany('App\DetailMove');
+    }
+
 }

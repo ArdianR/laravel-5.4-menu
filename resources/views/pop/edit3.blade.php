@@ -56,7 +56,7 @@
                                 </label>
                                 <div class="col-md-4">
                                     @if ($pop->status_id == 2)
-                                    {!! Form::hidden('type', 1, array('class' => 'form-control')) !!}
+                                    {!! Form::hidden('type', 1) !!}
                                     <input type="file" name="photo[]" class="form-control" multiple="true" required="true" />
                                     @else
                                     @foreach ($pop->photopop->where('type',1) as $photopop)
@@ -67,17 +67,17 @@
                                     @endif
                                 </div>
                             </div>
-                            @if ($pop->status_id == 3 || $pop->status_id == 5)
                             <div class="form-group">
                                 <label class="control-label col-md-3">Foto Pemasangan
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {!! Form::hidden('type', 2, array('class' => 'form-control')) !!}
+                                    @if ($pop->status_id == 3 || $pop->status_id == 5)
+                                    {!! Form::hidden('type', 2) !!}
                                     <input type="file" name="photo[]" class="form-control" multiple="true" required="true" />
+                                    @endif
                                 </div>
                             </div>
-                            @endif
                             <div class="form-group">
                                 <label class="control-label col-md-3">Posisi
                                     <span class="required"> * </span>

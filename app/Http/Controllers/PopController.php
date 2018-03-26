@@ -55,6 +55,7 @@ class PopController extends Controller
         $area = Area::find(Auth::user()->detailuser->area_id);
         $store = Store::where('area_id',Auth::user()->detailuser->area_id)->with('area','pop')->get();
         $pop = Pop::where('area_id',Auth::user()->detailuser->area_id)->get();
+        $move = Move::where('area_id',Auth::user()->detailuser->area_id)->get();
         $alls = DB::table('pop')
         ->leftjoin('detail_pop', 'pop.id', '=', 'detail_pop.pop_id')
         ->leftjoin('product', 'detail_pop.product_id', '=', 'product.id')
@@ -62,7 +63,7 @@ class PopController extends Controller
         ->select('product.id as id','product.name as name', DB::raw("sum(detail_pop.qty) as sum"))
         ->groupBy('product.id','product.name')
         ->get();
-        return view('pop.index3',compact('alls','store','area','pop'))
+        return view('pop.index3',compact('alls','store','area','pop','move'))
             ->with('i');
     }
 
@@ -77,10 +78,10 @@ class PopController extends Controller
     public function list22() // list pop for hq group
     {
         $move = Move::orderBy('created_at', 'desc')
-            ->where('status_id','!=',8)
-            ->where('status_id','!=',9)
-            ->where('status_id','!=',11)
-            ->where('status_id','!=',12)
+            // ->where('status_id','!=',8)
+            // ->where('status_id','!=',9)
+            // ->where('status_id','!=',11)
+            // ->where('status_id','!=',12)
             ->with('area','fromstore','tostore','status')->get();
         return view('pop.list22',compact('move'))
             ->with('i');
@@ -135,7 +136,7 @@ class PopController extends Controller
     public function create3($id)
     {
         $id;
-        $store = Store::all();
+        $store = Store::where('area_id',Auth::user()->detailuser->area_id)->get();
         $product = Product::all();
         return view('pop.create3',compact('product','id','store'))
             ->with('i');
@@ -144,13 +145,15 @@ class PopController extends Controller
     public function create33($id)
     {
         $from = Store::find($id);
-        $product = DB::table('product_store')
-        ->leftjoin('product', 'product_store.product_id', '=', 'product.id')
-        ->where('store_id', $id)
-        ->get();
-        $store2 = ProductStore::where('store_id',$id)->get();
+        $pops = Pop::where('store_id',$id)->where('status_id',6)->get();
+
+        // $product = DB::table('product_store')
+        // ->leftjoin('product', 'product_store.product_id', '=', 'product.id')
+        // ->where('store_id', $id)
+        // ->get();
+        // $store2 = ProductStore::where('store_id',$id)->get();
         $store = Store::where('area_id',Auth::user()->detailuser->area_id)->get();
-        return view('pop.create33',compact('from','product','store2','store'))
+        return view('pop.create33',compact('from','pops','store2','store'))
             ->with('i');
     }    
 
@@ -182,7 +185,7 @@ class PopController extends Controller
             'posisi' => 'required|integer',
             'ukuran' => 'required|integer',
             'active' => 'required|boolean',
-            'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'product_id.*' => 'required|different:product_id',
             'qty' => 'required|array:integer'
         ]);
@@ -203,10 +206,10 @@ class PopController extends Controller
         {
             foreach ($request->photo as $photo)
             {
-                $imgPath = 'images/'.$request->store_id;
+                $imgPath = 'images/pop/'.$pop->id;
                 Storage::makeDirectory($imgPath, $mode = 0775, true);
-                $imgDestinationPath = $imgPath.'';
-                $filename = $photo->store($imgDestinationPath);
+                $filename = $photo->store($imgPath);
+                $filename = $photo->store($imgPath);
                 PhotoPop::create([
                     'pop_id' => $pop->id,
                     'type' => 1,
@@ -214,8 +217,8 @@ class PopController extends Controller
                 ]);
             }
         }
-        return redirect()->action('PopController@index3')
-            ->with('success','created successfully');
+        return redirect()->action('PopController@list3')
+            ->with('success','created pop successfully');
     }
 
     public function store33(Request $request)
@@ -294,12 +297,6 @@ class PopController extends Controller
         $move = Move::find($id);
         $detailmove = DetailMove::where('move_id',$id)->with('product')->get();
         $photomove = PhotoMove::where('move_id',$id)->get();
-        // dd($detailmove);
-
-        // $area = Area::all();
-        // $store = Store::all();
-        // $status = Status::all();
-        // $group = Group::all();
         return view('pop.show33',compact('move','detailmove','photomove'))
             ->with('i');
     }
@@ -351,7 +348,7 @@ class PopController extends Controller
         $photomove = PhotoMove::where('move_id',$id)->get();
         $detailmove = DetailMove::where('move_id',$id)->get();
         // $area = Area::all();
-        $store = Store::all();
+        $store = Store::where('area_id',Auth::user()->detailuser->area_id)->get();
         // $status = Status::all();
         // $group = Group::all();
         return view('pop.edit33',compact('detailmove','move','area','group','store','status','photomove'))
@@ -386,19 +383,18 @@ class PopController extends Controller
     public function update3(Request $request, $id)
     {
         $this->validate($request, [
-            'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
         if ($request->type == 1)
         {
-            $imgPath = 'images/'.$request->store_id;
+            $imgPath = 'images/pop/'.$id;
             File::deleteDirectory($imgPath);
             PhotoPop::where('pop_id',$id)->delete();
             foreach ($request->photo as $photo)
             {
-                $imgPath = 'images/'.$request->store_id;
+                $imgPath = 'images/pop/'.$id;
                 Storage::makeDirectory($imgPath, $mode = 0775, true);
-                $imgDestinationPath = $imgPath.'';
-                $filename = $photo->store($imgDestinationPath);
+                $filename = $photo->store($imgPath);
                 PhotoPop::create([
                     'pop_id' => $id,
                     'type' => $request->type,
@@ -409,15 +405,15 @@ class PopController extends Controller
         }
         if ($request->type == 2)
         {
-            if ($request->hasFile('photo')) {
-                File::delete($request);
+            $file = PhotoPop::where('pop_id',$id)->where('type',2)->get();
+            foreach ($file as $file) {
+                Storage::delete($file->photo);
             }
             PhotoPop::where('pop_id',$id)->where('type',2)->delete();
             foreach ($request->photo as $photo)
             {
-                $imgPath = 'images/'.$request->store_id;
-                $imgDestinationPath = $imgPath.'';
-                $filename = $photo->store($imgDestinationPath);
+                $imgPath = 'images/pop/'.$id;
+                $filename = $photo->store($imgPath);
                 PhotoPop::create([
                     'pop_id' => $id,
                     'type' => $request->type,
@@ -433,6 +429,9 @@ class PopController extends Controller
     public function update33(Request $request, $id)
     {
         if ($request->status == 8) {
+            $this->validate($request, [
+                'to_store_id' => 'required|integer',
+            ]);
             $move = Move::where('id',$id)->update([
                 'status_id' => 7,
                 'to_store_id' => $request->to_store_id,
@@ -440,14 +439,18 @@ class PopController extends Controller
         }
         if ($request->status == 9) {
             $this->validate($request, [
-                'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             ]);
+            $file = PhotoMove::where('move_id',$id)->where('type',1)->get();
+            foreach ($file as $file) {
+                Storage::delete($file->photo);
+            }
+            PhotoMove::where('move_id',$id)->where('type',1)->delete();
             foreach ($request->photo as $photo)
             {
-                $imgPath = 'images/'.$request->from_store_id.$request->to_store_id;
+                $imgPath = 'images/move/'.$id;
                 Storage::makeDirectory($imgPath, $mode = 0775, true);
-                $imgDestinationPath = $imgPath.'';
-                $filename = $photo->store($imgDestinationPath);
+                $filename = $photo->store($imgPath);
                 PhotoMove::create([
                     'move_id' => $id,
                     'type' => 1,
@@ -460,22 +463,22 @@ class PopController extends Controller
             $this->validate($request, [
                 'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
-            if ($request->hasFile('photo')) {
-                File::delete($request);
+            $file = PhotoMove::where('move_id',$id)->where('type',2)->get();
+            foreach ($file as $file) {
+                Storage::delete($file->photo);
             }
             PhotoMove::where('move_id',$id)->where('type',2)->delete();
             foreach ($request->photo as $photo)
             {
-                $imgPath = 'images/'.$request->from_store_id.$request->to_store_id;
-                $imgDestinationPath = $imgPath.'';
-                $filename = $photo->store($imgDestinationPath);
+                $imgPath = 'images/move/'.$id;
+                $filename = $photo->store($imgPath);
                 PhotoMove::create([
                     'move_id' => $id,
                     'type' => 2,
                     'photo' => $filename
                 ]);
             }
-            $move = Move::where('id',$id)->update(['status_id' => 13]);
+            $move = Move::where('id',$id)->update(['status_id' => 14]);
         }
         return redirect()->action('PopController@list33')
             ->with('success','update successfully');
@@ -543,6 +546,26 @@ class PopController extends Controller
                 'status_id' => '6',
                 'note' => $request->note,
             ]);
+            // $detailpops = detailpop::where('pop_id',$id)->get();
+
+            // $productstore = ProductStore::where('store_id',$request->store_id)->get();
+            // if ($productstore->isEmpty()) {
+            //     foreach ($detailpops as $detailpop) {
+            //         $productstore = new ProductStore;
+            //         $productstore->store_id = $request->store_id;
+            //         $productstore->product_id = $detailpop->product_id;
+            //         $productstore->qty= $detailpop->qty;
+            //         $productstore->save(); 
+            //         dd('test');   
+            //     }
+            // }
+            // dd('ada');
+            
+           // dd($detailpops);
+            // foreach ($detailpops as $detailpop) {
+            //     // dd($detailpop->product_id,$detailpop->qty);    
+            // }
+            // dd($request->store_id);
             return redirect()->action('PopController@list2')
                 ->with('success','POP Done successfully');
         }
@@ -560,7 +583,7 @@ class PopController extends Controller
                 'note' => $request->note,
             ]);
             return redirect()->action('PopController@list22')
-                ->with('success','Approve POP successfully');
+                ->with('success','Approve Move successfully');
         }
         if ($request->reject_move) {
             $move = Move::findOrFail($id)->update([
@@ -568,7 +591,7 @@ class PopController extends Controller
                 'note' => $request->note,
             ]);
             return redirect()->action('PopController@list22')
-                ->with('warning','Reject POP successfully');
+                ->with('warning','Reject Move successfully');
         }
         if ($request->approve_upload) {
             $move = Move::findOrFail($id)->update([
@@ -576,7 +599,7 @@ class PopController extends Controller
                 'note' => $request->note,
             ]);
             return redirect()->action('PopController@list22')
-                ->with('success','Approve POP successfully');
+                ->with('success','Approve Move successfully');
         }
         if ($request->reject_upload) {
             $move = Move::findOrFail($id)->update([
@@ -584,12 +607,31 @@ class PopController extends Controller
                 'note' => $request->note,
             ]);
             return redirect()->action('PopController@list22')
-                ->with('warning','Reject POP successfully');
+                ->with('warning','Reject Move successfully');
         } 
-        //else {
-        //     return redirect()->action('PopController@list2');
-        // }
-
+        if ($request->approve_bukti) {
+            // $product = Move::where('id',$id)->with('detailmove')->get();
+            // foreach ($product as $product) {
+            //     foreach ($product->detailmove as $detailmove) {
+            //         dd($detailmove->product_id);
+            //     }
+            // }
+            // dd($product);
+            $move = Move::findOrFail($id)->update([
+                'status_id' => '15',
+                'note' => $request->note,
+            ]);
+            return redirect()->action('PopController@list22')
+                ->with('success','Move Done successfully');
+        }
+        if ($request->reject_bukti) {
+            $move = Move::findOrFail($id)->update([
+                'status_id' => '13',
+                'note' => $request->note,
+            ]);
+            return redirect()->action('PopController@list22')
+                ->with('warning','Reject Move successfully');
+        } 
     }
 
     public function history3($id) // history  per store hr group

@@ -79,6 +79,14 @@
                                             <span class="badge badge-danger">
                                                 {{ $move->status->name }}
                                             </span>
+                                        @elseif($move->status_id == 14)
+                                            <span class="badge badge-danger">
+                                                {{ $move->status->name }}
+                                            </span>
+                                        @elseif($move->status_id == 15)
+                                            <span class="badge badge-danger">
+                                                {{ $move->status->name }}
+                                            </span>
                                         @endif
                                     </td>
                                     <td>{{ $move->created_at }}</td>

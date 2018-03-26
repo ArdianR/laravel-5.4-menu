@@ -79,12 +79,16 @@
                                             <span class="badge badge-success">
                                                 {{ $pop->status->name }}
                                             </span>
-                                        @elseif ($pop->status_id == 9)
+                                        @elseif ($pop->status_id == 4)
                                             <span class="badge badge-success">
                                                 {{ $pop->status->name }}
                                             </span>
-                                        @else
-                                            <span class="badge badge-danger">
+                                        @elseif ($pop->status_id == 5)
+                                            <span class="badge badge-success">
+                                                {{ $pop->status->name }}
+                                            </span>
+                                        @elseif ($pop->status_id == 6)
+                                            <span class="badge badge-success">
                                                 {{ $pop->status->name }}
                                             </span>
                                         @endif

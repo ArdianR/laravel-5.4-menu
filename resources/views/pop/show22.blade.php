@@ -55,27 +55,25 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    @foreach ($pop->photopop->where('type',1) as $photopop)
-                                    <a data-fancybox class="thumbnail" href="{{ url(asset($photopop->photo)) }}">
-                                        <img src="{{ url(asset($photopop->photo)) }}" class="img-responsiv" />
+                                    @foreach ($pop->photopop->where('type',1) as $photopop1)
+                                    <a data-fancybox class="thumbnail" href="{{ url(asset($photopop1->photo)) }}">
+                                        <img src="{{ url(asset($photopop1->photo)) }}" class="img-responsiv" />
                                     </a>
                                     @endforeach
                                 </div>
                             </div>
-                            @if ($pop->status_id !== 1 || $pop->status_id !== 2)
                             <div class="form-group">
                                 <label class="control-label col-md-3">Foto Pemasangan
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
                                     @foreach ($pop->photopop->where('type',2) as $photopop2)
-                                    <a data-fancybox class="thumbnail" href="{{ url(asset($photopop->photo)) }}">
+                                    <a data-fancybox class="thumbnail" href="{{ url(asset($photopop2->photo)) }}">
                                         <img src="{{ url(asset($photopop2->photo)) }}" class="img-responsiv" />
                                     </a>
                                     @endforeach
                                 </div>
                             </div>
-                            @endif
                             <div class="form-group">
                                 <label class="control-label col-md-3">Posisi
                                     <span class="required"> * </span>
@@ -110,13 +108,13 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            @if ($pop->status_id == 1 || $pop->status_id == 4)
+{{--                             @if ($pop->status_id == 1 || $pop->status_id == 4) --}}
                             <div class="form-group">
                                 <div class="col-md-12">
                                     {!! Form::textarea('note', null, array('placeholder' => 'Note','class' => 'form-control','required'=>'true')) !!}
                                 </div>
                             </div>
-                            @endif
+                            {{-- @endif --}}
                         </div>
                         <div class="form-actions">
                             <div class="row">

@@ -72,27 +72,25 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    @foreach ($photomove->where('type',1) as $photomove)
-                                    <a data-fancybox class="thumbnail" href="{{ url(asset($photomove->photo)) }}">
-                                        <img src="{{ url(asset($photomove->photo)) }}" class="img-responsiv" />
+                                    @foreach ($photomove->where('type',1) as $photomove1)
+                                    <a data-fancybox class="thumbnail" href="{{ url(asset($photomove1->photo)) }}">
+                                        <img src="{{ url(asset($photomove1->photo)) }}" class="img-responsiv" />
                                     </a>
                                     @endforeach
                                 </div>
                             </div>
-                            @if ($move->status_id == 13)
                             <div class="form-group">
                                 <label class="control-label col-md-3">Bukti Terima
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    @foreach ($photomove->where('type',2) as $photomove)
-                                    <a data-fancybox class="thumbnail" href="{{ url(asset($photomove->photo)) }}">
-                                        <img src="{{ url(asset($photomove->photo)) }}" class="img-responsiv" />
+                                    @foreach ($photomove->where('type',2) as $photomove2)
+                                    <a data-fancybox class="thumbnail" href="{{ url(asset($photomove2->photo)) }}">
+                                        <img src="{{ url(asset($photomove2->photo)) }}" class="img-responsiv" />
                                     </a>
                                     @endforeach
                                 </div>
                             </div>
-                            @endif
                             <table class="table table-striped table-bordered table-hover dt-responsive" width="100%">
                                 <thead>
                                     <tr>
@@ -121,6 +119,9 @@
                                     @elseif ($move->status_id == 10)
                                     <button type="submit" name="approve_upload" value="approve_upload" class="btn btn-primary">Approve</button>
                                     <button type="submit" name="reject_upload" value="reject_upload" class="btn btn-danger">Reject</button>
+                                    @elseif ($move->status_id == 14)
+                                    <button type="submit" name="approve_bukti" value="approve_bukti" class="btn btn-primary">Done</button>
+                                    <button type="submit" name="reject_bukti" value="reject_bukti" class="btn btn-danger">Reject</button>
                                     @endif
                                     <a href="{{action('PopController@list22')}}" class="btn grey-salsa btn-outline">Cancel</a>
                                 </div>

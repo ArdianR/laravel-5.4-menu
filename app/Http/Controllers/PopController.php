@@ -195,11 +195,24 @@ class PopController extends Controller
             $input = $request->all();
             for ($i=0; $i < count($input['product_id']); ++$i)
             {
-                $detailpop= new DetailPop;
+                $detailpop = new DetailPop;
                 $detailpop->pop_id = $pop->id;
                 $detailpop->product_id = $input['product_id'][$i];
-                $detailpop->qty= $input['qty'][$i];
-                $detailpop->save();  
+                $detailpop->qty = $input['qty'][$i];
+                $detailpop->save();
+                
+                // $find = ProductStore::where('store_id',$pop->store_id)->get();
+                // if ($find->isEmpty()) {
+                //     $productstore = new ProductStore;
+                //     $productstore->store_id = $pop->store_id;
+                //     $productstore->product_id = $input['product_id'][$i];
+                //     $productstore->qty= $input['qty'][$i];
+                //     $productstore->save();
+                // } else {
+                //     dd($request);
+                //     // $productstore = ProductStore::where('product_id',)
+                //     dd($find);
+                // }
             }
         }
         if ($request->hasFile('photo'))
@@ -542,10 +555,73 @@ class PopController extends Controller
                 ->with('warning','Reject POP successfully');
         } 
         if ($request->pop_done) {
-            $pop = Pop::findOrFail($id)->update([
-                'status_id' => '6',
-                'note' => $request->note,
-            ]);
+            // $pop = Pop::findOrFail($id)->update([
+            //     'status_id' => '6',
+            //     'note' => $request->note,
+            // ]);
+            
+            $detailpop = DetailPop::where('pop_id',$id)->get();
+            $hitung=$detailpop->count();
+            $store = ProductStore::where('store_id',$request->store_id)->get();
+            if ($store->isEmpty()) {
+                for($i=0;$i<$hitung;++$i){
+                    $productstore = new ProductStore;
+                    $productstore->store_id = $request->store_id;
+                    $productstore->product_id = $detailpop[$i]['product_id'];
+                    $productstore->qty = $detailpop[$i]['qty'];
+                    $productstore->save();
+                }
+            }else{
+                for($i=0;$i<$hitung;++$i){
+                    $store1 = ProductStore::where('store_id',$request->store_id)->where('product_id',$detailpop[$i]['product_id'])->get();
+                    if ($store1->isEmpty()) {
+                        $find = ProductStore::where('store_id',$request->store_id)->create([
+                            'store_id' => $request->store_id,
+                            'product_id' => $detailpop[$i]['product_id'],
+                            'qty' => $detailpop[$i]['qty']
+                        ]);
+                    } 
+
+                    if($store1->isNotEmpty()){
+                            foreach($store1 as $store2){
+                                $cekproduct=$store2->product_id; 
+                                $cekqty=$store2->qty;
+                                $total=$cekqty+$detailpop[$i]['qty'];                                                             
+                                $find = ProductStore::where('store_id',$request->store_id)->where('product_id',$cekproduct)->update([                                    
+                                     'qty' => $total
+                            ]);
+                    }
+                    
+
+                    //     for($i=0;$i<$hitung1;++$i){
+                    //         dd($hitung1);
+                    //         $stores1=$store1[$i]['qty'];
+                    //         $detailpops1=$detailpop[$i]['qty'];
+                    //         $total=$stores1+$detailpops1;
+
+                    //         $find1 = ProductStore::where('store_id',$request->store_id)->where('product_id',$detailpop[$i]['product_id'])->update([
+                    //             'qty' => $total
+                    //         ]);
+                    //     }
+
+                     }
+
+                }
+                
+                
+            }
+
+
+               
+            // dd($detailpop->product_id,$request->store_id);
+            // $productstore = new ProductStore;
+            // $productstore->store_id = $request->store_id;
+            // $productstore->product_id = $detailpop->product_id;
+            // $productstore->qty = $detailpop->product_id;
+            // $productstore->save();
+            // }
+
+
             // $detailpops = detailpop::where('pop_id',$id)->get();
 
             // $productstore = ProductStore::where('store_id',$request->store_id)->get();
@@ -566,8 +642,8 @@ class PopController extends Controller
             //     // dd($detailpop->product_id,$detailpop->qty);    
             // }
             // dd($request->store_id);
-            return redirect()->action('PopController@list2')
-                ->with('success','POP Done successfully');
+            // return redirect()->action('PopController@list2')
+            //     ->with('success','POP Done successfully');
         }
         if ($request->reject_pp) {
             $pop = Pop::findOrFail($id)->update([

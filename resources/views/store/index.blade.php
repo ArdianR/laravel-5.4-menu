@@ -31,20 +31,14 @@
                         </a>
                     </div>
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="sample_1">
+                        <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="table-store">
                             <thead>
                                 <tr>
                                     <th class="all">No</th>
                                     <th class="desktop">Name</th>
-                                    <th class="desktop">Dealer ID</th>
-                                    <th class="desktop">Address</th>
-                                    <th class="desktop">Area</th>
-                                    <th class="destop">Grade</th>
-                                    <th class="desktop">Active</th>
-                                    <th class="all">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+{{--                             <tbody>
                                 @foreach ($store as $store)
                                 <tr>
                                     <td>{{ ++$i }}</td>
@@ -100,7 +94,7 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                            </tbody>
+                            </tbody> --}}
                         </table>
                     </div>
                 </div>
@@ -111,4 +105,33 @@
     <!-- END CONTENT BODY -->
 </div>
 <!-- END CONTENT -->
+{{-- <script>
+$(function() {
+    $('#users-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: '{!! url('store/index') !!}',
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'name', name: 'name' }
+        ]
+    });
+});
+</script> --}}
+
+<script type="text/javascript">
+    $(function() {
+        var oTable = $('#table-store').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '{{ route('user.datastore') }}'
+            },
+            columns: [
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'name', orderable: false, searchable: false},
+        ],
+        });
+    });
+</script>
 @endsection

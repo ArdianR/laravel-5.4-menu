@@ -40,11 +40,23 @@ class UserController extends Controller
         return view('user.create',compact('group', 'area'));
     }
 
-    public function create2()
+    public function active()
     {
-        $group = Group::all();
-        $area = Area::all();
-        return view('user.create',compact('group', 'area'));
+        $user = User::all();
+        return view('user.active',compact('user'));
+    }
+
+    public function set(Request $request)
+    {
+        $this->validate($request, [
+            'user_id' => 'required|array:integer',
+            'active' => 'required|boolean',
+        ]);
+        $user = User::whereIn('id',$request->user_id)->update([
+            'active' => $request->active
+        ]);
+        return redirect()->action('UserController@index')
+            ->with('success','Non Activated successfully');
     }
 
     /**

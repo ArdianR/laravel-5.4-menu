@@ -33,7 +33,8 @@ Route::group(['middleware' => ['hq']], function () {
 	Route::get('/pop/show22/{id}','PopController@show22');
    	Route::post('/pop/approve/{id}','PopController@approve');
    	Route::get('/pop/history2/{id}','PopController@history2');
-   	Route::get('/pop/history5/{id}','PopController@history5');
+   	Route::get('/pop/history22/{id}','PopController@history22');
+   	Route::get('/pop/history222/{id}','PopController@history222');
     Route::get('/pop/list22','PopController@list22');
     Route::get('/pop/show222/{id}','PopController@show222');
 });
@@ -93,6 +94,9 @@ Route::group(['middleware' => 'admin'], function() {
 	Route::put('/store/productUpdate/{id}','StoreController@productUpdate')->name('store.productUpdate');
 	Route::delete('/store/productDestroy/{id}','StoreController@productDestroy')->name('store.productDestroy');
 	Route::resource('/pop','PopController');
+	Route::get('/active','UserController@active')->name('user.active');
+	Route::post('/set','UserController@set')->name('user.set');
+	Route::get('/datastore', 'UserController@DataStore')->name('user.datastore');
 });
 
 

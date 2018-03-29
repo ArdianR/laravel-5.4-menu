@@ -36,8 +36,10 @@
                                     <th class="all">No</th>
                                     <th class="desktop">Region</th>
                                     <th class="desktop">Total Toko V2</th>
-                                    <th class="desktop">Upload</th>
-                                    <th class="desktop">Approve</th>
+                                    <th class="desktop">Request Pop</th>
+                                    <th class="none">Pop Done</th>
+                                    <th class="desktop">Request Move</th>
+                                    <th class="none">Move Done</th>
                                     <th class="all">Action</th>
                                 </tr>
                             </thead>
@@ -48,7 +50,9 @@
                                     <td>{{ $area->name}}</td>
                                     <td>{{ $area->store->count()}}</td>
                                     <td>{{ $area->pop->where('status_id',1)->count() }}</td>
-                                    <td>{{ $area->pop->where('status_id',3)->count() }}</td>
+                                    <td>{{ $area->pop->where('status_id',6)->count() }}</td>
+                                    <td>{{ $area->move->where('status_id',7)->count() }}</td>
+                                    <td>{{ $area->move->where('status_id',15)->count() }}</td>
                                     <td>
                                         <div class="btn-group pull-right">
                                             <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools

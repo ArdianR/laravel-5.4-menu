@@ -26,7 +26,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-bubble font-red"></i>
-                            <span class="caption-subject font-red sbold uppercase">Total Request Product</span>
+                            <span class="caption-subject font-red sbold uppercase">Total Product</span>
                         </div>
                         <div class="tools">
                             <a href="" class="expand" data-original-title="" title=""> </a>
@@ -52,8 +52,22 @@
                 <!-- BEGIN EXAMPLE TABLE PORTLET-->
                 <div class="portlet light bordered">
                     <div class="portlet-title">
-                        <a>
-                        </a>
+                        <div class="caption">
+                            <i class="icon-bubble font-red"></i>
+                            <span class="caption-subject font-red sbold uppercase">Request Pop</span>
+                        </div>
+                        <div class="tools">
+                            <a href="" class="collapse" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="font-red"></i>
+                            <span class="caption-subject font-red sbold uppercase"></span>
+                        </div>
+                        <div class="tools">
+                            <a href="" class="" data-original-title="" title=""> </a>
+                        </div>
                     </div>
                     <div class="portlet-body">
                         <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="sample_1">
@@ -86,7 +100,76 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right">
                                                 <li>
-                                                    <a href="{{action('PopController@history5', $pop->id)}}">
+                                                    <a href="{{action('PopController@history22', $pop->id)}}">
+                                                        <i class="fa fa-eye"></i> Show
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- END EXAMPLE TABLE PORTLET-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-bubble font-red"></i>
+                            <span class="caption-subject font-red sbold uppercase">Request Move</span>
+                        </div>
+                        <div class="tools">
+                            <a href="" class="collapse" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="font-red"></i>
+                            <span class="caption-subject font-red sbold uppercase"></span>
+                        </div>
+                        <div class="tools">
+                            <a href="" class="" data-original-title="" title=""> </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body" style="display: block;">
+                        <table class="table table-striped table-bordered table-hover dt-responsive" width="100%" id="sample_2">
+                            <thead>
+                                <tr>
+                                    <th class="all">No</th>
+                                    <th class="desktop">Area</th>
+                                    <th class="desktop">From Store</th>
+                                    <th class="desktop">To Store</th>
+                                    <th class="desktop">Status</th>
+                                    <th class="none">Note</th>
+                                    <th class="none">Created Date</th>
+                                    <th class="all">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($move as $move)
+                                <tr>
+                                    <td>{{ ++$ii }}</td>
+                                    <td>{{ $move->area->name}}</td>
+                                    <td>{{ $move->fromstore->name }}</td>
+                                    <td>{{ $move->tostore->name}}</td>
+                                    <td>{{ $move->status->name}}</td>
+                                    <td>{{ $move->note}}</td>
+                                    <td>{{ $move->created_at }}</td>
+                                    <td>
+                                        <div class="btn-group pull-right">
+                                            <button class="btn green btn-xs btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+                                                <i class="fa fa-angle-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li>
+                                                    <a href="{{action('PopController@history222', $move->id)}}">
                                                         <i class="fa fa-eye"></i> Show
                                                     </a>
                                                 </li>

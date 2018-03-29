@@ -25,14 +25,14 @@
         <p><b>Regional : </b>{{ Auth::user()->detailuser->area->name }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Total Toko : </b>{{ $store->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Request Move: </b>{{ $move->where('status_id',7)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Move Done : </b>{{ $move->where('status_id',12)->count() }}</p>
+        <b>Move Done : </b>{{ $move->where('status_id',15)->count() }}</p>
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-bubble font-red"></i>
-                            <span class="caption-subject font-red sbold uppercase">Total Request Product</span>
+                            <span class="caption-subject font-red sbold uppercase">Total Request Product Move</span>
                         </div>
                         <div class="tools">
                             <a href="" class="expand" data-original-title="" title=""> </a>
@@ -42,12 +42,12 @@
                         <table class="table table-striped table-bordered table-hover dt-responsive">
                             <th>Nama Produk</th>
                             <th>Total</th>
-{{--                             @foreach ($alls as $all)
+                            @foreach ($alls as $all)
                             <tr>                        
                                 <td>{{ $all->name }}</td> 
                                 <td><b>{{ $all->sum }}</b></td>                        
                             </tr> 
-                            @endforeach   --}}                                       
+                            @endforeach                                         
                          </table>   
                     </div>
                 </div>

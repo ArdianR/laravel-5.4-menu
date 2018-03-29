@@ -40,10 +40,10 @@
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item ">
-                            <a href="{{ url('/user') }}" class="nav-link "> User </a>
+                            <a href="{{ url('/user') }}" class="nav-link "> List </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="" class="nav-link "> Active </a>
+                            <a href="{{route('user.active')}}" class="nav-link "> Active </a>
                         </li>
                     </ul>
                 </li>

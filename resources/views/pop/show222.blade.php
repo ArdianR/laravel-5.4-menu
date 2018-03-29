@@ -46,8 +46,8 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::hidden('store_id', $move->from_store_id) }}
-                                    {{ Form::text('store', $move->fromstore->name, ['class'=>'form-control','readonly']) }}
+                                    {{ Form::hidden('from_store_id', $move->from_store_id) }}
+                                    {{ Form::text('', $move->fromstore->name, ['class'=>'form-control','readonly']) }}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -55,7 +55,8 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    {{ Form::text('store', $move->tostore->name, ['class'=>'form-control','readonly']) }}
+                                    {{ Form::hidden('to_store_id', $move->to_store_id) }}
+                                    {{ Form::text('', $move->tostore->name, ['class'=>'form-control','readonly']) }}
                                 </div>
                             </div>
                             <div class="form-group">

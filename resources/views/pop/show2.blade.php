@@ -25,9 +25,9 @@
         <p><b>Regional : </b>{{ $area->name }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Total Toko : </b>{{ $store->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Request POP: </b>{{ $pop->where('status_id',1)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Request Move: </b>{{ $pop->where('status_id',6)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>POP Done : </b>{{ $pop->where('status_id',5)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
-        <b>Move Done : </b>{{ $pop->where('status_id',12)->count() }}</p>
+        <b>Request Move: </b>{{ $move->where('status_id',7)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>POP Done : </b>{{ $pop->where('status_id',6)->count() }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Move Done : </b>{{ $move->where('status_id',15)->count() }}</p>
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">

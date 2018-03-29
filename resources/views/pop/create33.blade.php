@@ -30,16 +30,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pops as $pop)
-                                        
+                                    @foreach ($alls as $all)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            @foreach ($pop->detailpop as $detailpop)
-                                            <td>{{ $detailpop->product->name }}</td>
-                                            <td>{{ $detailpop->qty }}</td>
-                                            @endforeach
+                                            <td>{{ $all->name }}</td>
+                                            <td>{{ $all->sum }}</td>
                                         </tr>
-                                        
                                     @endforeach
                                 </tbody>                                     
                          </table>   
@@ -117,8 +113,8 @@
                                 </label>
                                 <div class="col-md-4">
                                     <select id="product" name="product_id[]" class="form-control" required autofocus>
-                                    @foreach($pops as $pop)
-                                        <option value="{{$detailpop->product_id}}">{{$detailpop->product->name}} = ({{$detailpop->qty}})</option>
+                                    @foreach($alls as $all)
+                                        <option value="{{$all->id}}">{{$all->name}} = ({{$all->sum}})</option>
                                     @endforeach
                                     </select>
                                 </div>
@@ -162,17 +158,17 @@
         })
     });
 </script>
-{{-- <script type="text/javascript" >
+<script type="text/javascript" >
     $(document).ready(function(){
         var i=1;  
             $('#add').click(function(){  
                 i++;  
-                $('#dynamic_field').append('<div class="form-group" id="row'+i+'"><label class="control-label col-md-3">POP Material List<span class="required">*</span></label><div class="col-md-4">{{ Form::select('product_id[]', $product->pluck('name','id'), null, ['class'=>'form-control','id'=>'product','required'=>'true']) }}</div><label class="control-label col-md-1">Qty<span class="required">*</span></label><div class="col-md-1"><input type="text" id="qty" name="qty[]" class="form-control" required="true" autofocus="true"></div><div class="col-md-1"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div></div>');
+                $('#dynamic_field').append('<div class="form-group" id="row'+i+'"><label class="control-label col-md-3">POP Material List<span class="required">*</span></label><div class="col-md-4"><select id="product" name="product_id[]" class="form-control" required autofocus>@foreach($alls as $all)<option value="{{$all->id}}">{{$all->name}} = ({{$all->sum}})</option>@endforeach</select></div><label class="control-label col-md-1">Qty<span class="required">*</span></label><div class="col-md-1"><input type="text" id="qty" name="qty[]" class="form-control" required="true" autofocus="true"></div><div class="col-md-1"><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></div></div>');
             });  
             $(document).on('click', '.btn_remove', function(){  
                var button_id = $(this).attr("id");   
                $('#row'+button_id+'').remove();  
             });
         });  
-</script> --}}
+</script>
 @endsection

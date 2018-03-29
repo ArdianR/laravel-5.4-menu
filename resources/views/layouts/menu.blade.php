@@ -18,6 +18,7 @@
         <link href="{{ asset('metronic/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <link href="{{ asset('metronic/assets/global/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('metronic/assets/global/plugins/morris/morris.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('metronic/assets/global/plugins/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
@@ -200,7 +201,7 @@
         <script src="{{ asset('metronic/assets/global/plugins/fuelux/js/spinner.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js')}}" type="text/javascript"></script>
 {{--         <script src="{{ asset('metronic/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js')}}" type="text/javascript"></script> --}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+        <script src="{{ asset('jquery.fancybox.min.js')}}"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/table-datatables-editable.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/global/plugins/jquery-file-upload/js/vendor/tmpl.min.js')}}" type="text/javascript"></script>
@@ -219,11 +220,13 @@
         <script src="{{ asset('metronic/assets/global/plugins/jquery-bootpag/jquery.bootpag.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/global/plugins/holder.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/global/plugins/bootbox/bootbox.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('metronic/assets/global/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js')}}" type="text/javascript"></script>
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
         <script src="{{ asset('metronic/assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
         <!-- END THEME GLOBAL SCRIPTS -->
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
+        <script src="{{ asset('metronic/assets/pages/scripts/components-bootstrap-multiselect.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/components-select2.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/table-datatables-buttons.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('metronic/assets/pages/scripts/form-validation.min.js')}}" type="text/javascript"></script>

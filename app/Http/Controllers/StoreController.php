@@ -7,7 +7,7 @@ use App\Store;
 use App\Area;
 use App\Product;
 use App\ProductStore;
-use Datatables;
+use Yajra\Datatables\Facades\Datatables;
 
 class StoreController extends Controller
 {
@@ -24,9 +24,15 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $store = Store::with('area')->limit(100)->get();
-        return view('store.index',compact('store'))
+        // $store = Store::all();
+        // $datatables = Datatables::of($store)->make(true);
+        return view('store.index')
             ->with('i');
+    }
+
+    public function DataStore()
+    {
+        return Datatables::of(Store::query())->make(true);
     }
 
     /**

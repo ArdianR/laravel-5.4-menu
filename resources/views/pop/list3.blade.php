@@ -32,7 +32,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-bubble font-red"></i>
-                            <span class="caption-subject font-red sbold uppercase">Total Request Product</span>
+                            <span class="caption-subject font-red sbold uppercase">Total Request Product Pop</span>
                         </div>
                         <div class="tools">
                             <a href="" class="expand" data-original-title="" title=""> </a>

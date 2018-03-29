@@ -29,4 +29,9 @@ class Area extends Model
         return $this->hasMany('App\Pop');
     }
 
+    public function Move()
+    {
+        return $this->hasMany('App\Move');
+    }
+
 }
